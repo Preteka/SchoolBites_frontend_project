@@ -1,0 +1,1060 @@
+﻿/**
+ * SchoolBite — Contact Support Section Styles (contact-support.css)
+ * Premium two-column support area replacing the delivery network section.
+ */
+
+/* ============================================================
+   1. SECTION CONTAINER & BACKGROUND
+   ============================================================ */
+.contact-support-section {
+  position: relative;
+  padding: 6rem 0;
+  background: linear-gradient(170deg, #FFFDF8 0%, #FFF8E7 45%, #F5F7F6 100%);
+  overflow: hidden;
+}
+
+.contact-hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: 4rem;
+  padding-bottom: 4.5rem;
+}
+
+.contact-hero .section-header {
+  position: relative;
+  z-index: 2;
+  margin: 0 auto;
+  max-width: 760px;
+}
+
+.contact-leaf {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.75;
+  animation: contactLeafFloat 7s ease-in-out infinite alternate;
+}
+
+.contact-leaf-tl {
+  top: 18%;
+  left: 4%;
+  width: 42px;
+  transform: rotate(-20deg);
+}
+
+.contact-leaf-tr {
+  top: 15%;
+  right: 5%;
+  width: 38px;
+  transform: rotate(26deg);
+  animation-delay: 0.7s;
+}
+
+.contact-leaf-bl {
+  bottom: 14%;
+  left: 10%;
+  width: 34px;
+  transform: rotate(-8deg);
+  animation-delay: 1.3s;
+}
+
+.contact-leaf-br {
+  bottom: 18%;
+  right: 8%;
+  width: 30px;
+  transform: rotate(18deg);
+  animation-delay: 1.8s;
+}
+
+@keyframes contactLeafFloat {
+  0% {
+    transform: translateY(0) rotate(var(--leaf-rot, 0deg));
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-10px) rotate(calc(var(--leaf-rot, 0deg) + 8deg));
+    opacity: 0.8;
+  }
+}
+
+.contact-leaf-tl { --leaf-rot: -20deg; }
+.contact-leaf-tr { --leaf-rot: 26deg; }
+.contact-leaf-bl { --leaf-rot: -8deg; }
+.contact-leaf-br { --leaf-rot: 18deg; }
+
+.contact-hero .section-eyebrow,
+.contact-hero .hero-title,
+.contact-hero .hero-subtitle {
+  opacity: 0;
+  animation: contactHeroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.contact-hero .section-eyebrow {
+  animation-delay: 0.05s;
+}
+
+.contact-hero .hero-title {
+  animation-delay: 0.15s;
+}
+
+.contact-hero .hero-subtitle {
+  animation-delay: 0.25s;
+}
+
+@keyframes contactHeroFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Organic Background Blobs */
+.cs-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.45;
+}
+.cs-blob-1 {
+  top: -60px;
+  right: -80px;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(76,175,80,0.22) 0%, rgba(7,91,70,0.06) 70%, transparent 100%);
+}
+.cs-blob-2 {
+  bottom: -40px;
+  left: -60px;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(249,168,37,0.18) 0%, rgba(232,243,232,0.4) 70%, transparent 100%);
+}
+
+/* Floating Leaf Decor */
+.cs-leaf {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  animation: csLeafFloat 6s ease-in-out infinite alternate;
+}
+.cs-leaf-tl {
+  top: 30px;
+  left: 4%;
+  width: 38px;
+  height: 56px;
+  transform: rotate(-18deg);
+}
+.cs-leaf-br {
+  bottom: 40px;
+  right: 5%;
+  width: 44px;
+  height: 64px;
+  transform: rotate(25deg);
+  animation-duration: 8s;
+  animation-delay: -3s;
+}
+
+@keyframes csLeafFloat {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(4deg); }
+  100% { transform: translateY(6px) rotate(-4deg); }
+}
+
+/* ============================================================
+   2. TWO-COLUMN GRID LAYOUT
+   ============================================================ */
+.cs-layout-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+/* ============================================================
+   3. LEFT SIDE: CONTENT & CALLOUTS
+   ============================================================ */
+.cs-left-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.cs-eyebrow-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #FFFFFF;
+  color: #075B46;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.35rem 0.95rem;
+  border-radius: 100px;
+  border: 1px solid rgba(7,91,70,0.18);
+  box-shadow: 0 2px 8px rgba(7,91,70,0.06);
+  margin-bottom: 1.25rem;
+  width: fit-content;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cs-eyebrow-badge svg {
+  width: 14px;
+  height: 14px;
+  color: #4CAF50;
+}
+
+.cs-main-heading {
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-size: clamp(2rem, 3.4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.18;
+  color: var(--color-dark-text, #17352D);
+  margin-bottom: 1.25rem;
+}
+
+.cs-main-desc {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #4a6660;
+  margin-bottom: 2rem;
+  max-width: 520px;
+}
+
+.cs-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.25rem;
+}
+
+.cs-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: #075B46;
+  color: #FFFFFF;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 0.8rem 1.65rem;
+  border-radius: 100px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(7,91,70,0.22);
+  transition: all 0.25s ease;
+}
+
+.cs-btn-primary:hover {
+  background: #0d7057;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(7,91,70,0.3);
+}
+
+.cs-btn-primary svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+}
+
+.cs-btn-primary:hover svg {
+  transform: translateX(3px);
+}
+
+.cs-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: #FFFFFF;
+  color: #075B46;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 0.8rem 1.5rem;
+  border-radius: 100px;
+  border: 1px solid rgba(7,91,70,0.2);
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.cs-btn-ghost:hover {
+  background: #E8F3E8;
+  border-color: #075B46;
+  transform: translateY(-2px);
+}
+
+.cs-btn-ghost svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+}
+
+.cs-btn-ghost:hover svg {
+  transform: translateX(3px);
+}
+
+/* Supporting Statement Box with Organic Meal Visual */
+.cs-statement-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg, 16px);
+  border: 1px solid rgba(7,91,70,0.12);
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 6px 20px rgba(7,91,70,0.05);
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.cs-statement-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #E8F3E8;
+  color: #075B46;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cs-statement-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.cs-statement-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-weight: 600;
+  color: #17352D;
+  margin: 0;
+}
+
+/* Organic circular meal badge */
+.cs-meal-badge-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.cs-meal-thumb {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #FFFFFF;
+  box-shadow: 0 4px 14px rgba(7,91,70,0.15);
+  flex-shrink: 0;
+}
+
+.cs-meal-caption {
+  font-size: 0.85rem;
+  color: #618278;
+  line-height: 1.45;
+}
+
+.cs-meal-caption strong {
+  color: #17352D;
+  display: block;
+}
+
+/* ============================================================
+   4. RIGHT SIDE: PREMIUM CONTACT CARD & 3 SUPPORT TILES
+   ============================================================ */
+.cs-right-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Main "SchoolBite Support" Card */
+.cs-main-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-xl, 20px);
+  border: 1px solid rgba(7,91,70,0.12);
+  box-shadow: 0 10px 32px rgba(7,91,70,0.07);
+  padding: 2.25rem 2.25rem 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cs-main-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(7,91,70,0.12);
+}
+
+.cs-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(7,91,70,0.08);
+}
+
+.cs-card-title {
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-dark-text, #17352D);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.cs-card-title-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #E8F3E8;
+  color: #075B46;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cs-card-title-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.cs-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #E8F3E8;
+  color: #075B46;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 100px;
+}
+
+.cs-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4CAF50;
+  animation: csPulse 2s infinite;
+}
+
+@keyframes csPulse {
+  0% { transform: scale(0.9); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.6; }
+  100% { transform: scale(0.9); opacity: 1; }
+}
+
+/* 4 Contact Items List */
+.cs-contact-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.cs-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  background: #F8FAF9;
+  border-radius: 12px;
+  border: 1px solid rgba(7,91,70,0.06);
+  transition: all 0.2s ease;
+}
+
+.cs-contact-item:hover {
+  background: #E8F3E8;
+  border-color: rgba(7,91,70,0.18);
+  transform: translateY(-2px);
+}
+
+.cs-item-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #FFFFFF;
+  color: #075B46;
+  border: 1px solid rgba(7,91,70,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(7,91,70,0.04);
+}
+
+.cs-item-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.cs-item-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.cs-item-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #618278;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.15rem;
+}
+
+.cs-item-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #17352D;
+  text-decoration: none;
+  line-height: 1.35;
+}
+
+a.cs-item-value:hover {
+  color: #075B46;
+  text-decoration: underline;
+}
+
+/* ============================================================
+   5. THREE COMPACT SUPPORT TILES
+   ============================================================ */
+.cs-support-tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.cs-support-tile {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg, 16px);
+  border: 1px solid rgba(7,91,70,0.1);
+  padding: 1.35rem 1.2rem;
+  box-shadow: 0 4px 14px rgba(7,91,70,0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.cs-support-tile:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 24px rgba(7,91,70,0.1);
+  border-color: rgba(7,91,70,0.25);
+}
+
+.cs-tile-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #E8F3E8;
+  color: #075B46;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.85rem;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.cs-support-tile:hover .cs-tile-icon-wrap {
+  background: #075B46;
+  color: #FFFFFF;
+  transform: scale(1.08);
+}
+
+.cs-tile-icon-wrap svg {
+  width: 18px;
+  height: 18px;
+}
+
+.cs-tile-title {
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--color-dark-text, #17352D);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.02em;
+}
+
+.cs-tile-desc {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #55756d;
+  margin: 0;
+}
+
+/* ============================================================
+   6. DARK THEME OVERRIDES
+   ============================================================ */
+[data-theme="dark"] .contact-support-section {
+  background: linear-gradient(170deg, #0D1F1A 0%, #142923 50%, #0d1f1a 100%);
+}
+
+[data-theme="dark"] .cs-eyebrow-badge,
+[data-theme="dark"] .cs-statement-card,
+[data-theme="dark"] .cs-main-card,
+[data-theme="dark"] .cs-support-tile,
+[data-theme="dark"] .cs-btn-ghost {
+  background: #142923;
+  border-color: rgba(255,255,255,0.1);
+  color: #F3F8F5;
+}
+
+[data-theme="dark"] .cs-contact-item {
+  background: #1B352D;
+  border-color: rgba(255,255,255,0.06);
+}
+
+[data-theme="dark"] .cs-contact-item:hover {
+  background: #23473c;
+  border-color: rgba(99,201,141,0.25);
+}
+
+[data-theme="dark"] .cs-item-icon {
+  background: #142923;
+  color: #63C98D;
+  border-color: rgba(255,255,255,0.1);
+}
+
+[data-theme="dark"] .cs-statement-icon,
+[data-theme="dark"] .cs-tile-icon-wrap,
+[data-theme="dark"] .cs-card-title-icon {
+  background: rgba(99,201,141,0.15);
+  color: #63C98D;
+}
+
+[data-theme="dark"] .cs-main-heading,
+[data-theme="dark"] .cs-card-title,
+[data-theme="dark"] .cs-tile-title,
+[data-theme="dark"] .cs-statement-text,
+[data-theme="dark"] .cs-item-value,
+[data-theme="dark"] .cs-meal-caption strong {
+  color: #F3F8F5;
+}
+
+[data-theme="dark"] .cs-main-desc,
+[data-theme="dark"] .cs-item-label,
+[data-theme="dark"] .cs-tile-desc,
+[data-theme="dark"] .cs-meal-caption {
+  color: #A9BCB5;
+}
+
+[data-theme="dark"] .cs-btn-ghost {
+  color: #63C98D;
+  border-color: rgba(99,201,141,0.3);
+}
+
+[data-theme="dark"] .cs-btn-ghost:hover {
+  background: rgba(99,201,141,0.12);
+  border-color: #63C98D;
+}
+
+[data-theme="dark"] .cs-live-badge {
+  background: rgba(99,201,141,0.12);
+  color: #63C98D;
+}
+
+[data-theme="dark"] .cs-live-dot {
+  background: #63C98D;
+}
+
+/* ============================================================
+   7. RESPONSIVE BREAKPOINTS
+   ============================================================ */
+@media (max-width: 1024px) {
+  .cs-layout-grid {
+    grid-template-columns: 1fr;
+    gap: 2.75rem;
+  }
+  .cs-contact-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-hero {
+    padding-top: 3rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .contact-leaf-tl {
+    top: 15%;
+    left: 2%;
+    width: 28px;
+  }
+
+  .contact-leaf-tr {
+    top: 12%;
+    right: 3%;
+    width: 26px;
+  }
+
+  .contact-leaf-bl {
+    left: 6%;
+    bottom: 12%;
+    width: 24px;
+  }
+
+  .contact-leaf-br {
+    right: 7%;
+    bottom: 15%;
+    width: 22px;
+  }
+
+  .contact-support-section {
+    padding: 4.5rem 0;
+  }
+  .cs-contact-list {
+    grid-template-columns: 1fr;
+  }
+  .cs-support-tiles-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+  .cs-action-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cs-btn-primary,
+  .cs-btn-ghost {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-main-card {
+    padding: 1.5rem 1.25rem;
+  }
+  .cs-main-heading {
+    font-size: 1.75rem;
+  }
+  .cs-statement-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.25rem;
+  }
+
+  .cs-blob,
+  .cs-leaf {
+    display: none;
+  }
+
+  .cs-meal-badge-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .cs-meal-caption {
+    font-size: 0.8rem;
+  }
+}
+/* ============================================================
+   8. CENTRAL KITCHEN MAP SECTION (ABOVE FOOTER)
+   ============================================================ */
+.contact-map-section {
+  padding: 5rem 0 6rem;
+  background: #FFFFFF;
+  position: relative;
+  border-top: 1px solid rgba(7,91,70,0.08);
+}
+
+.cs-map-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 3rem;
+}
+
+.cs-map-header .cs-eyebrow-badge {
+  margin: 0 auto 1rem;
+}
+
+.cs-map-wrapper {
+  position: relative;
+  border-radius: var(--radius-xl, 24px);
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(7,91,70,0.1);
+  border: 1px solid rgba(7,91,70,0.14);
+  background: #F5F7F6;
+  height: 480px;
+}
+
+.cs-map-iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  filter: saturate(1.1) contrast(1.05);
+}
+
+/* Floating Info Card over Map */
+.cs-map-overlay-card {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg, 18px);
+  border: 1px solid rgba(7,91,70,0.15);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  padding: 1.5rem 1.6rem;
+  max-width: 360px;
+  z-index: 5;
+  transition: transform 0.25s ease;
+}
+
+.cs-map-overlay-card:hover {
+  transform: translateY(-2px);
+}
+
+.cs-map-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #E8F3E8;
+  color: #075B46;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 100px;
+  margin-bottom: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.cs-map-card-badge svg {
+  width: 12px;
+  height: 12px;
+  color: #4CAF50;
+}
+
+.cs-map-card-title {
+  font-family: var(--font-heading, 'Sora', sans-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-dark-text, #17352D);
+  margin: 0 0 0.45rem;
+}
+
+.cs-map-card-address {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: #4a6660;
+  margin-bottom: 1rem;
+}
+
+.cs-map-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.cs-map-btn-directions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #075B46;
+  color: #FFFFFF;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.55rem 1.1rem;
+  border-radius: 100px;
+  text-decoration: none;
+  box-shadow: 0 3px 10px rgba(7,91,70,0.2);
+  transition: all 0.2s ease;
+}
+
+.cs-map-btn-directions:hover {
+  background: #0d7057;
+  transform: translateY(-1px);
+}
+
+.cs-map-btn-directions svg {
+  width: 13px;
+  height: 13px;
+}
+
+.cs-map-btn-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #FFFFFF;
+  color: #075B46;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.55rem 1rem;
+  border-radius: 100px;
+  border: 1px solid rgba(7,91,70,0.2);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.cs-map-btn-call:hover {
+  background: #E8F3E8;
+}
+
+.cs-map-btn-call svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* Facility Feature Highlights Below Map */
+.cs-map-features-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.cs-map-feat-item {
+  background: #F8FAF9;
+  border: 1px solid rgba(7,91,70,0.1);
+  border-radius: var(--radius-lg, 16px);
+  padding: 1.25rem 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.2s ease;
+}
+
+.cs-map-feat-item:hover {
+  background: #E8F3E8;
+  transform: translateY(-2px);
+  border-color: rgba(7,91,70,0.25);
+}
+
+.cs-map-feat-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #FFFFFF;
+  color: #075B46;
+  border: 1px solid rgba(7,91,70,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(7,91,70,0.05);
+}
+
+.cs-map-feat-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.cs-map-feat-text strong {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--color-dark-text, #17352D);
+  margin-bottom: 0.15rem;
+}
+
+.cs-map-feat-text span {
+  font-size: 0.8rem;
+  color: #618278;
+  line-height: 1.4;
+}
+
+/* Dark Mode Overrides for Map Section */
+[data-theme="dark"] .contact-map-section {
+  background: #0D1F1A;
+  border-top-color: rgba(255,255,255,0.08);
+}
+
+[data-theme="dark"] .cs-map-wrapper {
+  border-color: rgba(255,255,255,0.1);
+}
+
+[data-theme="dark"] .cs-map-iframe {
+  filter: invert(90%) hue-rotate(180deg) contrast(1.1);
+}
+
+[data-theme="dark"] .cs-map-overlay-card {
+  background: rgba(20, 41, 35, 0.94);
+  border-color: rgba(255,255,255,0.12);
+  color: #F3F8F5;
+}
+
+[data-theme="dark"] .cs-map-card-title {
+  color: #F3F8F5;
+}
+
+[data-theme="dark"] .cs-map-card-address {
+  color: #A9BCB5;
+}
+
+[data-theme="dark"] .cs-map-btn-call {
+  background: #1B352D;
+  color: #63C98D;
+  border-color: rgba(99,201,141,0.3);
+}
+
+[data-theme="dark"] .cs-map-feat-item {
+  background: #142923;
+  border-color: rgba(255,255,255,0.08);
+}
+
+[data-theme="dark"] .cs-map-feat-icon {
+  background: #1B352D;
+  color: #63C98D;
+  border-color: rgba(255,255,255,0.1);
+}
+
+[data-theme="dark"] .cs-map-feat-text strong {
+  color: #F3F8F5;
+}
+
+[data-theme="dark"] .cs-map-feat-text span {
+  color: #A9BCB5;
+}
+
+/* Responsive Map Layout */
+@media (max-width: 1024px) {
+  .cs-map-wrapper {
+    height: 420px;
+  }
+  .cs-map-features-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-map-section {
+    padding: 3.5rem 0 4.5rem;
+  }
+  .cs-map-wrapper {
+    height: auto;
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+  }
+  .cs-map-overlay-card {
+    position: static;
+    max-width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+  .cs-map-iframe {
+    height: 300px;
+  }
+  .cs-map-features-row {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+}

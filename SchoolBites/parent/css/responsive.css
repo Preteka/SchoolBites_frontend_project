@@ -1,0 +1,620 @@
+/* ==========================================================================
+   SchoolBite - Dedicated Responsive Stylesheet (responsive.css)
+   Healthy Meals. Brighter Futures.
+   Comprehensive breakpoint coverage:
+   - 320px, 375px, 390px, 430px (Mobile Portrait)
+   - 580px - 768px (Large Mobile & Tablet Portrait)
+   - 820px - 1024px (Tablet Landscape & Small Laptops)
+   - 1280px - 1440px (Standard & High-Res Desktop)
+   - 1920px+ (Ultra-wide Displays)
+   Zero frameworks. Strictly no emojis.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Mobile Navigation & Drawer Refinements
+   -------------------------------------------------------------------------- */
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-dark-text);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.mobile-nav-link .mobile-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  background-color: var(--bg-surface-sage);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.mobile-nav-link.active .mobile-icon {
+  color: var(--color-secondary);
+}
+
+/* --------------------------------------------------------------------------
+   Final CTA Banner Section
+   -------------------------------------------------------------------------- */
+.section-cta-final {
+  padding-top: 3rem;
+  padding-bottom: 5.5rem;
+}
+
+.cta-banner-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-primary) 0%, #0d4233 100%);
+  color: #FFFFFF;
+  padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.5rem, 4vw, 3.5rem);
+  text-align: center;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .cta-banner-card {
+  background: linear-gradient(135deg, #142923 0%, #0d1f1a 100%);
+  border-color: var(--border-color);
+}
+
+.cta-banner-card::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99, 201, 141, 0.18) 0%, rgba(99, 201, 141, 0) 70%);
+  pointer-events: none;
+}
+
+.cta-banner-card::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 181, 46, 0.12) 0%, rgba(255, 181, 46, 0) 70%);
+  pointer-events: none;
+}
+
+.cta-content {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.cta-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--radius-full);
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #FFB52E;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.25rem;
+  backdrop-filter: blur(4px);
+}
+
+.cta-title {
+  color: #FFFFFF;
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.cta-subtitle {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  line-height: 1.6;
+  margin-bottom: 2.25rem;
+}
+
+.cta-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.cta-perks-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.cta-perk {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.cta-perk svg {
+  color: #63C98D;
+}
+
+/* --------------------------------------------------------------------------
+   BREAKPOINT: Large Desktop & Ultra-Wide (1440px - 1920px+)
+   -------------------------------------------------------------------------- */
+@media (min-width: 1441px) {
+  .container {
+    max-width: 1400px;
+  }
+  
+  .hero-circle-frame {
+    width: 480px;
+    height: 480px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   BREAKPOINT: Desktop & Laptop (1081px - 1440px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1440px) {
+  .hero-grid {
+    gap: 3rem;
+  }
+  
+  .choose-us-dual-grid {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 1280px) {
+  .hero-title {
+    font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  }
+  
+  .hero-circle-frame {
+    width: clamp(340px, 32vw, 420px);
+    height: clamp(340px, 32vw, 420px);
+  }
+  
+  .features-pill-card {
+    padding: 1.75rem 1.5rem;
+  }
+  
+  .feature-item-col {
+    padding: 0 0.75rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   BREAKPOINT: Tablet Landscape & Small Laptop (1024px - 1080px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1080px) {
+  .main-navigation,
+  .header-actions .btn-login,
+  .header-actions .btn-signup {
+    display: none;
+  }
+
+  .btn-hamburger {
+    display: flex;
+  }
+  
+  .meals-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .testimonials-grid,
+  .services-grid,
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   BREAKPOINT: Tablet Portrait (769px - 1023px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1023px) {
+  .choose-us-dual-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .quote-pill-card {
+    min-height: auto;
+    padding: 2.25rem 2rem;
+  }
+
+  .hero-trust-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 3rem;
+  }
+
+  .hero-content {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-trust-grid {
+    width: 100%;
+    max-width: 540px;
+    margin: 2rem auto 0 auto;
+    text-align: left;
+  }
+
+  .hero-media-circular {
+    order: 2;
+    margin: 0 auto;
+  }
+
+  .features-pill-card {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .feature-item-col {
+    border-right: none;
+    padding: 0.5rem;
+  }
+
+  .feature-item-col:nth-child(1),
+  .feature-item-col:nth-child(2) {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.25rem;
+  }
+
+  .how-works-steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .how-works-steps::before {
+    display: none;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .featured-plan-box {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .featured-plan-visual {
+    order: -1;
+    max-height: 280px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   BREAKPOINT: Mobile Landscape / Large Phone (581px - 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .pricing-card.is-featured {
+    transform: none;
+  }
+
+  .pricing-card.is-featured:hover {
+    transform: translateY(-4px);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .menu-filter-bar {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    padding: 0.5rem 0.25rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .menu-filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .btn-filter-day {
+    flex-shrink: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   BREAKPOINT: Standard Mobile (431px - 580px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .settings-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-sidebar {
+    position: static;
+  }
+}
+
+@media (max-width: 580px) {
+  .settings-card,
+  .settings-summary-card {
+    padding: 1.25rem;
+  }
+
+  .settings-form-grid,
+  .theme-picker {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-card-header,
+  .settings-toggle-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .settings-form-actions,
+  .settings-action-row,
+  .cta-actions {
+    width: 100%;
+  }
+
+  .settings-form-actions .btn,
+  .settings-action-row .btn,
+  .cta-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-circle-frame {
+    width: min(320px, 86vw);
+    height: min(320px, 86vw);
+  }
+
+  .hero-circle-ambient-glow {
+    width: min(370px, 98vw);
+    height: min(370px, 98vw);
+  }
+
+  .hero-circle-frame .hero-script-overlay {
+    top: 16px;
+    left: 16px;
+    transform: scale(0.85);
+    transform-origin: top left;
+  }
+
+  .hero-media-circular .floating-badge-pill {
+    bottom: -8px;
+    right: 0px;
+    padding: 0.55rem 0.85rem;
+    gap: 0.5rem;
+  }
+
+  .badge-pill-highlight {
+    font-size: 0.82rem;
+  }
+
+  .badge-pill-sub {
+    font-size: 0.72rem;
+  }
+
+  .features-pill-card {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .feature-item-col:nth-child(1),
+  .feature-item-col:nth-child(2),
+  .feature-item-col:nth-child(3) {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.25rem;
+  }
+
+  .how-works-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .meals-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .cta-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .cta-actions .btn {
+    width: 100%;
+  }
+
+  .cta-perks-row {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   BREAKPOINT: Compact Mobile (375px - 430px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 430px) {
+  .site-header {
+    --header-height: 70px;
+  }
+
+  .site-logo-img {
+    height: 38px;
+    max-width: 180px;
+  }
+
+  .hero {
+    padding-top: 2rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.85rem, 8vw, 2.35rem);
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .btn-hero-primary,
+  .btn-hero-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-trust-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .hero-circle-frame {
+    width: min(280px, 84vw);
+    height: min(280px, 84vw);
+  }
+
+  .hero-circle-ambient-glow {
+    width: min(320px, 94vw);
+    height: min(320px, 94vw);
+  }
+
+  .hero-trust-badge {
+    padding: 0.65rem 0.9rem;
+  }
+
+  .featured-plan-perks {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-plan-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .featured-plan-actions .btn {
+    width: 100%;
+  }
+
+  .floating-leaf {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   BREAKPOINT: Ultra-Compact Mobile (320px - 374px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 374px) {
+  html {
+    font-size: 14.5px;
+  }
+
+  .hero-circle-frame {
+    width: 250px;
+    height: 250px;
+  }
+
+  .hero-circle-ambient-glow {
+    width: 280px;
+    height: 280px;
+  }
+
+  .hero-circle-frame .hero-script-overlay {
+    display: none;
+  }
+
+  .floating-badge-pill {
+    padding: 0.45rem 0.75rem;
+  }
+
+  .badge-leaf-svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .quote-pill-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .quote-script-text {
+    font-size: 1.25rem;
+  }
+}

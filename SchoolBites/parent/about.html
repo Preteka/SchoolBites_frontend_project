@@ -1,0 +1,2230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — SchoolBite | Healthy Meals. Brighter Futures.</title>
+  <meta name="description"
+    content="Learn how SchoolBite helps parents manage nutritious school meals, child preferences, subscriptions, payments and delivery in one simple experience." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <style>
+    /* ===================================================
+       ABOUT US (SCHOOLBITE) — PIXEL-PERFECT SPECIFIC STYLES
+       =================================================== */
+
+    :root {
+      --ab-green-deep: #075B46;
+      --ab-green-primary: #4CAF50;
+      --ab-green-light: #E8F3E8;
+      --ab-green-soft: #F5F7F6;
+      --ab-orange: #F9A825;
+      --ab-orange-deep: #F9A825;
+      --ab-cream: #FFF8E7;
+      --ab-bg-page: #FFFFFF;
+      --ab-text-dark: #17352D;
+      --ab-text-muted: #4B6B61;
+      --font-doodle: var(--font-script);
+    }
+
+    [data-theme="dark"] {
+      --ab-bg-page: #0D1F1A;
+      --ab-green-soft: #1B352D;
+      --ab-green-light: #1B352D;
+      --ab-text-dark: #F3F8F5;
+      --ab-text-muted: #A9BCB5;
+      --ab-cream: #2A2920;
+    }
+
+    /* Common Eyebrow Pill */
+    .ab-pill-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      background: var(--ab-green-light);
+      padding: 0.4rem 0.95rem;
+      border-radius: 100px;
+      margin-bottom: 1.1rem;
+    }
+
+    [data-theme="dark"] .ab-pill-eyebrow {
+      background: var(--ab-green-light);
+      color: #63c98d;
+    }
+
+    /* Hand-drawn Doodles */
+    .ab-doodle {
+      font-family: var(--font-doodle);
+      color: var(--color-primary);
+      font-size: 1.3rem;
+      line-height: 1.2;
+      pointer-events: none;
+      user-select: none;
+      position: absolute;
+    }
+
+    .ab-hero-doodle {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.5rem;
+      z-index: 5;
+      display: block;
+      max-width: 9rem;
+      text-align: center;
+      font-size: 1.2rem;
+      line-height: 1.1;
+      transform: rotate(6deg);
+    }
+
+    [data-theme="dark"] .ab-doodle {
+      color: var(--color-secondary);
+    }
+
+    /* Leaf Decoration Floating */
+    .ab-leaf-decor {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.8;
+    }
+
+    /* ===================================================
+       1. HERO SECTION
+       =================================================== */
+    .ab-hero-section {
+      background: var(--ab-bg-page);
+      padding: clamp(3rem, 6vw, 4.8rem) 0 clamp(3.5rem, 7vw, 5.5rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ab-hero-section::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      right: 15%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(76, 175, 80, 0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .ab-hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .ab-hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.3rem, 4.6vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.14;
+      color: var(--ab-text-dark);
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .ab-hero-title .text-orange {
+      color: var(--ab-orange);
+    }
+
+    .ab-hero-sub {
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+      color: var(--ab-text-muted);
+      line-height: 1.75;
+      max-width: 500px;
+      margin-bottom: 2rem;
+    }
+
+    .ab-hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 2.2rem;
+    }
+
+    .btn-ab-primary {
+      background: var(--ab-green-deep);
+      color: #fff;
+      padding: 0.85rem 1.8rem;
+      border-radius: 100px;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      border: 2px solid var(--ab-green-deep);
+      box-shadow: 0 4px 16px rgba(7, 91, 70, 0.25);
+    }
+
+    .btn-ab-primary:hover {
+      background: var(--color-primary-hover);
+      border-color: var(--color-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(7, 91, 70, 0.35);
+    }
+
+    .btn-ab-outline {
+      background: transparent;
+      color: var(--ab-text-dark);
+      padding: 0.85rem 1.8rem;
+      border-radius: 100px;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      border: 1.5px solid var(--border-color);
+      transition: all 0.25s ease;
+    }
+
+    .btn-ab-outline:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      background: var(--ab-green-soft);
+      transform: translateY(-2px);
+    }
+
+    .ab-hero-benefits {
+      display: flex;
+      gap: 1.75rem;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--border-color);
+      padding-top: 1.5rem;
+    }
+
+    .ab-benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ab-text-muted);
+    }
+
+    .ab-benefit-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--color-primary);
+      flex-shrink: 0;
+    }
+
+    /* Hero Visual Right Side */
+    .ab-hero-visual-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 440px;
+    }
+
+    .ab-hero-circle-main {
+      width: clamp(280px, 32vw, 400px);
+      height: clamp(280px, 32vw, 400px);
+      border-radius: 50%;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(7, 91, 70, 0.15);
+      border: 8px solid rgba(255, 255, 255, 0.9);
+      overflow: hidden;
+      background: #e6f4ea;
+    }
+
+    [data-theme="dark"] .ab-hero-circle-main {
+      border-color: rgba(255, 255, 255, 0.1);
+      background: #102d20;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .ab-hero-circle-main img {
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      transition: transform 0.5s ease;
+    }
+
+    .ab-hero-circle-main:hover img {
+      transform: scale(1.04);
+    }
+
+    /* Floating UI Cards in Hero */
+    .ab-card-float {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.95);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 14px;
+      padding: 0.65rem 0.95rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      animation: abFloat 4s ease-in-out infinite alternate;
+    }
+
+    [data-theme="dark"] .ab-card-float {
+      background: rgba(14, 36, 27, 0.95);
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    @keyframes abFloat {
+      0% {
+        transform: translateY(0px);
+      }
+
+      100% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .ab-float-top-left {
+      top: 1rem;
+      left: -1.5rem;
+      animation-delay: 0.2s;
+    }
+
+    .ab-float-middle-right {
+      top: 38%;
+      right: -2rem;
+      animation-delay: 0.6s;
+    }
+
+    .ab-float-bottom-right {
+      bottom: 2rem;
+      right: -1.5rem;
+      animation-delay: 1s;
+    }
+
+    .ab-cf-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--ab-green-deep);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .ab-cf-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .ab-cf-text strong {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--ab-text-dark);
+    }
+
+    .ab-cf-text span {
+      font-size: 0.68rem;
+      color: var(--ab-text-muted);
+    }
+
+    /* ===================================================
+       2. COMPANY OVERVIEW ("WHO WE ARE")
+       =================================================== */
+    .ab-overview-section {
+      background: var(--ab-bg-page);
+      padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+      position: relative;
+    }
+
+    .ab-overview-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: clamp(2.5rem, 5vw, 4.5rem);
+      align-items: center;
+    }
+
+    .ab-overview-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .ab-overview-circle {
+      width: clamp(260px, 30vw, 360px);
+      height: clamp(260px, 30vw, 360px);
+      border-radius: 50%;
+      border: 8px solid var(--ab-green-light);
+      overflow: hidden;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+      position: relative;
+    }
+
+    .ab-overview-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .ab-overview-badge-circle {
+      position: absolute;
+      top: 10%;
+      left: -1rem;
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      background: var(--ab-green-deep);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: var(--font-heading);
+      font-size: 0.65rem;
+      font-weight: 700;
+      line-height: 1.2;
+      box-shadow: 0 8px 20px rgba(7, 91, 70, 0.3);
+      border: 3px solid #fff;
+    }
+
+    .ab-goal-box {
+      background: var(--ab-green-light);
+      border-radius: 16px;
+      padding: 1.25rem 1.4rem;
+      margin-top: 1.75rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+    }
+
+    .ab-goal-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--ab-green-deep);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .ab-goal-text strong {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--ab-green-deep);
+      margin-bottom: 0.2rem;
+    }
+
+    [data-theme="dark"] .ab-goal-text strong {
+      color: #63c98d;
+    }
+
+    .ab-goal-text p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--ab-text-muted);
+      line-height: 1.55;
+    }
+
+    /* ===================================================
+       3. WHY SCHOOLBITE ("WHY SCHOOLBITE")
+       =================================================== */
+    .ab-why-section {
+      background: var(--ab-green-soft);
+      padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+      position: relative;
+    }
+
+    .ab-sec-head {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 3.2rem;
+      position: relative;
+    }
+
+    .ab-sec-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 3.8vw, 2.6rem);
+      font-weight: 800;
+      color: var(--ab-text-dark);
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .ab-sec-sub {
+      font-size: 0.98rem;
+      color: var(--ab-text-muted);
+      line-height: 1.7;
+    }
+
+    .ab-why-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .ab-why-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 2rem 1.6rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .ab-why-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.08);
+      border-color: rgba(7, 91, 70, 0.2);
+    }
+
+    .ab-why-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: var(--ab-green-deep);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 6px 16px rgba(7, 91, 70, 0.2);
+    }
+
+    .ab-why-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .ab-why-title {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ab-text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .ab-why-desc {
+      font-size: 0.88rem;
+      color: var(--ab-text-muted);
+      line-height: 1.65;
+    }
+
+    /* ===================================================
+       4. MISSION & VISION
+       =================================================== */
+    .ab-mission-section {
+      background: var(--ab-bg-page);
+      padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+      position: relative;
+    }
+
+    .ab-mv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem;
+    }
+
+    .ab-mv-panel {
+      border-radius: 24px;
+      padding: clamp(2rem, 4vw, 3rem);
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    /* Mission Panel (Deep Green) */
+    .ab-mission-panel {
+      background: var(--color-dark-bg);
+      color: var(--color-dark-text-primary);
+      box-shadow: 0 16px 48px rgba(13, 31, 26, 0.2);
+    }
+
+    .ab-mv-icon-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .ab-mv-title {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+
+    .ab-mission-panel .ab-mv-title {
+      color: #fff;
+    }
+
+    .ab-mission-panel p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .ab-mv-img-circle {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, 0.2);
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      margin-left: auto;
+    }
+
+    .ab-mv-img-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Vision Panel (Soft Cream with Orange Accent) */
+    .ab-vision-panel {
+      background: var(--ab-cream);
+      border: 1.5px solid rgba(var(--color-accent-rgb), 0.3);
+      box-shadow: 0 16px 48px rgba(var(--color-accent-rgb), 0.08);
+    }
+
+    [data-theme="dark"] .ab-vision-panel {
+      background: var(--color-dark-surface);
+      border-color: rgba(var(--color-accent-rgb), 0.3);
+    }
+
+    .ab-vision-panel .ab-mv-icon-badge {
+      background: rgba(var(--color-accent-rgb), 0.15);
+      color: var(--ab-orange);
+    }
+
+    .ab-vision-panel .ab-mv-title {
+      color: var(--ab-text-dark);
+    }
+
+    .ab-vision-panel p {
+      color: var(--ab-text-muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    /* ===================================================
+       5. VALUES ("WHAT WE BELIEVE")
+       =================================================== */
+    .ab-values-section {
+      background: var(--ab-green-soft);
+      padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+      position: relative;
+    }
+
+    .ab-values-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.25rem;
+    }
+
+    .ab-val-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 1.75rem 1.25rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .ab-val-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .ab-val-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--ab-green-light);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .ab-val-card:hover .ab-val-icon {
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    .ab-val-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .ab-val-title {
+      font-family: var(--font-heading);
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--ab-text-dark);
+      margin-bottom: 0.45rem;
+    }
+
+    .ab-val-desc {
+      font-size: 0.8rem;
+      color: var(--ab-text-muted);
+      line-height: 1.55;
+    }
+
+    /* ===================================================
+       6. OUR JOURNEY ("OUR JOURNEY")
+       =================================================== */
+    .ab-journey-section {
+      background: var(--ab-bg-page);
+      padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+      position: relative;
+    }
+
+    .ab-journey-timeline {
+      position: relative;
+      margin-top: 3.5rem;
+    }
+
+    .ab-timeline-line {
+      position: absolute;
+      top: 28px;
+      left: 12%;
+      right: 12%;
+      height: 2px;
+      background-image: linear-gradient(to right, #1a6b3a 40%, rgba(255, 255, 255, 0) 0%);
+      background-position: top;
+      background-size: 10px 2px;
+      background-repeat: repeat-x;
+      z-index: 1;
+      opacity: 0.6;
+    }
+
+    .ab-journey-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .ab-journey-step {
+      text-align: center;
+      padding: 0 0.5rem;
+    }
+
+    .ab-journey-node {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 2px solid var(--ab-green-primary);
+      color: var(--ab-green-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.25rem;
+      box-shadow: 0 4px 14px rgba(7, 91, 70, 0.12);
+      transition: transform 0.3s ease;
+    }
+
+    .ab-journey-step:hover .ab-journey-node {
+      transform: scale(1.1);
+      background: var(--ab-green-primary);
+      color: #fff;
+    }
+
+    .ab-journey-step-pill {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #fff;
+      background: var(--ab-green-deep);
+      padding: 0.15rem 0.6rem;
+      border-radius: 100px;
+      margin-bottom: 0.5rem;
+    }
+
+    .ab-journey-step-title {
+      font-family: var(--font-heading);
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--ab-text-dark);
+      margin-bottom: 0.45rem;
+    }
+
+    .ab-journey-step-desc {
+      font-size: 0.84rem;
+      color: var(--ab-text-muted);
+      line-height: 1.6;
+    }
+
+    /* ===================================================
+       7. CONNECTED EXPERIENCE
+       =================================================== */
+    .ab-connected-section {
+      background: var(--ab-green-soft);
+      padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+      position: relative;
+    }
+
+    .ab-connected-visual {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 2rem;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .ab-connect-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .ab-connect-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.25rem 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+      transition: transform 0.25s ease;
+    }
+
+    .ab-connect-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .ab-connect-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--ab-green-light);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .ab-connect-info strong {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ab-text-dark);
+      margin-bottom: 0.15rem;
+    }
+
+    .ab-connect-info span {
+      font-size: 0.8rem;
+      color: var(--ab-text-muted);
+      line-height: 1.5;
+    }
+
+    /* Central Hub */
+    .ab-connect-center-hub {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: #fff;
+      border: 4px solid var(--ab-green-deep);
+      box-shadow: 0 12px 36px rgba(7, 91, 70, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0.75rem;
+      z-index: 2;
+    }
+
+    [data-theme="dark"] .ab-connect-center-hub {
+      background: #142923;
+    }
+
+    .ab-connect-center-hub img {
+      height: 28px;
+      width: auto;
+      margin-bottom: 0.3rem;
+    }
+
+    .ab-connect-center-hub span {
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--ab-green-deep);
+    }
+
+    [data-theme="dark"] .ab-connect-center-hub span {
+      color: #63c98d;
+    }
+
+    /* ===================================================
+       8. TEAM SECTION ("THE PEOPLE BEHIND SCHOOLBITE")
+       =================================================== */
+    .ab-team-section {
+      background: var(--ab-bg-page);
+      padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+      position: relative;
+    }
+
+    .ab-team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .ab-team-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ab-team-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.09);
+    }
+
+    .ab-team-img-wrap {
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+      background: #e8f5ed;
+    }
+
+    .ab-team-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform 0.4s ease;
+    }
+
+    .ab-team-card:hover .ab-team-img-wrap img {
+      transform: scale(1.05);
+    }
+
+    .ab-team-body {
+      padding: 1.25rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .ab-team-head-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.25rem;
+    }
+
+    .ab-team-name {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ab-text-dark);
+      margin: 0;
+    }
+
+    .ab-team-role {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 0.6rem;
+    }
+
+    .ab-team-bio {
+      font-size: 0.82rem;
+      color: var(--ab-text-muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .ab-team-li-icon {
+      color: #0a66c2;
+      font-size: 0.85rem;
+    }
+
+    /* Team Doodle Right */
+    .ab-team-doodle-wrap {
+      position: absolute;
+      right: 0.5rem;
+      top: 0.5rem;
+      color: var(--ab-green-primary);
+      text-align: center;
+      z-index: 2;
+    }
+
+    .ab-team-doodle-wrap .ab-doodle {
+      display: block;
+      font-size: 1.15rem;
+      line-height: 1.2;
+      position: static;
+    }
+
+    /* ===================================================
+       9. TESTIMONIALS ("PARENT STORIES")
+       =================================================== */
+    .ab-testi-section {
+      background: var(--ab-green-soft);
+      padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+      position: relative;
+    }
+
+    .ab-testi-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .ab-testi-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 1.85rem 1.6rem;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+
+    .ab-testi-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+    }
+
+    .ab-testi-quote {
+      font-size: 0.92rem;
+      color: var(--ab-text-dark);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .ab-testi-author-row {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .ab-testi-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .ab-testi-author-name {
+      font-family: var(--font-heading);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--ab-text-dark);
+    }
+
+    .ab-testi-author-sub {
+      font-size: 0.75rem;
+      color: var(--ab-text-muted);
+    }
+
+    .ab-testi-stars {
+      display: flex;
+      gap: 0.2rem;
+      color: var(--ab-orange);
+      margin-top: 0.4rem;
+    }
+
+    .ab-testi-stars svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--ab-orange);
+    }
+
+    .ab-testi-dots {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 2.5rem;
+    }
+
+    .ab-testi-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border-color);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .ab-testi-dot.active {
+      width: 24px;
+      border-radius: 100px;
+      background: var(--ab-green-deep);
+    }
+
+    /* ===================================================
+       10. FINAL CTA SECTION ("LET'S BUILD HEALTHIER SCHOOL DAYS")
+       =================================================== */
+    .ab-final-cta-section {
+      padding: clamp(3rem, 6vw, 5rem) 0;
+      background: var(--ab-bg-page);
+    }
+
+    .ab-final-cta-box {
+      background: var(--color-dark-bg);
+      border-radius: 32px;
+      padding: clamp(2.5rem, 5vw, 4.5rem);
+      color: var(--color-dark-text-primary);
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2.5rem;
+      align-items: center;
+      box-shadow: 0 24px 64px rgba(9, 38, 23, 0.3);
+    }
+
+    .ab-final-cta-box::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(76, 175, 80, 0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .ab-cta-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #8ce1a9;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .ab-cta-main-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 1.1rem;
+    }
+
+    .ab-cta-main-sub {
+      font-size: 0.98rem;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.7;
+      max-width: 460px;
+      margin-bottom: 2rem;
+    }
+
+    .ab-cta-btns-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-cta-orange {
+      background: var(--color-primary);
+      color: #FFFFFF;
+      padding: 0.85rem 1.8rem;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .btn-cta-orange:hover {
+      background: var(--color-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(7, 91, 70, 0.28);
+    }
+
+    .btn-cta-outline-white {
+      background: var(--color-dark-surface);
+      color: var(--color-dark-text-secondary);
+      padding: 0.85rem 1.8rem;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      border: 1.5px solid var(--color-dark-border);
+      transition: all 0.25s ease;
+    }
+
+    .btn-cta-outline-white:hover {
+      border-color: var(--color-dark-bright-green);
+      background: var(--color-dark-surface-alt);
+      color: var(--color-dark-text-primary);
+      transform: translateY(-2px);
+    }
+
+    /* CTA Visual */
+    .ab-cta-visual-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .ab-cta-child-circle {
+      width: clamp(220px, 25vw, 320px);
+      height: clamp(220px, 25vw, 320px);
+      border-radius: 50%;
+      border: 6px solid rgba(255, 255, 255, 0.2);
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .ab-cta-child-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .ab-cta-doodle-text {
+      position: absolute;
+      top: 5%;
+      left: -2.5rem;
+      font-family: var(--font-doodle);
+      color: #8ce1a9;
+      font-size: 1.4rem;
+      line-height: 1.2;
+      text-align: center;
+      transform: rotate(-10deg);
+    }
+
+    /* ===================================================
+       RESPONSIVE BREAKPOINTS
+       =================================================== */
+    @media (max-width: 1100px) {
+      .ab-values-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .ab-team-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .ab-mv-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .ab-hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .ab-hero-grid > *,
+      .ab-hero-content,
+      .ab-hero-btns,
+      .ab-hero-benefits {
+        min-width: 0;
+      }
+
+      .ab-hero-sub {
+        margin: 0 auto 2rem;
+      }
+
+      .ab-hero-btns {
+        justify-content: center;
+      }
+
+      .ab-hero-benefits {
+        justify-content: center;
+      }
+
+      .ab-hero-visual-wrap {
+        margin-top: 1.5rem;
+      }
+
+      .ab-overview-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ab-why-cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ab-timeline-line {
+        display: none;
+      }
+
+      .ab-journey-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+
+      .ab-connected-visual {
+        grid-template-columns: 1fr;
+      }
+
+      .ab-connect-center-hub {
+        margin: 1.5rem auto;
+      }
+
+      .ab-testi-cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ab-final-cta-box {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .ab-cta-btns-row {
+        justify-content: center;
+      }
+
+      .ab-cta-doodle-text {
+        position: static;
+        transform: none;
+        margin-bottom: 1rem;
+      }
+
+      .ab-team-doodle-wrap {
+        position: static;
+        margin-top: 0.9rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .ab-hero-doodle {
+        top: 0.25rem;
+        right: 0;
+        max-width: 7rem;
+        font-size: 1rem;
+      }
+
+      .ab-cta-doodle-text {
+        display: none;
+      }
+
+      .ab-leaf-decor {
+        width: 28px !important;
+        opacity: 0.45;
+      }
+      .ab-values-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ab-journey-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ab-team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ab-card-float {
+        position: static;
+        margin: 0.5rem auto;
+        width: 100%;
+        max-width: 260px;
+        animation: none;
+      }
+
+      .ab-hero-visual-wrap {
+        flex-direction: column;
+      }
+
+      .ab-hero-circle-main {
+        flex-shrink: 0;
+      }
+
+      .ab-overview-badge-circle {
+        position: static;
+        margin: 0.5rem auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Site Header Mount -->
+  <div id="site-header-mount"></div>
+
+  <main id="main-content">
+
+    <!-- ===================================================
+         1. HERO SECTION ("ABOUT SCHOOLBITE")
+         =================================================== -->
+    <section class="ab-hero-section" aria-label="About SchoolBite Hero">
+      <!-- Decorative Leaves -->
+      <svg class="ab-leaf-decor" style="top: 5%; left: 3%; width: 42px; transform: rotate(-25deg);" viewBox="0 0 40 60"
+        fill="none">
+        <path d="M20 55 C10 40, 2 25, 5 10 C8 0, 20 0, 30 8 C38 15, 35 35, 20 55Z" fill="#1a6b3a" opacity="0.6" />
+      </svg>
+      <svg class="ab-leaf-decor" style="top: 12%; right: 4%; width: 36px; transform: rotate(45deg);" viewBox="0 0 40 60"
+        fill="none">
+        <path d="M20 55 C10 40, 2 25, 5 10 C8 0, 20 0, 30 8 C38 15, 35 35, 20 55Z" fill="#4caf50" opacity="0.7" />
+      </svg>
+
+      <div class="container">
+        <div class="ab-hero-grid">
+
+          <!-- Left Column -->
+          <div class="ab-hero-content reveal">
+            <span class="ab-pill-eyebrow">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+              About SchoolBite
+            </span>
+            <h1 class="ab-hero-title">
+              Building Healthier<br />School Days,<br />
+              <span class="text-orange">One Meal at a Time.</span>
+            </h1>
+            <p class="ab-hero-sub">
+              SchoolBite makes nutritious school meals simple and convenient for parents, while helping children enjoy
+              balanced and thoughtfully planned meals every school day.
+            </p>
+            <div class="ab-hero-btns">
+              <a href="#who-we-are" class="btn-ab-primary" id="ab-hero-story">
+                <span>Our Story</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a href="contact.html" class="btn-ab-outline" id="ab-hero-contact">
+                <span>Get in Touch</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+            <div class="ab-hero-benefits">
+              <div class="ab-benefit-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                </svg>
+                <span>Nutritious Meals</span>
+              </div>
+              <div class="ab-benefit-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                </svg>
+                <span>Simple Planning</span>
+              </div>
+              <div class="ab-benefit-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                  <line x1="9" x2="9.01" y1="9" y2="9" />
+                  <line x1="15" x2="15.01" y1="9" y2="9" />
+                </svg>
+                <span>Peace of Mind</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column (Hero Visual) -->
+          <div class="ab-hero-visual-wrap reveal reveal-delay-1">
+
+            <!-- Circular Child Portrait -->
+            <div class="ab-hero-circle-main">
+              <img src="assets/images/hero_girl_lunchbox.jpg" alt="Happy school child enjoying healthy SchoolBite meal"
+                loading="eager" />
+            </div>
+
+            <!-- Floating Card 1: Nutritious Meals -->
+            <div class="ab-card-float ab-float-top-left">
+              <div class="ab-cf-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                </svg>
+              </div>
+              <div class="ab-cf-text">
+                <strong>Nutritious Meals</strong>
+                <span>100% Balanced</span>
+              </div>
+            </div>
+
+            <!-- Floating Card 2: Healthy Kids -->
+            <div class="ab-card-float ab-float-middle-right">
+              <div class="ab-cf-icon" style="background: #1a6b3a;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                </svg>
+              </div>
+              <div class="ab-cf-text">
+                <strong>Healthy Kids</strong>
+                <span>Active &amp; Energized</span>
+              </div>
+            </div>
+
+            <!-- Floating Card 3: Stronger Tomorrows -->
+            <div class="ab-card-float ab-float-bottom-right">
+              <div class="ab-cf-icon" style="background: var(--ab-orange-deep);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M18 20V10" />
+                  <path d="M12 20V4" />
+                  <path d="M6 20v-6" />
+                </svg>
+              </div>
+              <div class="ab-cf-text">
+                <strong>Stronger Tomorrows</strong>
+                <span>Lifelong Habits</span>
+              </div>
+            </div>
+
+            <!-- Hand-drawn Doodle Note -->
+            <div class="ab-hero-doodle" aria-hidden="true">
+              <span class="ab-doodle" style="position: static; display: block; color: var(--ab-green-primary);">Good
+                Food<br />Brighter Futures ☺</span>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         2. COMPANY OVERVIEW ("WHO WE ARE")
+         =================================================== -->
+    <section class="ab-overview-section" id="who-we-are" aria-label="Who We Are">
+      <div class="container">
+        <div class="ab-overview-grid">
+
+          <!-- Left Visual -->
+          <div class="ab-overview-visual reveal">
+            <div class="ab-overview-circle">
+              <img src="assets/images/cta_child_thumbsup.jpg" alt="Child with healthy lunchbox" loading="lazy" />
+            </div>
+            <!-- Circular Badge -->
+            <div class="ab-overview-badge-circle" aria-hidden="true">
+              <span>Healthy<br />Kids<br /><strong>Happier<br />Futures</strong></span>
+            </div>
+          </div>
+
+          <!-- Right Content -->
+          <div class="reveal reveal-delay-1">
+            <span class="ab-pill-eyebrow">Our Purpose</span>
+            <h2 class="ab-sec-title">Making School Meals Easier for Parents.</h2>
+            <p class="ab-sec-sub" style="margin-bottom: 1rem;">
+              Planning healthy school meals every day can be difficult. SchoolBite brings meal planning, child
+              preferences, subscriptions and delivery into one simple experience for parents.
+            </p>
+            <p class="ab-sec-sub" style="margin-bottom: 1.5rem;">
+              Nutritious meals for school days<br />
+              Simple weekly meal planning<br />
+              Flexible subscriptions<br />
+              Easy child profile management<br />
+              Convenient delivery and payment tracking
+            </p>
+
+            <div class="ab-goal-box">
+              <div class="ab-goal-icon">🌿</div>
+              <div class="ab-goal-text">
+                <strong>Our goal is simple:</strong>
+                <p>Give parents a reliable way to manage better meals while children enjoy every school day.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         3. WHY SCHOOLBITE ("WHY SCHOOLBITE")
+         =================================================== -->
+    <section class="ab-why-section" id="why-schoolbite" aria-label="Why SchoolBite">
+      <div class="container">
+
+        <div class="ab-sec-head reveal">
+          <span class="ab-pill-eyebrow">Why SchoolBite</span>
+          <h2 class="ab-sec-title">Good Food. Happier Kids. Peace of Mind for Parents.</h2>
+          <p class="ab-sec-sub">
+            We believe children deserve nutritious meals they enjoy, while parents deserve a simple and reliable way to
+            manage them.
+          </p>
+        </div>
+
+        <div class="ab-why-cards-grid">
+          <!-- Card 1 -->
+          <div class="ab-why-card reveal">
+            <div class="ab-why-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 8v8" />
+                <path d="M8 12h8" />
+              </svg>
+            </div>
+            <h3 class="ab-why-title">Nutritious Meals</h3>
+          <p class="ab-why-desc">Balanced meals prepared with children's nutritional needs in mind.</p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="ab-why-card reveal reveal-delay-1">
+            <div class="ab-why-icon" style="background: var(--ab-green-primary);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3" />
+                <path
+                  d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+              </svg>
+            </div>
+            <h3 class="ab-why-title">Parent-Friendly Planning</h3>
+            <p class="ab-why-desc">View weekly menus and manage your child's meals from one convenient dashboard.</p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="ab-why-card reveal reveal-delay-2">
+            <div class="ab-why-icon" style="background: var(--ab-orange-deep);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <h3 class="ab-why-title">Flexible Subscriptions</h3>
+            <p class="ab-why-desc">Choose a suitable meal plan, manage it with flexibility and rely on safe &amp; reliable delivery.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================
+         4. HOW SCHOOLBITE HELPS
+         =================================================== -->
+    <section class="ab-mission-section" aria-label="How SchoolBite Helps">
+      <div class="container">
+        <div class="ab-mv-grid">
+
+          <!-- Mission Panel (Deep Green) -->
+          <div class="ab-mv-panel ab-mission-panel reveal">
+            <div>
+              <div class="ab-mv-icon-badge">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <circle cx="12" cy="12" r="6" />
+                  <circle cx="12" cy="12" r="2" />
+                </svg>
+              </div>
+              <h3 class="ab-mv-title">Everything Parents Need in One Place.</h3>
+              <p>
+                Add Your Child — Create profiles with school, class, dietary preferences and allergy information.<br /><br />
+                Explore Weekly Menus — View upcoming meals and understand the nutrition details before choosing.<br /><br />
+                Choose a Meal Plan — Select one of the available subscription plans that suits your needs.
+              </p>
+            </div>
+            <div class="ab-mv-img-circle">
+              <img src="assets/images/meal_thursday_chapati.jpg" alt="Wholesome school meal" />
+            </div>
+          </div>
+
+          <!-- Vision Panel (Soft Cream with Orange Accent) -->
+          <div class="ab-mv-panel ab-vision-panel reveal reveal-delay-1">
+            <div>
+              <div class="ab-mv-icon-badge">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="4" />
+                  <path d="M12 2v2" />
+                  <path d="M12 20v2" />
+                  <path d="m4.93 4.93 1.41 1.41" />
+                  <path d="m17.66 17.66 1.41 1.41" />
+                  <path d="M2 12h2" />
+                  <path d="M20 12h2" />
+                  <path d="m6.34 17.66-1.41 1.41" />
+                  <path d="m19.07 4.93-1.41 1.41" />
+                </svg>
+              </div>
+              <h3 class="ab-mv-title">A Simpler Parent Experience.</h3>
+              <p>
+                Manage Your Subscription — View, pause, resume or manage your subscription according to the available options.<br /><br />
+                Track Orders &amp; Payments — View your order history, payment details and subscription transactions.<br /><br />
+                Track Delivery — Check upcoming deliveries and delivery status from the Parent Dashboard.
+              </p>
+            </div>
+            <div class="ab-mv-img-circle">
+              <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80"
+                alt="Hands holding growing plant sprout" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         5. OUR APPROACH
+         =================================================== -->
+    <section class="ab-values-section" id="values" aria-label="Our Approach">
+      <div class="container">
+
+        <div class="ab-sec-head reveal">
+          <span class="ab-pill-eyebrow">Our Approach</span>
+          <h2 class="ab-sec-title">Simple for Parents. Better for Children.</h2>
+          <p class="ab-sec-sub">SchoolBite combines thoughtful nutrition, convenient planning and reliable school-day
+            meal delivery into one easy experience.</p>
+        </div>
+
+        <div class="ab-values-grid">
+          <!-- 1 -->
+          <div class="ab-val-card reveal">
+            <div class="ab-val-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+              </svg>
+            </div>
+            <h3 class="ab-val-title">Thoughtful Nutrition</h3>
+            <p class="ab-val-desc">Balanced meals prepared with children's nutritional needs in mind.</p>
+          </div>
+
+          <!-- 2 -->
+          <div class="ab-val-card reveal reveal-delay-1">
+            <div class="ab-val-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path
+                  d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+              </svg>
+            </div>
+            <h3 class="ab-val-title">Parent-Friendly Planning</h3>
+            <p class="ab-val-desc">Simple menus and preferences help parents make confident choices.</p>
+          </div>
+
+          <!-- 3 -->
+          <div class="ab-val-card reveal reveal-delay-2">
+            <div class="ab-val-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <h3 class="ab-val-title">Reliable Delivery</h3>
+            <p class="ab-val-desc">Fresh meals are prepared, packed and delivered with care.</p>
+          </div>
+
+          <!-- 4 -->
+          <div class="ab-val-card reveal reveal-delay-3">
+            <div class="ab-val-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <h3 class="ab-val-title">Clear Information</h3>
+            <p class="ab-val-desc">Parents can understand meals, subscriptions, payments and delivery status.</p>
+          </div>
+
+          <!-- 5 -->
+          <div class="ab-val-card reveal reveal-delay-4">
+            <div class="ab-val-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="m18 8 4 4-4 4" />
+                <path d="M2 12h20" />
+                <path d="m6 16-4-4 4-4" />
+              </svg>
+            </div>
+            <h3 class="ab-val-title">Better School Days</h3>
+            <p class="ab-val-desc">Good food helps children learn, grow and enjoy their day.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================
+         6. OUR JOURNEY ("OUR JOURNEY")
+         =================================================== -->
+    <section class="ab-journey-section" id="our-journey" aria-label="Our Journey">
+      <div class="container">
+
+        <div class="ab-sec-head reveal">
+          <span class="ab-pill-eyebrow">Our Journey</span>
+          <h2 class="ab-sec-title">From Meal Planning to Mealtime, Made Simple.</h2>
+        </div>
+
+        <div class="ab-journey-timeline">
+          <div class="ab-timeline-line"></div>
+
+          <div class="ab-journey-grid">
+            <!-- 01 -->
+            <div class="ab-journey-step reveal">
+              <div class="ab-journey-node">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" x2="12.01" y1="8" y2="8" />
+                </svg>
+              </div>
+              <span class="ab-journey-step-pill">01</span>
+              <h3 class="ab-journey-step-title">Create Your Account</h3>
+              <p class="ab-journey-step-desc">Start your parent account and add your child to begin.</p>
+            </div>
+
+            <!-- 02 -->
+            <div class="ab-journey-step reveal reveal-delay-1">
+              <div class="ab-journey-node">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect width="18" height="18" x="3" y="4" rx="2" />
+                  <line x1="16" x2="16" y1="2" y2="6" />
+                  <line x1="8" x2="8" y1="2" y2="6" />
+                  <line x1="3" x2="21" y1="10" y2="10" />
+                </svg>
+              </div>
+              <span class="ab-journey-step-pill">02</span>
+              <h3 class="ab-journey-step-title">Add Your Child</h3>
+              <p class="ab-journey-step-desc">Save school, class, dietary preferences and allergy information.</p>
+            </div>
+
+            <!-- 03 -->
+            <div class="ab-journey-step reveal reveal-delay-2">
+              <div class="ab-journey-node">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+              </div>
+              <span class="ab-journey-step-pill">03</span>
+              <h3 class="ab-journey-step-title">Choose a Meal Plan</h3>
+              <p class="ab-journey-step-desc">Select a plan that suits your family's school-day routine.</p>
+            </div>
+
+            <!-- 04 -->
+            <div class="ab-journey-step reveal reveal-delay-3">
+              <div class="ab-journey-node">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+                  <path
+                    d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+                </svg>
+              </div>
+              <span class="ab-journey-step-pill">04</span>
+              <h3 class="ab-journey-step-title">Complete Payment</h3>
+              <p class="ab-journey-step-desc">Complete Payment → Manage Meals from Your Dashboard → Enjoy Convenient School-Day Meals.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================
+         7. PARENT DASHBOARD EXPERIENCE
+         =================================================== -->
+    <section class="ab-connected-section" aria-label="Parent Dashboard Experience">
+      <div class="container">
+
+        <div class="ab-sec-head reveal">
+          <span class="ab-pill-eyebrow">Parent Dashboard</span>
+          <h2 class="ab-sec-title">Manage Every School Meal in One Place.</h2>
+        </div>
+
+        <div class="ab-connected-visual">
+
+          <!-- Left Column -->
+          <div class="ab-connect-col">
+            <div class="ab-connect-card reveal">
+              <div class="ab-connect-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </div>
+              <div class="ab-connect-info">
+                <strong>Manage Meals</strong>
+                <span>Plan and personalize school meals easily.</span>
+              </div>
+            </div>
+
+            <div class="ab-connect-card reveal reveal-delay-1">
+              <div class="ab-connect-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                </svg>
+              </div>
+              <div class="ab-connect-info">
+                <strong>Child Profiles</strong>
+                <span>Keep school, class and dietary details organized.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Center Hub -->
+          <div class="ab-connect-center-hub reveal">
+            <img src="assets/images/logo.png" alt="SchoolBite Hub" />
+            <span>SchoolBite</span>
+          </div>
+
+          <!-- Right Column -->
+          <div class="ab-connect-col">
+            <div class="ab-connect-card reveal">
+              <div class="ab-connect-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 21h18" />
+                  <path d="M5 21V7l8-4 8 4v14" />
+                  <path d="M9 10h1" />
+                  <path d="M9 14h1" />
+                  <path d="M9 18h1" />
+                  <path d="M14 10h1" />
+                  <path d="M14 14h1" />
+                  <path d="M14 18h1" />
+                </svg>
+              </div>
+              <div class="ab-connect-info">
+                <strong>Subscriptions</strong>
+                <span>Choose, pause or manage your available meal plan.</span>
+              </div>
+            </div>
+
+            <div class="ab-connect-card reveal reveal-delay-1">
+              <div class="ab-connect-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path
+                    d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z" />
+                </svg>
+              </div>
+              <div class="ab-connect-info">
+                <strong>Orders &amp; Delivery</strong>
+                <span>Track payments, upcoming orders and delivery status.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================
+         8. TEAM SECTION ("THE PEOPLE BEHIND SCHOOLBITE")
+         =================================================== -->
+    <section class="ab-team-section" id="team" aria-label="The People Behind SchoolBite">
+      <div class="container" style="position: relative;">
+
+        <div class="ab-sec-head reveal">
+          <span class="ab-pill-eyebrow">The People Behind SchoolBite</span>
+          <h2 class="ab-sec-title">Meet the Team Behind the Mission.</h2>
+
+          <!-- Hand-drawn Note -->
+          <div class="ab-team-doodle-wrap" aria-hidden="true">
+            <span class="ab-doodle" style="position: static; display: block;">People Passion<br />Better Meals ☺</span>
+          </div>
+        </div>
+
+        <div class="ab-team-grid">
+          <!-- Team Member 1 -->
+          <div class="ab-team-card reveal">
+            <div class="ab-team-img-wrap">
+              <img src="assets/images/team_priya_sharma.jpg" alt="Priya Sharma" loading="lazy" />
+            </div>
+            <div class="ab-team-body">
+              <div class="ab-team-head-row">
+                <h3 class="ab-team-name">Priya Sharma</h3>
+                <span class="ab-team-li-icon">in</span>
+              </div>
+              <div class="ab-team-role">Founder &amp; CEO</div>
+              <p class="ab-team-bio">Passionate about child nutrition and simplifying healthy school days for parents.
+              </p>
+            </div>
+          </div>
+
+          <!-- Team Member 2 -->
+          <div class="ab-team-card reveal reveal-delay-1">
+            <div class="ab-team-img-wrap">
+              <img src="assets/images/team_rahul_mehta.jpg" alt="Rahul Mehta" loading="lazy" />
+            </div>
+            <div class="ab-team-body">
+              <div class="ab-team-head-row">
+                <h3 class="ab-team-name">Rahul Mehta</h3>
+                <span class="ab-team-li-icon">in</span>
+              </div>
+              <div class="ab-team-role">Head of Operations</div>
+              <p class="ab-team-bio">Ensures on-time, hygienic kitchen preparation and seamless school deliveries.</p>
+            </div>
+          </div>
+
+          <!-- Team Member 3 -->
+          <div class="ab-team-card reveal reveal-delay-2">
+            <div class="ab-team-img-wrap">
+              <img src="assets/images/team_sneha_iyer.jpg" alt="Dr. Sneha Iyer" loading="lazy" />
+            </div>
+            <div class="ab-team-body">
+              <div class="ab-team-head-row">
+                <h3 class="ab-team-name">Dr. Sneha Iyer</h3>
+                <span class="ab-team-li-icon">in</span>
+              </div>
+              <div class="ab-team-role">Head of Nutrition</div>
+              <p class="ab-team-bio">Pediatric nutritionist curating balanced, allergen-safe weekly lunch menus.</p>
+            </div>
+          </div>
+
+          <!-- Team Member 4 -->
+          <div class="ab-team-card reveal reveal-delay-3">
+            <div class="ab-team-img-wrap">
+              <img src="assets/images/team_alex_morgan.jpg" alt="Alex Morgan" loading="lazy" />
+            </div>
+            <div class="ab-team-body">
+              <div class="ab-team-head-row">
+                <h3 class="ab-team-name">Alex Morgan</h3>
+                <span class="ab-team-li-icon">in</span>
+              </div>
+              <div class="ab-team-role">Technology Lead</div>
+              <p class="ab-team-bio">Building seamless parent portals, meal tracking, and flexible recurring
+                subscriptions.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================
+         9. TESTIMONIAL SECTION ("PARENT STORIES")
+         =================================================== -->
+    <section class="ab-testi-section" id="testimonials" aria-label="Parent Stories">
+      <div class="container">
+
+        <div class="ab-sec-head reveal">
+          <span class="ab-pill-eyebrow">Parent Stories</span>
+          <h2 class="ab-sec-title">Loved by Families. Built for Better School Days.</h2>
+        </div>
+
+        <div class="ab-testi-cards-grid">
+          <!-- Card 1 -->
+          <div class="ab-testi-card reveal">
+            <p class="ab-testi-quote">
+              “SchoolBite makes school meal planning feel so much easier. I can see what my child is having and manage
+              everything in one place.”
+            </p>
+            <div class="ab-testi-author-row">
+              <img src="assets/images/team_priya_sharma.jpg" alt="Parent review" class="ab-testi-avatar" />
+              <div>
+                <div class="ab-testi-author-name">Meera S.</div>
+                <div class="ab-testi-author-sub">Parent of a Grade 5 Student</div>
+                <div class="ab-testi-stars">
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="ab-testi-card reveal reveal-delay-1">
+            <p class="ab-testi-quote">
+              “It is convenient, simple and gives me more confidence about what my child is eating at school.”
+            </p>
+            <div class="ab-testi-author-row">
+              <img src="assets/images/team_rahul_mehta.jpg" alt="Parent review" class="ab-testi-avatar" />
+              <div>
+                <div class="ab-testi-author-name">Rohan P.</div>
+                <div class="ab-testi-author-sub">Parent of a Grade 3 Student</div>
+                <div class="ab-testi-stars">
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="ab-testi-card reveal reveal-delay-2">
+            <p class="ab-testi-quote">
+              “The meal planning experience saves me time while still keeping nutrition in focus.”
+            </p>
+            <div class="ab-testi-author-row">
+              <img src="assets/images/team_sneha_iyer.jpg" alt="Parent review" class="ab-testi-avatar" />
+              <div>
+                <div class="ab-testi-author-name">Kavita N.</div>
+                <div class="ab-testi-author-sub">Parent of a Grade 6 Student</div>
+                <div class="ab-testi-stars">
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carousel Dots -->
+
+
+      </div>
+    </section>
+
+    <!-- ===================================================
+         10. FINAL CTA SECTION ("LET'S BUILD HEALTHIER SCHOOL DAYS")
+         =================================================== -->
+    <section class="ab-final-cta-section" aria-label="Final Call to Action">
+      <div class="container">
+        <div class="ab-final-cta-box reveal">
+
+          <!-- Left Copy -->
+          <div>
+            <span class="ab-cta-eyebrow">Let's Build Healthier School Days</span>
+            <h2 class="ab-cta-main-title">Ready to Make School Mealtimes Easier?</h2>
+            <p class="ab-cta-main-sub">
+              Give your child nutritious, thoughtfully planned meals while keeping everything simple to manage.
+            </p>
+            <div class="ab-cta-btns-row">
+              <a href="services.html" class="btn-cta-orange" id="ab-cta-services-btn">
+                <span>Get Started</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a href="contact.html" class="btn-cta-outline-white" id="ab-cta-contact-btn">
+                <span>Contact Us</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Visual -->
+          <div class="ab-cta-visual-wrap">
+            <div class="ab-cta-doodle-text" aria-hidden="true">
+              Healthy Meals<br /><strong>Brighter Futures ☺</strong>
+            </div>
+
+            <div class="ab-cta-child-circle">
+              <img src="assets/images/cta_child_thumbsup.jpg" alt="Happy school child thumbs up with SchoolBite meal" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Site Footer Mount -->
+  <div id="site-footer-mount"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

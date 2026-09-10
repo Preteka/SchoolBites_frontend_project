@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifications & Broadcasts | SchoolBite Admin</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <style>
+    .notif-kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .notif-card { background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 18px; box-shadow: var(--shadow); }
+    .notif-card .num { font-size: 26px; font-weight: 800; font-family: var(--font-head); color: var(--green); margin-top: 6px; }
+    .notif-card .lbl { font-size: 12px; color: var(--muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
+
+    .notif-toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 14px 18px; margin-bottom: 20px; box-shadow: var(--shadow); }
+    .notif-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tab-btn { padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; border: 1px solid var(--line); background: var(--page); color: var(--ink-sec); transition: all 0.2s; cursor: pointer; }
+    .tab-btn:hover { background: var(--sage); color: var(--green); }
+    .tab-btn.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+    .notif-list { display: flex; flex-direction: column; gap: 12px; }
+    .notif-item { display: flex; align-items: flex-start; gap: 16px; background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 16px 20px; box-shadow: var(--shadow); transition: transform 0.15s, box-shadow 0.15s; position: relative; }
+    .notif-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .notif-item.unread { border-left: 4px solid var(--green); background: #fafdfb; }
+    .notif-item.urgent { border-left: 4px solid #e05252; }
+    .notif-icon { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 18px; }
+    .icon-delivery { background: #e0f2fe; color: #0284c7; }
+    .icon-alert { background: #fee2e2; color: #dc2626; }
+    .icon-sub { background: #ecfdf5; color: #059669; }
+    .icon-system { background: #f3e8ff; color: #7e22ce; }
+    .icon-broadcast { background: #fef3c7; color: #d97706; }
+
+    .notif-content { flex: 1; }
+    .notif-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 4px; }
+    .notif-title { font-size: 15px; font-weight: 700; color: var(--ink); }
+    .notif-time { font-size: 12px; color: var(--muted); white-space: nowrap; }
+    .notif-desc { font-size: 13px; color: var(--ink-sec); line-height: 1.5; margin-bottom: 8px; }
+    .notif-tags { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+    .notif-actions { display: flex; gap: 8px; align-items: center; margin-left: 12px; }
+    
+    @media (max-width: 768px) {
+      .notif-item { flex-direction: column; }
+      .notif-actions { margin-left: 0; margin-top: 8px; width: 100%; justify-content: flex-end; }
+      .notif-toolbar { flex-direction: column; align-items: stretch; }
+    }
+  </style>
+</head>
+<body data-page="notifications">
+  <div class="admin-layout">
+    <aside class="sidebar" id="adminSidebar"><div id="sidebarMount"></div></aside>
+    <div class="main-wrapper">
+      <header class="topbar">
+        <button class="hamburger" onclick="toggleSidebar()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        <div class="topbar-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="notifSearch" placeholder="Search broadcasts, alerts & announcements..." oninput="filterNotifications()"></div>
+        <div class="topbar-actions">
+          <a href="notifications.html" class="icon-btn active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="icon-badge"></span></a>
+          <div class="admin-profile" id="adminProfileBtn"><div class="admin-avatar">A</div><div class="admin-info"><span class="admin-name">Admin</span><span class="admin-role">Administrator</span></div><svg class="admin-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="profile-dropdown" id="profileDropdown"><a href="settings.html" class="dropdown-item">Settings</a><a href="../parent/index.html" class="dropdown-item" style="color:#d9534f">Sign Out</a></div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <div class="page-header-row">
+          <div class="page-title-group">
+            <h1>Notifications &amp; Broadcast Center</h1>
+            <p>Send instant school announcements, dietary alerts, delivery notifications and operational messages to parents.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn-secondary" onclick="markAllAsRead()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+              Mark All Read
+            </button>
+            <button class="btn-primary" onclick="document.getElementById('broadcastModal').style.display='flex'">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="16" height="16"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Send New Broadcast
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI Grid -->
+        <div class="notif-kpi-grid">
+          <div class="notif-card">
+            <div class="lbl">Total Broadcasts (MTD)</div>
+            <div class="num">142</div>
+          </div>
+          <div class="notif-card">
+            <div class="lbl">Delivery Success Rate</div>
+            <div class="num" style="color:#15966e">99.4%</div>
+          </div>
+          <div class="notif-card">
+            <div class="lbl">Unread Priority Alerts</div>
+            <div class="num" style="color:#e05252" id="unreadCount">3</div>
+          </div>
+          <div class="notif-card">
+            <div class="lbl">Scheduled Announcements</div>
+            <div class="num" style="color:#f4a340">2</div>
+          </div>
+        </div>
+
+        <!-- Toolbar & Filter Tabs -->
+        <div class="notif-toolbar">
+          <div class="notif-tabs">
+            <button class="tab-btn active" data-filter="all" onclick="selectTab(this, 'all')">All Notifications</button>
+            <button class="tab-btn" data-filter="broadcast" onclick="selectTab(this, 'broadcast')">Broadcasts</button>
+            <button class="tab-btn" data-filter="delivery" onclick="selectTab(this, 'delivery')">Delivery Updates</button>
+            <button class="tab-btn" data-filter="allergy" onclick="selectTab(this, 'allergy')">Dietary &amp; Allergies</button>
+            <button class="tab-btn" data-filter="system" onclick="selectTab(this, 'system')">System &amp; Billing</button>
+          </div>
+          <div style="font-size:13px; color:var(--muted); font-weight:600;" id="showingCount">Showing 6 messages</div>
+        </div>
+
+        <!-- Notification Feed List -->
+        <div class="notif-list" id="notifListContainer">
+          
+          <!-- Item 1 -->
+          <div class="notif-item unread urgent" data-cat="allergy">
+            <div class="notif-icon icon-alert">⚠️</div>
+            <div class="notif-content">
+              <div class="notif-top">
+                <div class="notif-title">Emergency Peanut Allergy Flag: Aarav Sharma (Grade 4B)</div>
+                <div class="notif-time">10 mins ago</div>
+              </div>
+              <div class="notif-desc">Parent updated medical records with severe peanut sensitivity. Kitchen staff and dispatch manager must ensure separate gluten/nut-free prep box #SB-4402.</div>
+              <div class="notif-tags">
+                <span class="badge-status cancelled">Urgent Safety</span>
+                <span class="badge-status preparing">Delhi Public School</span>
+                <span class="badge-status packed">Child: Aarav Sharma</span>
+              </div>
+            </div>
+            <div class="notif-actions">
+              <button class="btn-icon-action" title="Mark Read" onclick="toggleRead(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></button>
+              <button class="btn-icon-action danger" title="Delete" onclick="deleteItem(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="notif-item unread" data-cat="broadcast">
+            <div class="notif-icon icon-broadcast">📢</div>
+            <div class="notif-content">
+              <div class="notif-top">
+                <div class="notif-title">Special Diwali Festive Lunch Menu Announcement</div>
+                <div class="notif-time">2 hours ago</div>
+              </div>
+              <div class="notif-desc">Broadcast sent to 480 parents regarding custom festive thali and sweets distribution scheduled for next Friday. Opt-out window closes on Wednesday 6 PM.</div>
+              <div class="notif-tags">
+                <span class="badge-status active">Sent Broadcast</span>
+                <span class="badge-status preparing">480 Recipients</span>
+                <span class="badge-status out-for-delivery">Open Rate: 88%</span>
+              </div>
+            </div>
+            <div class="notif-actions">
+              <button class="btn-icon-action" title="Mark Read" onclick="toggleRead(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></button>
+              <button class="btn-icon-action danger" title="Delete" onclick="deleteItem(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="notif-item unread" data-cat="delivery">
+            <div class="notif-icon icon-delivery">🚚</div>
+            <div class="notif-content">
+              <div class="notif-top">
+                <div class="notif-title">Route 04 Van Dispatch Completed: Ryan International</div>
+                <div class="notif-time">Today, 11:15 AM</div>
+              </div>
+              <div class="notif-desc">All 48 hot insulated tiffin boxes safely handed over to cafeteria in-charge Mr. Deshmukh. Temperature sensor logs verified at 68°C.</div>
+              <div class="notif-tags">
+                <span class="badge-status out-for-delivery">Delivery Verified</span>
+                <span class="badge-status active">48 Meals Handed Over</span>
+              </div>
+            </div>
+            <div class="notif-actions">
+              <button class="btn-icon-action" title="Mark Read" onclick="toggleRead(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></button>
+              <button class="btn-icon-action danger" title="Delete" onclick="deleteItem(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="notif-item" data-cat="system">
+            <div class="notif-icon icon-sub">💳</div>
+            <div class="notif-content">
+              <div class="notif-top">
+                <div class="notif-title">Term Renewal Successful: Rohan Varma (Annual Plan)</div>
+                <div class="notif-time">Yesterday, 4:30 PM</div>
+              </div>
+              <div class="notif-desc">Payment of ₹24,000 received via Razorpay UPI auto-debit. Subscription extended until March 31, 2027. Invoice #INV-8910 generated.</div>
+              <div class="notif-tags">
+                <span class="badge-status active">Payment Success</span>
+                <span class="badge-status preparing">Parent: Priya Varma</span>
+              </div>
+            </div>
+            <div class="notif-actions">
+              <button class="btn-icon-action" title="Mark Read" onclick="toggleRead(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></button>
+              <button class="btn-icon-action danger" title="Delete" onclick="deleteItem(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="notif-item" data-cat="system">
+            <div class="notif-icon icon-system">⚙️</div>
+            <div class="notif-content">
+              <div class="notif-top">
+                <div class="notif-title">Weekly Automated Nutrition Audit Report Ready</div>
+                <div class="notif-time">2 days ago</div>
+              </div>
+              <div class="notif-desc">Calculated avg balanced calorie intake at 420 kcal/meal. Zero high-sodium threshold violations detected across all 5 school routes.</div>
+              <div class="notif-tags">
+                <span class="badge-status active">Audit Passed</span>
+                <span class="badge-status preparing">Dietician Team Approved</span>
+              </div>
+            </div>
+            <div class="notif-actions">
+              <button class="btn-icon-action" title="Mark Read" onclick="toggleRead(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></button>
+              <button class="btn-icon-action danger" title="Delete" onclick="deleteItem(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+            </div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="notif-item" data-cat="delivery">
+            <div class="notif-icon icon-delivery">⏰</div>
+            <div class="notif-content">
+              <div class="notif-top">
+                <div class="notif-title">Severe Weather Warning &amp; Early Dispatch Adjustment</div>
+                <div class="notif-time">3 days ago</div>
+              </div>
+              <div class="notif-desc">Due to heavy rainfall alert in South Zone, morning kitchen prep moved 30 minutes earlier to ensure on-time 11:30 AM lunch handover.</div>
+              <div class="notif-tags">
+                <span class="badge-status paused">Weather Action</span>
+                <span class="badge-status preparing">All 5 Routes Notified</span>
+              </div>
+            </div>
+            <div class="notif-actions">
+              <button class="btn-icon-action" title="Mark Read" onclick="toggleRead(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></button>
+              <button class="btn-icon-action danger" title="Delete" onclick="deleteItem(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+            </div>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </div>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <!-- BROADCAST MODAL -->
+  <div class="modal-overlay" id="broadcastModal" style="display:none">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Create Broadcast Announcement</h3>
+        <button class="modal-close" onclick="document.getElementById('broadcastModal').style.display='none'">&times;</button>
+      </div>
+      <form onsubmit="sendBroadcast(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Announcement Title *</label>
+            <input type="text" class="form-control" id="broadcastTitle" required placeholder="e.g. Tomorrow's Menu Upgrade & Holiday Schedule">
+          </div>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Target Audience</label>
+              <select class="form-control" id="broadcastAudience">
+                <option value="all">All Active Parents (All Schools)</option>
+                <option value="dps">Delhi Public School Only</option>
+                <option value="ryan">Ryan International Only</option>
+                <option value="oakridge">Oakridge International Only</option>
+                <option value="stmary">St. Mary's Convent</option>
+                <option value="veg">Vegetarian Plan Holders Only</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Urgency Level</label>
+              <select class="form-control" id="broadcastUrgency">
+                <option value="normal">Normal Announcement</option>
+                <option value="important">Important (Push Notification)</option>
+                <option value="urgent">Urgent Alert (SMS + Push + In-App)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Message Content *</label>
+            <textarea class="form-control" id="broadcastBody" rows="4" required placeholder="Type the message that parents will see on their mobile app and SMS..."></textarea>
+          </div>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Delivery Channel</label>
+              <div style="display:flex; gap:12px; margin-top:8px; font-size:13px;">
+                <label style="display:flex; align-items:center; gap:6px; cursor:pointer;"><input type="checkbox" checked> App Push</label>
+                <label style="display:flex; align-items:center; gap:6px; cursor:pointer;"><input type="checkbox" checked> WhatsApp</label>
+                <label style="display:flex; align-items:center; gap:6px; cursor:pointer;"><input type="checkbox"> SMS</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Schedule</label>
+              <select class="form-control">
+                <option>Send Immediately</option>
+                <option>Schedule for Tomorrow 7:00 AM</option>
+                <option>Schedule for Weekend Summary</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="document.getElementById('broadcastModal').style.display='none'">Cancel</button>
+          <button type="submit" class="btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="16" height="16"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Broadcast Now
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="js/admin-sidebar.js"></script>
+  <script src="js/admin-common.js"></script>
+  <script>
+    let currentFilter = 'all';
+
+    function selectTab(btn, cat) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = cat;
+      filterNotifications();
+    }
+
+    function filterNotifications() {
+      const q = (document.getElementById('notifSearch').value || '').toLowerCase();
+      const items = document.querySelectorAll('.notif-item');
+      let visible = 0;
+
+      items.forEach(item => {
+        const itemCat = item.getAttribute('data-cat') || '';
+        const text = item.innerText.toLowerCase();
+        const matchesCat = (currentFilter === 'all' || itemCat === currentFilter);
+        const matchesQuery = !q || text.includes(q);
+
+        if (matchesCat && matchesQuery) {
+          item.style.display = 'flex';
+          visible++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      document.getElementById('showingCount').textContent = `Showing ${visible} message${visible === 1 ? '' : 's'}`;
+    }
+
+    function toggleRead(btn) {
+      const item = btn.closest('.notif-item');
+      if (item.classList.contains('unread')) {
+        item.classList.remove('unread');
+        showToast('Marked as read');
+      } else {
+        item.classList.add('unread');
+        showToast('Marked as unread');
+      }
+      updateUnreadCount();
+    }
+
+    function deleteItem(btn) {
+      const item = btn.closest('.notif-item');
+      item.style.opacity = '0';
+      item.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        item.remove();
+        filterNotifications();
+        updateUnreadCount();
+        showToast('Notification removed');
+      }, 200);
+    }
+
+    function markAllAsRead() {
+      document.querySelectorAll('.notif-item.unread').forEach(item => {
+        item.classList.remove('unread');
+      });
+      updateUnreadCount();
+      showToast('All notifications marked as read');
+    }
+
+    function updateUnreadCount() {
+      const count = document.querySelectorAll('.notif-item.unread').length;
+      const el = document.getElementById('unreadCount');
+      if (el) el.textContent = count;
+    }
+
+    function sendBroadcast(e) {
+      e.preventDefault();
+      const title = document.getElementById('broadcastTitle').value;
+      const body = document.getElementById('broadcastBody').value;
+      const audience = document.getElementById('broadcastAudience').options[document.getElementById('broadcastAudience').selectedIndex].text;
+      
+      const container = document.getElementById('notifListContainer');
+      const newCard = document.createElement('div');
+      newCard.className = 'notif-item unread';
+      newCard.setAttribute('data-cat', 'broadcast');
+      newCard.innerHTML = `
+        <div class="notif-icon icon-broadcast">📢</div>
+        <div class="notif-content">
+          <div class="notif-top">
+            <div class="notif-title">${title}</div>
+            <div class="notif-time">Just now</div>
+          </div>
+          <div class="notif-desc">${body}</div>
+          <div class="notif-tags">
+            <span class="badge-status active">Sent Broadcast</span>
+            <span class="badge-status preparing">${audience}</span>
+            <span class="badge-status out-for-delivery">Delivery: 100%</span>
+          </div>
+        </div>
+        <div class="notif-actions">
+          <button class="btn-icon-action" title="Mark Read" onclick="toggleRead(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></button>
+          <button class="btn-icon-action danger" title="Delete" onclick="deleteItem(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+        </div>
+      `;
+      container.insertBefore(newCard, container.firstChild);
+
+      document.getElementById('broadcastModal').style.display = 'none';
+      e.target.reset();
+      updateUnreadCount();
+      filterNotifications();
+      showToast('Broadcast sent successfully to all recipients!');
+    }
+  </script>
+</body>
+</html>

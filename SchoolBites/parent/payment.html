@@ -1,0 +1,350 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secure Payment — SchoolBite</title>
+  <meta name="description" content="Complete your SchoolBite subscription payment securely via UPI, Net Banking, or Card." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .payment-page { min-height: 100vh; display: flex; flex-direction: column; background: var(--bg-page); }
+    .payment-main { flex: 1; padding: 5rem 1.5rem 4rem; }
+    .payment-container { max-width: 820px; margin: 0 auto; }
+    .flow-steps { display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+    .flow-step { display: flex; align-items: center; gap: 0.375rem; font-size: 0.8rem; font-weight: 500; color: var(--color-text-muted); }
+    .flow-step-num { width: 1.625rem; height: 1.625rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; background: var(--border-color); color: var(--color-text-muted); flex-shrink: 0; }
+    .flow-step.done .flow-step-num { background: var(--color-secondary, #55a458); color: #fff; }
+    .flow-step.active .flow-step-num { background: var(--color-primary); color: #fff; }
+    .flow-step.active { color: var(--color-primary); font-weight: 600; }
+    .flow-sep { color: var(--border-color); }
+    .payment-grid { display: grid; grid-template-columns: 1fr 340px; gap: 2rem; align-items: start; }
+    /* Left: payment methods */
+    .payment-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 1.25rem; padding: 1.875rem; margin-bottom: 1.5rem; }
+    .payment-card-title { font-size: 1.0625rem; font-weight: 700; color: var(--color-text-heading); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem; }
+    .payment-card-title svg { width: 1.125rem; height: 1.125rem; color: var(--color-primary); }
+    /* Method tabs */
+    .method-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .method-tab { display: flex; align-items: center; gap: 0.5rem; padding: 0.625rem 1rem; border: 1.5px solid var(--border-color); border-radius: 0.75rem; cursor: pointer; font-size: 0.875rem; font-weight: 600; color: var(--color-text-muted); background: var(--bg-page); transition: all 0.2s; font-family: var(--font-body); }
+    .method-tab.active { border-color: var(--color-primary); color: var(--color-primary); background: rgba(52,107,59,0.05); }
+    .method-tab svg { width: 1rem; height: 1rem; }
+    .method-panel { display: none; }
+    .method-panel.active { display: block; }
+    /* UPI */
+    .upi-input-wrap { display: flex; gap: 0.75rem; }
+    .upi-input { flex: 1; padding: 0.75rem 1rem; border: 1.5px solid var(--border-color); border-radius: 0.625rem; background: var(--bg-page); color: var(--color-text-body); font-size: 0.9375rem; font-family: var(--font-body); transition: border-color 0.2s; }
+    .upi-input:focus { outline: none; border-color: var(--color-primary); }
+    .btn-verify-upi { padding: 0.75rem 1.25rem; background: var(--color-primary); color: #fff; border: none; border-radius: 0.625rem; font-size: 0.9rem; font-weight: 700; cursor: pointer; font-family: var(--font-body); white-space: nowrap; }
+    .upi-apps { display: flex; gap: 0.75rem; margin-top: 1.25rem; flex-wrap: wrap; }
+    .upi-app-btn { display: flex; flex-direction: column; align-items: center; gap: 0.375rem; padding: 0.75rem 1rem; border: 1.5px solid var(--border-color); border-radius: 0.875rem; cursor: pointer; background: var(--bg-page); font-size: 0.75rem; font-weight: 600; color: var(--color-text-muted); min-width: 5rem; transition: border-color 0.2s; font-family: var(--font-body); }
+    .upi-app-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
+    .upi-app-icon { width: 2.25rem; height: 2.25rem; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 900; }
+    /* Card form */
+    .card-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .card-input-group { margin-bottom: 1rem; }
+    .card-label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--color-text-body); margin-bottom: 0.375rem; }
+    .card-input { width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(--border-color); border-radius: 0.625rem; background: var(--bg-page); color: var(--color-text-body); font-size: 0.9375rem; font-family: var(--font-body); box-sizing: border-box; transition: border-color 0.2s; }
+    .card-input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(52,107,59,0.1); }
+    /* Netbanking */
+    .bank-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.625rem; }
+    .bank-item { padding: 0.875rem 0.5rem; border: 1.5px solid var(--border-color); border-radius: 0.75rem; text-align: center; cursor: pointer; font-size: 0.8rem; font-weight: 600; color: var(--color-text-muted); transition: all 0.2s; background: var(--bg-page); }
+    .bank-item:hover, .bank-item.active { border-color: var(--color-primary); color: var(--color-primary); background: rgba(52,107,59,0.05); }
+    .bank-item .bank-name { margin-top: 0.25rem; font-size: 0.75rem; }
+    /* Right: Order summary */
+    .order-summary-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 1.25rem; padding: 1.75rem; position: sticky; top: 7rem; }
+    .order-summary-title { font-size: 1rem; font-weight: 700; color: var(--color-text-heading); margin-bottom: 1.25rem; }
+    .order-plan-badge { display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark, #2a5c31)); border-radius: 0.875rem; margin-bottom: 1.25rem; color: #fff; }
+    .order-plan-icon { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .order-plan-icon svg { width: 1.25rem; height: 1.25rem; }
+    .order-plan-name { font-weight: 700; font-size: 0.9375rem; }
+    .order-plan-sub { font-size: 0.8rem; opacity: 0.85; margin-top: 0.125rem; }
+    .order-line { display: flex; justify-content: space-between; align-items: center; padding: 0.625rem 0; border-bottom: 1px solid var(--border-color); font-size: 0.9rem; }
+    .order-line:last-of-type { border-bottom: none; }
+    .order-line.total { font-weight: 800; font-size: 1.0625rem; color: var(--color-text-heading); padding-top: 1rem; }
+    .order-line .label { color: var(--color-text-muted); }
+    .order-line .value { color: var(--color-text-body); font-weight: 600; }
+    .order-line.total .value { color: var(--color-primary); font-size: 1.25rem; }
+    .order-features { margin: 1.25rem 0; }
+    .order-feature { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 0.5rem; }
+    .order-feature svg { width: 0.875rem; height: 0.875rem; color: var(--color-secondary, #55a458); flex-shrink: 0; }
+    .btn-pay { width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem 1.5rem; border: none; border-radius: 0.875rem; background: var(--color-primary); color: #fff; font-size: 1rem; font-weight: 800; cursor: pointer; font-family: var(--font-body); transition: background 0.2s, transform 0.15s; margin-top: 1rem; }
+    .btn-pay:hover { background: var(--color-primary-dark, #2a5c31); transform: translateY(-1px); }
+    .btn-pay svg { width: 1.125rem; height: 1.125rem; }
+    .security-note { display: flex; align-items: center; gap: 0.375rem; font-size: 0.78rem; color: var(--color-text-subtle); justify-content: center; margin-top: 0.75rem; }
+    .security-note svg { width: 0.875rem; height: 0.875rem; color: var(--color-secondary, #55a458); }
+    .pay-processing { display: none; text-align: center; padding: 2rem; }
+    .pay-spinner { width: 3rem; height: 3rem; border: 3px solid var(--border-color); border-top-color: var(--color-primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (max-width: 700px) { .payment-grid { grid-template-columns: 1fr; } .card-form-grid { grid-template-columns: 1fr; } .bank-grid { grid-template-columns: repeat(2,1fr); } }
+  </style>
+</head>
+<body class="payment-page">
+  <div id="site-header-mount"></div>
+
+  <main class="payment-main" id="main-content">
+    <div class="payment-container">
+
+      <!-- Progress -->
+      <div class="flow-steps">
+        <div class="flow-step done"><span class="flow-step-num">&#10003;</span><span>Choose Plan</span></div>
+        <span class="flow-sep">&#8250;</span>
+        <div class="flow-step done"><span class="flow-step-num">&#10003;</span><span>Account</span></div>
+        <span class="flow-sep">&#8250;</span>
+        <div class="flow-step done"><span class="flow-step-num">&#10003;</span><span>Setup</span></div>
+        <span class="flow-sep">&#8250;</span>
+        <div class="flow-step active"><span class="flow-step-num">4</span><span>Payment</span></div>
+      </div>
+
+      <div class="payment-grid">
+
+        <!-- LEFT: Payment Methods -->
+        <div>
+          <div class="payment-card">
+            <div class="payment-card-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+              Choose Payment Method
+            </div>
+
+            <!-- Tabs -->
+            <div class="method-tabs">
+              <button type="button" class="method-tab active" data-method="upi" onclick="switchMethod('upi')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12M6 8h12M6 13l8.5 8M6 13h3a4.5 4.5 0 0 0 0-9H6"/></svg>
+                UPI
+              </button>
+              <button type="button" class="method-tab" data-method="card" onclick="switchMethod('card')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                Card
+              </button>
+              <button type="button" class="method-tab" data-method="netbanking" onclick="switchMethod('netbanking')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                Net Banking
+              </button>
+              <button type="button" class="method-tab" data-method="wallet" onclick="switchMethod('wallet')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+                Wallet
+              </button>
+            </div>
+
+            <!-- UPI Panel -->
+            <div class="method-panel active" id="panel-upi">
+              <div class="card-label" style="margin-bottom:0.625rem;">Enter UPI ID</div>
+              <div class="upi-input-wrap">
+                <input type="text" class="upi-input" id="upi-id-input" placeholder="yourname@upi" />
+                <button type="button" class="btn-verify-upi">Verify</button>
+              </div>
+              <div class="upi-apps">
+                <button type="button" class="upi-app-btn" onclick="selectUpiApp(this, 'Google Pay')">
+                  <div class="upi-app-icon" style="background:#e8f5e9; color:#1a73e8; font-size:1rem; font-weight:800;">G</div>
+                  <span>Google Pay</span>
+                </button>
+                <button type="button" class="upi-app-btn" onclick="selectUpiApp(this, 'PhonePe')">
+                  <div class="upi-app-icon" style="background:#ede7f6; color:#5c35a0; font-size:1rem; font-weight:800;">P</div>
+                  <span>PhonePe</span>
+                </button>
+                <button type="button" class="upi-app-btn" onclick="selectUpiApp(this, 'Paytm')">
+                  <div class="upi-app-icon" style="background:#e3f2fd; color:#0070ba; font-size:1rem; font-weight:800;">P</div>
+                  <span>Paytm</span>
+                </button>
+                <button type="button" class="upi-app-btn" onclick="selectUpiApp(this, 'BHIM')">
+                  <div class="upi-app-icon" style="background:#fff3e0; color:#e65100; font-size:1rem; font-weight:800;">B</div>
+                  <span>BHIM</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card Panel -->
+            <div class="method-panel" id="panel-card">
+              <div class="card-input-group" style="margin-bottom:1rem;">
+                <label class="card-label" for="card-number">Card Number</label>
+                <input type="text" id="card-number" class="card-input" placeholder="1234 5678 9012 3456" maxlength="19" />
+              </div>
+              <div class="card-input-group" style="margin-bottom:1rem;">
+                <label class="card-label" for="card-name">Name on Card</label>
+                <input type="text" id="card-name" class="card-input" placeholder="As printed on card" />
+              </div>
+              <div class="card-form-grid">
+                <div class="card-input-group">
+                  <label class="card-label" for="card-expiry">Expiry Date</label>
+                  <input type="text" id="card-expiry" class="card-input" placeholder="MM / YY" maxlength="7" />
+                </div>
+                <div class="card-input-group">
+                  <label class="card-label" for="card-cvv">CVV</label>
+                  <input type="password" id="card-cvv" class="card-input" placeholder="&#8226;&#8226;&#8226;" maxlength="4" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Net Banking Panel -->
+            <div class="method-panel" id="panel-netbanking">
+              <div class="card-label" style="margin-bottom:0.75rem;">Select Your Bank</div>
+              <div class="bank-grid">
+                <button type="button" class="bank-item" onclick="selectBank(this)"><div>SBI</div><div class="bank-name">State Bank</div></button>
+                <button type="button" class="bank-item" onclick="selectBank(this)"><div>HDFC</div><div class="bank-name">HDFC Bank</div></button>
+                <button type="button" class="bank-item" onclick="selectBank(this)"><div>ICICI</div><div class="bank-name">ICICI Bank</div></button>
+                <button type="button" class="bank-item" onclick="selectBank(this)"><div>Axis</div><div class="bank-name">Axis Bank</div></button>
+                <button type="button" class="bank-item" onclick="selectBank(this)"><div>Kotak</div><div class="bank-name">Kotak Bank</div></button>
+                <button type="button" class="bank-item" onclick="selectBank(this)"><div>Other</div><div class="bank-name">More Banks</div></button>
+              </div>
+            </div>
+
+            <!-- Wallet Panel -->
+            <div class="method-panel" id="panel-wallet">
+              <div class="bank-grid">
+                <button type="button" class="bank-item" onclick="selectBank(this)"><div>Paytm</div><div class="bank-name">Wallet</div></button>
+                <button type="button" class="bank-item" onclick="selectBank(this)"><div>Amazon</div><div class="bank-name">Pay</div></button>
+                <button type="button" class="bank-item" onclick="selectBank(this)"><div>Mobikwik</div><div class="bank-name">Wallet</div></button>
+              </div>
+            </div>
+          </div><!-- /payment-card -->
+
+          <!-- Processing overlay -->
+          <div class="pay-processing" id="pay-processing">
+            <div class="pay-spinner"></div>
+            <p style="font-weight:700; color:var(--color-text-heading); font-size:1.0625rem;">Processing your payment...</p>
+            <p style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">Please do not close this window.</p>
+          </div>
+        </div><!-- /left col -->
+
+        <!-- RIGHT: Order Summary -->
+        <div>
+          <div class="order-summary-card">
+            <div class="order-summary-title">Order Summary</div>
+
+            <div class="order-plan-badge" id="order-plan-badge">
+              <div class="order-plan-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+              </div>
+              <div>
+                <div class="order-plan-name" id="order-plan-name">Loading...</div>
+                <div class="order-plan-sub" id="order-plan-sub"></div>
+              </div>
+            </div>
+
+            <div class="order-line"><span class="label">Plan Price</span><span class="value" id="order-price">&#8377;&mdash;</span></div>
+            <div class="order-line"><span class="label">CGST (2.5%)</span><span class="value" id="order-cgst">&#8377;&mdash;</span></div>
+            <div class="order-line"><span class="label">SGST (2.5%)</span><span class="value" id="order-sgst">&#8377;&mdash;</span></div>
+            <div class="order-line"><span class="label">Delivery & Setup</span><span class="value" style="color:var(--color-secondary,#55a458);">Free</span></div>
+            <div class="order-line total"><span class="label">Total Payable</span><span class="value" id="order-total">&#8377;&mdash;</span></div>
+
+            <div class="order-features">
+              <div class="order-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Pause or cancel anytime</div>
+              <div class="order-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Automatic credit rollover</div>
+              <div class="order-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> GST invoice emailed instantly</div>
+              <div class="order-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 256-bit encrypted payment</div>
+            </div>
+
+            <button type="button" class="btn-pay" id="btn-pay" onclick="processPayment()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span id="btn-pay-text">Pay Securely</span>
+            </button>
+
+            <div class="security-note">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Secured by 256-bit SSL encryption
+            </div>
+          </div>
+        </div><!-- /right col -->
+
+      </div><!-- /payment-grid -->
+    </div>
+  </main>
+
+  <div id="site-footer-mount"></div>
+  <div id="site-modals-mount"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    (function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const planId = urlParams.get('plan') || localStorage.getItem('schoolbite_pending_plan');
+      const dashboardPlan = (() => { try { return JSON.parse(localStorage.getItem('schoolbite_dashboard_selected_plan') || 'null'); } catch { return null; } })();
+
+      function populateOrder() {
+        if (!window.SCHOOLBITE_DATA || !planId) return;
+        const plan = (dashboardPlan && dashboardPlan.id === planId) ? dashboardPlan : window.SCHOOLBITE_DATA.pricingPlans.find(p => p.id === planId);
+        if (!plan) return;
+
+        const price = plan.price;
+        const gst   = Math.round(price * 0.025);
+        const total = price + gst * 2;
+
+        const fmt = n => '\u20B9' + n.toLocaleString('en-IN');
+
+        document.getElementById('order-plan-name').textContent = plan.name;
+        document.getElementById('order-plan-sub').textContent  = plan.period.replace('/ ','Per ').replace(/^Per /, 'Per ');
+        document.getElementById('order-price').textContent     = fmt(price);
+        document.getElementById('order-cgst').textContent      = fmt(gst);
+        document.getElementById('order-sgst').textContent      = fmt(gst);
+        document.getElementById('order-total').textContent     = fmt(total);
+        document.getElementById('btn-pay-text').textContent    = 'Pay ' + fmt(total) + ' Securely';
+
+        localStorage.setItem('schoolbite_order_total', total);
+        localStorage.setItem('schoolbite_order_plan', plan.name);
+        localStorage.setItem('schoolbite_order_cycle', plan.period.replace(/^\/\s*/, ''));
+      }
+
+      const wait = setInterval(() => { if (window.SCHOOLBITE_DATA) { clearInterval(wait); populateOrder(); } }, 50);
+
+      window.switchMethod = function (m) {
+        document.querySelectorAll('.method-tab').forEach(t => t.classList.toggle('active', t.getAttribute('data-method') === m));
+        document.querySelectorAll('.method-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + m));
+      };
+
+      window.selectUpiApp = function (el, name) {
+        document.querySelectorAll('.upi-app-btn').forEach(b => b.style.borderColor = '');
+        el.style.borderColor = 'var(--color-primary)';
+        document.getElementById('upi-id-input').placeholder = 'yourname@' + name.toLowerCase().replace(' ','');
+      };
+
+      window.selectBank = function (el) {
+        document.querySelectorAll('.bank-item').forEach(b => b.classList.remove('active'));
+        el.classList.add('active');
+      };
+
+      window.processPayment = function () {
+        const btn = document.getElementById('btn-pay');
+        const card = document.querySelector('.payment-card');
+        const processing = document.getElementById('pay-processing');
+        if (btn) { btn.disabled = true; }
+        if (card) card.style.display = 'none';
+        if (processing) processing.style.display = 'block';
+
+        // Simulate payment
+        setTimeout(() => {
+          localStorage.setItem('schoolbite_payment_done', '1');
+          const paidUser = window.SchoolBiteAuth && SchoolBiteAuth.currentUser();
+          const selectedPlan = (dashboardPlan && dashboardPlan.id === planId ? dashboardPlan : null) || (window.SCHOOLBITE_DATA && window.SCHOOLBITE_DATA.pricingPlans.find(plan => plan.id === planId));
+          if (paidUser && window.SchoolBiteAuth) {
+            SchoolBiteAuth.updateUser({
+              paymentCompleted: true,
+              subscriptionActive: true,
+              selectedPlan: selectedPlan ? selectedPlan.name : localStorage.getItem('schoolbite_order_plan'),
+              subscriptionPrice: selectedPlan ? selectedPlan.price : Number(localStorage.getItem('schoolbite_order_total') || 0),
+              subscriptionInfo: { planId, total: Number(localStorage.getItem('schoolbite_order_total') || 0), paidAt: new Date().toISOString() }
+            });
+          }
+          window.location.href = 'payment-success.html';
+        }, 2800);
+      };
+
+      // Card number formatting
+      const cardInput = document.getElementById('card-number');
+      if (cardInput) {
+        cardInput.addEventListener('input', function () {
+          let v = this.value.replace(/\D/g,'').substring(0,16);
+          this.value = v.replace(/(.{4})/g,'$1 ').trim();
+        });
+      }
+      const expiryInput = document.getElementById('card-expiry');
+      if (expiryInput) {
+        expiryInput.addEventListener('input', function () {
+          let v = this.value.replace(/\D/g,'').substring(0,4);
+          if (v.length >= 2) v = v.substring(0,2) + ' / ' + v.substring(2);
+          this.value = v;
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

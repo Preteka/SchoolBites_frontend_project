@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing Plans — SchoolBite School Meal Subscriptions</title>
+  <meta name="description" content="Transparent, flexible school lunch plans: Basic (₹1,500), Standard (₹2,200), and Premium (₹3,000). Pause anytime with automatic credit rollover." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Site Header Mount -->
+  <div id="site-header-mount"></div>
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="section-header reveal" style="max-width: 780px;">
+          <span class="section-eyebrow">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            Transparent &amp; Flexible
+          </span>
+          <h1 class="hero-title">
+            Simple, Wholesome Meal Plans for Every Family
+          </h1>
+          <p class="hero-subtitle">
+            Zero hidden fees. Zero lock-ins. Pause on vacations or sick days with 1-click rollover credits.
+          </p>
+
+          <!-- Monthly / Term Toggle Switch -->
+          <div class="pricing-switch-wrap" style="margin-top: 2rem;">
+            <span class="pricing-switch-label active" id="label-monthly">Monthly Billing</span>
+            <button type="button" class="toggle-switch" id="pricing-term-toggle" aria-label="Toggle between monthly and 3-month term billing">
+              <span class="toggle-thumb"></span>
+            </button>
+            <span class="pricing-switch-label" id="label-term">
+              Term Billing (3 Months)
+              <span class="pricing-discount-pill">Save 10%</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Dynamic Pricing Cards Grid (Auto generated from data.js & components.js) -->
+        <div class="pricing-grid reveal" id="pricing-container">
+          <!-- Populated by script.js using createPricingCard -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Plan Feature Comparison Table -->
+    <section class="section section-bg-subtle" id="comparison">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-eyebrow">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Detailed Comparison
+          </span>
+          <h2 class="section-title">Compare What's Included</h2>
+          <p class="section-subtitle">
+            See side-by-side features across our Basic, Standard, and Premium subscription tiers.
+          </p>
+        </div>
+
+        <div class="comparison-table-wrap reveal">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th style="width: 40%;">Plan Feature</th>
+                <th style="width: 20%;">Basic (₹1,500/mo)</th>
+                <th style="width: 20%; background-color: var(--bg-surface-sage); color: var(--color-primary);">Standard (₹2,200/mo)</th>
+                <th style="width: 20%;">Premium (₹3,000/mo)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Meals per week</td>
+                <td>3 days (Mon, Wed, Fri)</td>
+                <td style="background-color: rgba(232, 243, 232, 0.4); font-weight: 700;">5 days (Mon to Fri)</td>
+                <td>5 days + Breakfasts</td>
+              </tr>
+              <tr>
+                <td>Dietary options</td>
+                <td>Vegetarian only</td>
+                <td style="background-color: rgba(232, 243, 232, 0.4); font-weight: 700;">Veg + Non-Veg</td>
+                <td>Veg, Non-Veg &amp; Gourmet Organic</td>
+              </tr>
+              <tr>
+                <td>Daily fresh fruit portion</td>
+                <td>
+                  <svg class="icon-sm" style="color: var(--color-secondary); margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+                </td>
+                <td style="background-color: rgba(232, 243, 232, 0.4);">
+                  <svg class="icon-sm" style="color: var(--color-secondary); margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+                </td>
+                <td>
+                  <svg class="icon-sm" style="color: var(--color-secondary); margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+                </td>
+              </tr>
+              <tr>
+                <td>Afternoon energy snack</td>
+                <td>
+                  <svg class="icon-sm" style="color: var(--color-text-subtle); margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+                </td>
+                <td style="background-color: rgba(232, 243, 232, 0.4);">
+                  <svg class="icon-sm" style="color: var(--color-secondary); margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+                </td>
+                <td>
+                  <svg class="icon-sm" style="color: var(--color-secondary); margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+                </td>
+              </tr>
+              <tr>
+                <td>Cold-pressed fruit / vegetable juice</td>
+                <td>
+                  <svg class="icon-sm" style="color: var(--color-text-subtle); margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+                </td>
+                <td style="background-color: rgba(232, 243, 232, 0.4);">
+                  <svg class="icon-sm" style="color: var(--color-text-subtle); margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+                </td>
+                <td>
+                  <svg class="icon-sm" style="color: var(--color-secondary); margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+                </td>
+              </tr>
+              <tr>
+                <td>Weekly dish swapping portal</td>
+                <td>
+                  <svg class="icon-sm" style="color: var(--color-text-subtle); margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+                </td>
+                <td style="background-color: rgba(232, 243, 232, 0.4);">
+                  <svg class="icon-sm" style="color: var(--color-secondary); margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+                </td>
+                <td>
+                  <svg class="icon-sm" style="color: var(--color-secondary); margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+                </td>
+              </tr>
+              <tr>
+                <td>Pediatric nutritionist 1-on-1 consultation</td>
+                <td>
+                  <svg class="icon-sm" style="color: var(--color-text-subtle); margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+                </td>
+                <td style="background-color: rgba(232, 243, 232, 0.4);">
+                  <svg class="icon-sm" style="color: var(--color-text-subtle); margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+                </td>
+                <td>
+                  <svg class="icon-sm" style="color: var(--color-secondary); margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+                </td>
+              </tr>
+              <tr>
+                <td>Pause &amp; credit rollover guarantee</td>
+                <td>
+                  <svg class="icon-sm" style="color: var(--color-secondary); margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+                </td>
+                <td style="background-color: rgba(232, 243, 232, 0.4);">
+                  <svg class="icon-sm" style="color: var(--color-secondary); margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+                </td>
+                <td>
+                  <svg class="icon-sm" style="color: var(--color-secondary); margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Frequently Asked Questions (Accordion) -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-eyebrow">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+            Common Queries
+          </span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-subtitle">
+            Have questions about how SchoolBite subscriptions, pausing, and delivery work? Find answers below.
+          </p>
+        </div>
+
+        <!-- Dynamic FAQ list populated by script.js via createFAQItem -->
+        <div class="faq-list reveal" id="faq-container">
+          <!-- Accordion elements mounted here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section">
+      <div class="container">
+        <div class="cta-banner reveal">
+          <div class="cta-banner-content">
+            <h2 class="cta-title">Start Your Child's Wholesome Meal Plan</h2>
+            <p class="cta-subtitle">
+              Join thousands of students who enjoy healthy, hot, delicious lunches every single school day.
+            </p>
+            <div class="cta-actions">
+              <a href="login.html?plan=plan-monthly&cycle=MONTHLY-2999" class="btn btn-primary btn-lg" id="pricing-cta-banner">
+                <span>Subscribe to Monthly Plan (&#8377;2,999)</span>
+                <svg class="btn-icon icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="contact.html" class="btn btn-dark-secondary btn-lg">
+                <span>Speak with an Advisor</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer Mount -->
+  <div id="site-footer-mount"></div>
+
+  <!-- Site Modals Mount -->
+  <div id="site-modals-mount"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

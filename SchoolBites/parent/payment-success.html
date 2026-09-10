@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Successful — SchoolBite</title>
+  <meta name="description" content="Your SchoolBite subscription is confirmed. Fresh, nutritious meals are on their way to your child." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .success-page { min-height: 100vh; display: flex; flex-direction: column; background: var(--bg-page); }
+    .success-main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 5rem 1.5rem 4rem; }
+    .success-container { max-width: 600px; width: 100%; margin: 0 auto; text-align: center; }
+    /* Animated checkmark */
+    .success-anim-wrap { position: relative; width: 5rem; height: 5rem; margin: 0 auto 1.5rem; }
+    .success-circle-bg { width: 5rem; height: 5rem; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary), var(--color-secondary, #55a458)); display: flex; align-items: center; justify-content: center; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; box-shadow: 0 10px 30px rgba(52,107,59,0.3); }
+    .success-check-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .success-check-icon svg { width: 2.25rem; height: 2.25rem; stroke: #fff; stroke-dasharray: 50; stroke-dashoffset: 50; animation: drawCheck 0.4s 0.35s ease forwards; }
+    @keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    @keyframes drawCheck { to { stroke-dashoffset: 0; } }
+    .confetti-dot { position: absolute; width: 0.5rem; height: 0.5rem; border-radius: 50%; animation: floatDot 1.5s ease infinite alternate; }
+    @keyframes floatDot { from { transform: translateY(0) scale(1); } to { transform: translateY(-8px) scale(1.2); } }
+    /* Content */
+    .success-eyebrow { display: inline-block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-secondary, #55a458); margin-bottom: 0.5rem; }
+    .success-title { font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 900; color: var(--color-text-heading); margin-bottom: 0.75rem; line-height: 1.2; }
+    .success-title span { color: var(--color-primary); }
+    .success-subtitle { font-size: 1rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: 2rem; }
+    /* Receipt Card */
+    .receipt-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 1.25rem; padding: 1.75rem; text-align: left; margin-bottom: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.06); position: relative; overflow: hidden; }
+    .receipt-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--color-primary), var(--color-secondary, #55a458)); }
+    .receipt-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.5rem; }
+    .receipt-label { font-size: 0.875rem; color: var(--color-text-muted); font-weight: 600; }
+    .receipt-id { font-size: 0.8rem; font-family: monospace; color: var(--color-text-subtle); background: var(--bg-page); padding: 0.25rem 0.625rem; border-radius: 0.375rem; border: 1px solid var(--border-color); }
+    .receipt-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 0.75rem 0; border-bottom: 1px dashed var(--border-color); }
+    .receipt-row:last-of-type { border-bottom: none; }
+    .receipt-row .r-label { font-size: 0.875rem; color: var(--color-text-muted); }
+    .receipt-row .r-val { font-size: 0.9rem; color: var(--color-text-body); font-weight: 600; text-align: right; }
+    .receipt-row.total-row { background: rgba(52,107,59,0.05); border-radius: 0.625rem; padding: 0.875rem 0.75rem; margin-top: 0.5rem; border: 1px solid rgba(52,107,59,0.15); border-bottom: 1px solid rgba(52,107,59,0.15); }
+    .receipt-row.total-row .r-label { font-weight: 700; color: var(--color-text-body); font-size: 0.9375rem; }
+    .receipt-row.total-row .r-val { font-size: 1.25rem; color: var(--color-primary); font-weight: 900; }
+    /* What happens next */
+    .next-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .next-step-item { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 1rem; padding: 1.25rem 1rem; text-align: center; }
+    .next-step-num { width: 2rem; height: 2rem; border-radius: 50%; background: var(--color-primary); color: #fff; font-size: 0.875rem; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.625rem; }
+    .next-step-title { font-size: 0.875rem; font-weight: 700; color: var(--color-text-heading); margin-bottom: 0.25rem; }
+    .next-step-desc { font-size: 0.78rem; color: var(--color-text-muted); }
+    /* CTA buttons */
+    .success-cta { display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 1rem; }
+    .btn-dashboard { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.875rem 1.75rem; background: var(--color-primary); color: #fff; border: none; border-radius: 0.875rem; font-size: 0.95rem; font-weight: 700; cursor: pointer; font-family: var(--font-body); text-decoration: none; transition: all 0.2s ease; box-shadow: 0 4px 14px rgba(52,107,59,0.25); }
+    .btn-dashboard:hover { background: var(--color-primary-dark, #2a5c31); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(52,107,59,0.35); }
+    .btn-dashboard svg { width: 1.125rem; height: 1.125rem; }
+    .btn-home { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.875rem 1.75rem; background: var(--bg-surface); color: var(--color-text-body); border: 1.5px solid var(--border-color); border-radius: 0.875rem; font-size: 0.95rem; font-weight: 600; cursor: pointer; font-family: var(--font-body); text-decoration: none; transition: all 0.2s ease; }
+    .btn-home:hover { border-color: var(--color-primary); color: var(--color-primary); background: rgba(52,107,59,0.05); transform: translateY(-2px); }
+    .btn-home svg { width: 1.125rem; height: 1.125rem; }
+    
+    /* Dashboard Coming Soon Notice */
+    .dashboard-notice { display: none; margin-top: 1rem; padding: 0.875rem 1.25rem; background: rgba(52,107,59,0.08); border: 1px solid var(--color-primary); border-radius: 0.75rem; font-size: 0.875rem; color: var(--color-primary); font-weight: 600; text-align: center; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 500px) { 
+      .next-steps { grid-template-columns: 1fr; }
+      .success-cta { flex-direction: column; width: 100%; }
+      .btn-dashboard, .btn-home { width: 100%; }
+    }
+  </style>
+</head>
+<body class="success-page">
+  <div id="site-header-mount"></div>
+
+  <main class="success-main" id="main-content">
+    <div class="success-container">
+
+      <!-- Animated Check -->
+      <div class="success-anim-wrap">
+        <div class="success-circle-bg"></div>
+        <div class="success-check-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <!-- Confetti dots -->
+        <div class="confetti-dot" style="top:10%;left:15%;background:#55a458;animation-delay:0.6s;"></div>
+        <div class="confetti-dot" style="top:10%;right:15%;background:#f6c842;animation-delay:0.75s;"></div>
+        <div class="confetti-dot" style="bottom:15%;left:20%;background:#e88c3a;animation-delay:0.55s;width:0.375rem;height:0.375rem;"></div>
+        <div class="confetti-dot" style="bottom:10%;right:20%;background:#346b3b;animation-delay:0.85s;"></div>
+      </div>
+
+      <span class="success-eyebrow">Payment Successful</span>
+      <h1 class="success-title">Your Subscription is <span>Confirmed!</span></h1>
+      <p class="success-subtitle">
+        Healthy, nutritious school meals are now on their way to your child every school day. Check your email for the confirmation and GST invoice.
+      </p>
+
+      <!-- Receipt Card -->
+      <div class="receipt-card">
+        <div class="receipt-header">
+          <span class="receipt-label">Payment Receipt</span>
+          <span class="receipt-id" id="receipt-id">SB-2026-XXXXXXXX</span>
+        </div>
+        <div class="receipt-row"><span class="r-label">Plan</span><span class="r-val" id="receipt-plan">—</span></div>
+        <div class="receipt-row"><span class="r-label">Account</span><span class="r-val" id="receipt-account">—</span></div>
+        <div class="receipt-row"><span class="r-label">Payment Date</span><span class="r-val" id="receipt-date">—</span></div>
+        <div class="receipt-row"><span class="r-label">Payment Method</span><span class="r-val">UPI — Secure Gateway</span></div>
+        <div class="receipt-row total-row"><span class="r-label">Amount Paid</span><span class="r-val" id="receipt-total">&#8377;—</span></div>
+      </div>
+
+      <!-- What Happens Next -->
+      <div style="text-align:left; margin-bottom:1rem;">
+        <p style="font-size:0.875rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--color-text-muted); margin-bottom:0.875rem;">What Happens Next</p>
+      </div>
+      <div class="next-steps">
+        <div class="next-step-item">
+          <div class="next-step-num">1</div>
+          <div class="next-step-title">Confirmation Email</div>
+          <div class="next-step-desc">GST invoice sent to your inbox within 5 minutes.</div>
+        </div>
+        <div class="next-step-item">
+          <div class="next-step-num">2</div>
+          <div class="next-step-title">Kitchen Prep</div>
+          <div class="next-step-desc">Your child's meal preferences are sent to our central kitchen.</div>
+        </div>
+        <div class="next-step-item">
+          <div class="next-step-num">3</div>
+          <div class="next-step-title">First Delivery</div>
+          <div class="next-step-desc">Hot, fresh meal delivered right to the school desk on start date.</div>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="success-cta">
+        <a href="dashboard/dashboard.html" class="btn-dashboard" id="btn-go-dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          Go to Parent Dashboard
+        </a>
+        <a href="index.html" class="btn-home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          Back to Home
+        </a>
+      </div>
+
+      <div class="dashboard-notice" id="dashboard-notice">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="vertical-align:middle; margin-right:4px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        The Parent Dashboard is currently under development and will be available soon! You will receive meal updates via SMS and WhatsApp.
+      </div>
+
+    </div>
+  </main>
+
+  <div id="site-footer-mount"></div>
+  <div id="site-modals-mount"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    (function () {
+      // Populate receipt
+      const user  = window.SchoolBiteAuth ? SchoolBiteAuth.currentUser() : null;
+      const total = localStorage.getItem('schoolbite_order_total');
+      const plan  = localStorage.getItem('schoolbite_order_plan');
+
+      const receiptId = document.getElementById('receipt-id');
+      if (receiptId) receiptId.textContent = 'SB-' + new Date().getFullYear() + '-' + Math.floor(10000000 + Math.random() * 90000000);
+
+      const receiptPlan = document.getElementById('receipt-plan');
+      if (receiptPlan) receiptPlan.textContent = plan || 'SchoolBite Meal Plan';
+
+      const receiptAccount = document.getElementById('receipt-account');
+      if (receiptAccount) receiptAccount.textContent = user ? user.email : 'SchoolBite parent account';
+
+      const receiptDate = document.getElementById('receipt-date');
+      if (receiptDate) {
+        const now = new Date();
+        receiptDate.textContent = now.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) + ' at ' + now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+      }
+
+      const receiptTotal = document.getElementById('receipt-total');
+      if (receiptTotal && total) {
+        receiptTotal.textContent = '\u20B9' + parseInt(total).toLocaleString('en-IN');
+      }
+
+      const dashNotice = document.getElementById('dashboard-notice');
+      if (dashNotice) dashNotice.style.display = 'none';
+
+      // Clear pending plan state
+      localStorage.removeItem('schoolbite_pending_plan');
+      localStorage.removeItem('schoolbite_pending_cycle');
+    })();
+  </script>
+</body>
+</html>

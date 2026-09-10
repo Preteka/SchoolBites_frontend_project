@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parents | SchoolBite Admin</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body data-page="parents">
+  <div class="admin-layout">
+    <aside class="sidebar" id="adminSidebar"><div id="sidebarMount"></div></aside>
+    <div class="main-wrapper">
+      <header class="topbar">
+        <button class="hamburger" onclick="toggleSidebar()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        <div class="topbar-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Search..."></div>
+        <div class="topbar-actions">
+          <a href="notifications.html" class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="icon-badge"></span></a>
+          <div class="admin-profile" id="adminProfileBtn"><div class="admin-avatar">A</div><div class="admin-info"><span class="admin-name">Admin</span><span class="admin-role">Administrator</span></div><svg class="admin-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="profile-dropdown" id="profileDropdown"><a href="settings.html" class="dropdown-item">Settings</a><a href="../parent/index.html" class="dropdown-item" style="color:#d9534f">Sign Out</a></div>
+          </div>
+        </div>
+      </header>
+      <main class="content-body">
+        <div class="page-header-row">
+          <div class="page-title-group"><h1>Parent Accounts</h1><p>Registered parents, associated children, and subscription totals.</p></div>
+        </div>
+        <div class="table-panel">
+          <div class="table-toolbar">
+            <div class="table-search-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Search parents..." oninput="filterParents(this.value)"></div>
+          </div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Parent ID</th><th>Name</th><th>Contact</th><th>Children</th><th>Active Plans</th><th>Total Spent</th><th>Joined</th><th>Status</th></tr></thead>
+              <tbody id="parentsTbody">
+                <tr><td><span style="color:var(--muted);font-size:11px">PAR-101</span></td><td><strong>Priya Sharma</strong></td><td><div>priya.s@gmail.com</div><small style="color:var(--muted)">+91 98765 43210</small></td><td><strong style="color:var(--green)">1 Child</strong></td><td><span class="badge-status active">1 Active</span></td><td><strong>₹8,997</strong></td><td style="color:var(--muted);font-size:12px">12 Jan 2026</td><td><span class="badge-status active">Active</span></td></tr>
+                <tr><td><span style="color:var(--muted);font-size:11px">PAR-102</span></td><td><strong>Rajesh Raman</strong></td><td><div>rajesh.r@gmail.com</div><small style="color:var(--muted)">+91 98111 22334</small></td><td><strong style="color:var(--green)">2 Children</strong></td><td><span class="badge-status active">1 Active</span></td><td><strong>₹5,593</strong></td><td style="color:var(--muted);font-size:12px">04 Feb 2026</td><td><span class="badge-status active">Active</span></td></tr>
+                <tr><td><span style="color:var(--muted);font-size:11px">PAR-103</span></td><td><strong>Meera Kavin</strong></td><td><div>meera.k@gmail.com</div><small style="color:var(--muted)">+91 99000 88776</small></td><td><strong style="color:var(--green)">1 Child</strong></td><td><span class="badge-status active">1 Active</span></td><td><strong>₹15,998</strong></td><td style="color:var(--muted);font-size:12px">18 Nov 2025</td><td><span class="badge-status active">Active</span></td></tr>
+                <tr><td><span style="color:var(--muted);font-size:11px">PAR-104</span></td><td><strong>Sanjay Kumar</strong></td><td><div>sanjay.k@outlook.com</div><small style="color:var(--muted)">+91 97400 12345</small></td><td><strong style="color:var(--green)">1 Child</strong></td><td><span class="badge-status active">1 Active</span></td><td><strong>₹2,999</strong></td><td style="color:var(--muted);font-size:12px">01 Mar 2026</td><td><span class="badge-status active">Active</span></td></tr>
+                <tr><td><span style="color:var(--muted);font-size:11px">PAR-105</span></td><td><strong>Anita Gupta</strong></td><td><div>anita.g@yahoo.com</div><small style="color:var(--muted)">+91 98222 33445</small></td><td><strong style="color:var(--green)">1 Child</strong></td><td><span class="badge-status active">1 Active</span></td><td><strong>₹7,999</strong></td><td style="color:var(--muted);font-size:12px">15 Feb 2026</td><td><span class="badge-status active">Active</span></td></tr>
+                <tr><td><span style="color:var(--muted);font-size:11px">PAR-106</span></td><td><strong>Farhan Khan</strong></td><td><div>farhan.k@gmail.com</div><small style="color:var(--muted)">+91 99887 76655</small></td><td><strong style="color:var(--green)">2 Children</strong></td><td><span class="badge-status active">2 Active</span></td><td><strong>₹11,996</strong></td><td style="color:var(--muted);font-size:12px">22 Dec 2025</td><td><span class="badge-status active">Active</span></td></tr>
+                <tr><td><span style="color:var(--muted);font-size:11px">PAR-107</span></td><td><strong>Sunil Verma</strong></td><td><div>sunil.v@gmail.com</div><small style="color:var(--muted)">+91 98333 44556</small></td><td><strong style="color:var(--green)">1 Child</strong></td><td><span class="badge-status inactive">0 Active</span></td><td><strong>₹2,397</strong></td><td style="color:var(--muted);font-size:12px">10 Jan 2026</td><td><span class="badge-status inactive">Inactive</span></td></tr>
+                <tr><td><span style="color:var(--muted);font-size:11px">PAR-108</span></td><td><strong>Deepa Nair</strong></td><td><div>deepa.n@gmail.com</div><small style="color:var(--muted)">+91 97111 55667</small></td><td><strong style="color:var(--green)">1 Child</strong></td><td><span class="badge-status active">1 Active</span></td><td><strong>₹5,998</strong></td><td style="color:var(--muted);font-size:12px">28 Jan 2026</td><td><span class="badge-status active">Active</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="js/admin-sidebar.js"></script>
+  <script src="js/admin-common.js"></script>
+  <script>
+    function filterParents(q) {
+      q = q.toLowerCase();
+      document.querySelectorAll('#parentsTbody tr').forEach(function(r) {
+        r.style.display = !q || r.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

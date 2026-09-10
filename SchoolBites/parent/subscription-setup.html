@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subscription Setup — SchoolBite</title>
+  <meta name="description" content="Set up your child's school meal subscription. Choose dietary preferences, delivery schedule, and start date." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .setup-page { min-height: 100vh; display: flex; flex-direction: column; background: var(--bg-page); }
+    .setup-main { flex: 1; padding: 5rem 1.5rem 4rem; }
+    .setup-container { max-width: 720px; margin: 0 auto; }
+    /* Steps */
+    .flow-steps { display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+    .flow-step { display: flex; align-items: center; gap: 0.375rem; font-size: 0.8rem; font-weight: 500; color: var(--color-text-muted); }
+    .flow-step-num { width: 1.625rem; height: 1.625rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; background: var(--border-color); color: var(--color-text-muted); flex-shrink: 0; }
+    .flow-step.done .flow-step-num { background: var(--color-secondary, #55a458); color: #fff; }
+    .flow-step.active .flow-step-num { background: var(--color-primary); color: #fff; }
+    .flow-step.active { color: var(--color-primary); font-weight: 600; }
+    .flow-sep { color: var(--border-color); }
+    /* Header */
+    .setup-header { text-align: center; margin-bottom: 2.5rem; }
+    .setup-eyebrow { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-primary); background: rgba(52, 107, 59, 0.08); padding: 0.3rem 0.875rem; border-radius: 999px; margin-bottom: 0.875rem; }
+    .setup-title { font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 800; color: var(--color-text-heading); margin-bottom: 0.5rem; }
+    .setup-subtitle { font-size: 1rem; color: var(--color-text-muted); }
+    /* Plan Summary Card */
+    .plan-summary-card { background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark, #2a5c31)); border-radius: 1.125rem; padding: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; color: #fff; flex-wrap: wrap; box-shadow: 0 8px 24px rgba(52, 107, 59, 0.25); }
+    .plan-summary-left .plan-label { font-size: 0.8rem; font-weight: 600; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.25rem; }
+    .plan-summary-left .plan-name { font-size: 1.25rem; font-weight: 800; }
+    .plan-summary-left .plan-desc { font-size: 0.875rem; opacity: 0.85; margin-top: 0.25rem; }
+    .plan-summary-right .plan-price { font-size: 2rem; font-weight: 800; line-height: 1; }
+    .plan-summary-right .plan-period { font-size: 0.8rem; opacity: 0.8; margin-top: 0.125rem; }
+    /* Form Card */
+    .setup-form-card { background: var(--bg-surface); border: 1.5px solid var(--border-color); border-radius: 1.25rem; padding: 2rem; margin-bottom: 1.5rem; transition: border-color 0.2s, box-shadow 0.2s; }
+    .setup-form-card.has-error { border-color: #e53e3e; box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1); }
+    .setup-section-title { font-size: 1.0625rem; font-weight: 700; color: var(--color-text-heading); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem; }
+    .setup-section-title svg { width: 1.125rem; height: 1.125rem; color: var(--color-primary); }
+    .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { margin-bottom: 1.125rem; position: relative; }
+    .form-label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--color-text-body); margin-bottom: 0.375rem; }
+    .form-select, .form-input { width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(--border-color); border-radius: 0.625rem; background: var(--bg-page); color: var(--color-text-body); font-size: 0.9375rem; font-family: var(--font-body); box-sizing: border-box; transition: border-color 0.2s, box-shadow 0.2s; }
+    .form-select:focus, .form-input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(52, 107, 59, 0.1); }
+    .form-select.is-invalid, .form-input.is-invalid { border-color: #e53e3e; background-color: rgba(229, 62, 62, 0.02); }
+    .form-error-text { font-size: 0.8rem; color: #e53e3e; margin-top: 0.35rem; display: none; font-weight: 500; }
+    /* Dynamic Child Entry Card */
+    .child-entry-card { background: var(--bg-page); border: 1.5px solid var(--border-color); border-radius: 0.875rem; padding: 1.25rem; margin-bottom: 1rem; position: relative; transition: border-color 0.2s, box-shadow 0.2s; }
+    .child-entry-card:focus-within { border-color: var(--color-primary); }
+    .child-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.875rem; }
+    .child-entry-badge { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.8rem; font-weight: 700; color: var(--color-primary); background: rgba(52, 107, 59, 0.08); padding: 0.25rem 0.625rem; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .btn-remove-child { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.78rem; font-weight: 600; color: #e53e3e; background: transparent; border: none; cursor: pointer; padding: 0.25rem 0.5rem; border-radius: 0.375rem; transition: background 0.15s; font-family: inherit; }
+    .btn-remove-child:hover { background: rgba(229, 62, 62, 0.08); }
+    .btn-remove-child svg { width: 0.875rem; height: 0.875rem; }
+    .add-child-btn { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--color-primary); font-weight: 600; background: transparent; border: 1.5px dashed var(--color-primary); border-radius: 0.625rem; padding: 0.625rem 1rem; cursor: pointer; font-family: var(--font-body); margin-top: 0.25rem; transition: all 0.2s; }
+    .add-child-btn:hover { background: rgba(52, 107, 59, 0.06); }
+    .add-child-btn svg { width: 0.875rem; height: 0.875rem; }
+    /* Diet pills */
+    .diet-pills { display: flex; flex-wrap: wrap; gap: 0.625rem; }
+    .diet-pill-label { cursor: pointer; }
+    .diet-pill-label input { display: none; }
+    .diet-pill { padding: 0.5rem 1rem; border: 1.5px solid var(--border-color); border-radius: 999px; font-size: 0.875rem; font-weight: 600; color: var(--color-text-muted); transition: all 0.2s; display: block; }
+    .diet-pill-label input:checked+.diet-pill { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
+    /* Start date options */
+    .start-date-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+    .date-option-label { cursor: pointer; }
+    .date-option-label input { display: none; }
+    .date-option { padding: 0.875rem 0.5rem; border: 1.5px solid var(--border-color); border-radius: 0.875rem; text-align: center; transition: all 0.2s; }
+    .date-option-label input:checked+.date-option { border-color: var(--color-primary); background: rgba(52, 107, 59, 0.06); }
+    .date-option .do-day { font-size: 0.75rem; font-weight: 600; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .date-option .do-date { font-size: 1.0625rem; font-weight: 800; color: var(--color-text-heading); margin: 0.125rem 0; }
+    .date-option .do-label { font-size: 0.7rem; color: var(--color-primary); font-weight: 600; }
+    /* CTA */
+    .setup-cta { display: flex; gap: 1rem; align-items: center; justify-content: flex-end; flex-wrap: wrap; margin-top: 1rem; }
+    .btn-back { display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.75rem 1.25rem; border: 1.5px solid var(--border-color); border-radius: 0.75rem; background: var(--bg-surface); color: var(--color-text-body); font-size: 0.9375rem; font-weight: 600; cursor: pointer; font-family: var(--font-body); text-decoration: none; transition: all 0.2s; }
+    .btn-back:hover { border-color: var(--color-primary); color: var(--color-primary); background: rgba(52, 107, 59, 0.04); }
+    .btn-proceed { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem; border: none; border-radius: 0.875rem; background: var(--color-primary); color: #fff; font-size: 1rem; font-weight: 700; cursor: pointer; font-family: var(--font-body); transition: background 0.2s, transform 0.15s, box-shadow 0.2s; box-shadow: 0 4px 14px rgba(52, 107, 59, 0.25); }
+    .btn-proceed:hover { background: var(--color-primary-dark, #2a5c31); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(52, 107, 59, 0.35); }
+    .btn-proceed svg, .btn-back svg { width: 1rem; height: 1rem; }
+    @media (max-width: 580px) { .form-grid-2 { grid-template-columns: 1fr; } .start-date-options { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+
+<body class="setup-page">
+  <div id="site-header-mount"></div>
+
+  <main class="setup-main" id="main-content">
+    <div class="setup-container">
+
+      <!-- Flow Progress -->
+      <div class="flow-steps">
+        <div class="flow-step done"><span class="flow-step-num">&#10003;</span><span>Choose Plan</span></div>
+        <span class="flow-sep">&#8250;</span>
+        <div class="flow-step done"><span class="flow-step-num">&#10003;</span><span>Account</span></div>
+        <span class="flow-sep">&#8250;</span>
+        <div class="flow-step active"><span class="flow-step-num">3</span><span>Subscription Setup</span></div>
+        <span class="flow-sep">&#8250;</span>
+        <div class="flow-step"><span class="flow-step-num">4</span><span>Payment</span></div>
+      </div>
+
+      <!-- Header -->
+      <div class="setup-header">
+        <span class="setup-eyebrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+            <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+            <path d="m9 12 2 2 4-4" />
+          </svg>
+          Subscription Setup
+        </span>
+        <h1 class="setup-title">Customize Your Meal Subscription</h1>
+        <p class="setup-subtitle">Tell us about your child, dietary needs, and when you want meals to begin.</p>
+      </div>
+
+      <!-- Plan Summary -->
+      <div class="plan-summary-card" id="plan-summary-card">
+        <div class="plan-summary-left">
+          <div class="plan-label">Selected Plan</div>
+          <div class="plan-name" id="ps-plan-name">Loading...</div>
+          <div class="plan-desc" id="ps-plan-desc"></div>
+        </div>
+        <div class="plan-summary-right">
+          <div class="plan-price" id="ps-plan-price">&#8377;&mdash;</div>
+          <div class="plan-period" id="ps-plan-period"></div>
+        </div>
+      </div>
+
+      <form id="setup-form" novalidate>
+
+        <!-- Child Information -->
+        <div class="setup-form-card" id="card-child-info">
+          <div class="setup-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            Child Information
+          </div>
+
+          <div id="children-container">
+            <!-- Dynamic Child 1 Entry -->
+            <div class="child-entry-card" id="child-entry-1" data-index="1">
+              <div class="child-entry-header">
+                <span class="child-entry-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  Child 1
+                </span>
+              </div>
+              <div class="form-grid-2">
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" for="child-name-1">Child's Full Name *</label>
+                  <input type="text" class="form-input child-name-input" id="child-name-1" placeholder="Enter child's full name" required />
+                  <span class="form-error-text" id="child-name-1-error"></span>
+                </div>
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <label class="form-label" for="child-grade-1">Class / Grade *</label>
+                  <input type="text" class="form-input child-grade-input" id="child-grade-1" placeholder="e.g. Class 4-B" required />
+                  <span class="form-error-text" id="child-grade-1-error"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <span class="form-error-text" id="child-global-error" style="display:none; margin-bottom:0.75rem;"></span>
+
+          <button type="button" class="add-child-btn" id="add-child-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" x2="12" y1="5" y2="19" />
+              <line x1="5" x2="19" y1="12" y2="12" />
+            </svg>
+            Add another child
+          </button>
+        </div>
+
+        <!-- Dietary Preferences -->
+        <div class="setup-form-card">
+          <div class="setup-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+            </svg>
+            Dietary Preferences
+          </div>
+
+          <div class="form-group">
+            <div class="form-label" style="margin-bottom:0.625rem;">Meal Type</div>
+            <div class="diet-pills">
+              <label class="diet-pill-label"><input type="radio" name="diet-type" value="pure-veg" checked /><span class="diet-pill">Pure Vegetarian</span></label>
+              <label class="diet-pill-label"><input type="radio" name="diet-type" value="veg-egg" /><span class="diet-pill">Veg + Egg</span></label>
+              <label class="diet-pill-label"><input type="radio" name="diet-type" value="non-veg" /><span class="diet-pill">Non-Vegetarian</span></label>
+              <label class="diet-pill-label"><input type="radio" name="diet-type" value="jain" /><span class="diet-pill">Jain</span></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-label" style="margin-bottom:0.625rem;">Allergen Restrictions (select all that apply)</div>
+            <div class="diet-pills">
+              <label class="diet-pill-label"><input type="checkbox" name="allergen" value="nut-free" /><span class="diet-pill">Nut-Free</span></label>
+              <label class="diet-pill-label"><input type="checkbox" name="allergen" value="dairy-free" /><span class="diet-pill">Dairy-Free</span></label>
+              <label class="diet-pill-label"><input type="checkbox" name="allergen" value="gluten-free" /><span class="diet-pill">Gluten-Free</span></label>
+              <label class="diet-pill-label"><input type="checkbox" name="allergen" value="none" checked /><span class="diet-pill">No Restrictions</span></label>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="spice-level">Spice Level</label>
+              <select class="form-select" id="spice-level" name="spice-level">
+                <option value="very-mild">Very Mild (Toddler-Friendly)</option>
+                <option value="mild" selected>Mild</option>
+                <option value="medium">Medium</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="portion-size">Portion Size</label>
+              <select class="form-select" id="portion-size" name="portion-size">
+                <option value="small">Small (Ages 3-6)</option>
+                <option value="medium" selected>Medium (Ages 7-10)</option>
+                <option value="large">Large (Ages 11+)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Delivery Details -->
+        <div class="setup-form-card" id="card-delivery-details">
+          <div class="setup-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" />
+              <path d="M15 18H9" />
+              <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14" />
+              <circle cx="17" cy="18" r="2" />
+              <circle cx="7" cy="18" r="2" />
+            </svg>
+            Delivery Details
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="delivery-school">School *</label>
+              <select class="form-select" id="delivery-school" name="delivery-school" required>
+                <option value="">Select your child's school</option>
+                <option value="oakridge">Oakridge International School</option>
+                <option value="stpaul">St. Paul's International Academy</option>
+                <option value="valley">The Valley School</option>
+                <option value="ryan">Ryan International School</option>
+              </select>
+              <span class="form-error-text" id="delivery-school-error"></span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="delivery-notes">Delivery Desk / Special Notes</label>
+              <input type="text" class="form-input" id="delivery-notes" name="delivery-notes" placeholder="e.g. Primary Lunch Hall / Room 204" />
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom:0;">
+            <div class="form-label" style="margin-bottom:0.75rem;">Subscription Start Date *</div>
+            <div class="start-date-options" id="start-date-options">
+              <!-- Populated by JS with next 3 weekdays -->
+            </div>
+            <span class="form-error-text" id="start-date-error" style="margin-top:0.5rem;"></span>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="setup-cta">
+          <a href="pricing.html" class="btn-back">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m12 19-7-7 7-7" />
+              <path d="M19 12H5" />
+            </svg>
+            Back to Plans
+          </a>
+          <button type="submit" class="btn-proceed" id="btn-proceed">
+            <span>Continue to Payment</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </main>
+
+  <div id="site-footer-mount"></div>
+  <div id="site-modals-mount"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    (function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const planId = urlParams.get('plan') || localStorage.getItem('schoolbite_pending_plan');
+      const dashboardPlan = (() => { try { return JSON.parse(localStorage.getItem('schoolbite_dashboard_selected_plan') || 'null'); } catch { return null; } })();
+
+      // Populate plan summary
+      function populatePlan() {
+        if (!window.SCHOOLBITE_DATA || !planId) return;
+        const plan = (dashboardPlan && dashboardPlan.id === planId) ? dashboardPlan : window.SCHOOLBITE_DATA.pricingPlans.find(p => p.id === planId);
+        if (!plan) return;
+        const nameEl = document.getElementById('ps-plan-name');
+        const descEl = document.getElementById('ps-plan-desc');
+        const priceEl = document.getElementById('ps-plan-price');
+        const periodEl = document.getElementById('ps-plan-period');
+        if (nameEl) nameEl.textContent = plan.name;
+        if (descEl) descEl.textContent = plan.description.split('.')[0] + '.';
+        if (priceEl) priceEl.innerHTML = '\u20B9' + plan.price.toLocaleString('en-IN');
+        if (periodEl) periodEl.textContent = plan.period;
+        localStorage.setItem('schoolbite_pending_plan', planId);
+      }
+
+      const wait = setInterval(() => { if (window.SCHOOLBITE_DATA) { clearInterval(wait); populatePlan(); } }, 50);
+
+      // Generate next 3 weekdays as start date options
+      function getNextWeekdays(n) {
+        const shortDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const result = [];
+        let d = new Date();
+        d.setDate(d.getDate() + 1);
+        while (result.length < n) {
+          if (d.getDay() !== 0 && d.getDay() !== 6) {
+            result.push({
+              day: shortDays[d.getDay()],
+              date: d.getDate(),
+              month: months[d.getMonth()],
+              full: d.toISOString().split('T')[0],
+              label: result.length === 0 ? 'Earliest' : ''
+            });
+          }
+          d.setDate(d.getDate() + 1);
+        }
+        return result;
+      }
+
+      const dateContainer = document.getElementById('start-date-options');
+      if (dateContainer) {
+        const dates = getNextWeekdays(3);
+        dateContainer.innerHTML = dates.map((d, i) => `
+          <label class="date-option-label">
+            <input type="radio" name="start-date" value="${d.full}" ${i === 0 ? 'checked' : ''} />
+            <div class="date-option">
+              <div class="do-day">${d.day}</div>
+              <div class="do-date">${d.date} ${d.month}</div>
+              ${d.label ? '<div class="do-label">' + d.label + '</div>' : ''}
+            </div>
+          </label>
+        `).join('');
+      }
+
+      // Dynamic Child Management
+      const childrenContainer = document.getElementById('children-container');
+      const addChildBtn = document.getElementById('add-child-btn');
+      let childCount = 1;
+
+      function updateChildBadges() {
+        const cards = childrenContainer.querySelectorAll('.child-entry-card');
+        cards.forEach((card, idx) => {
+          const num = idx + 1;
+          const badge = card.querySelector('.child-entry-badge');
+          if (badge) {
+            badge.innerHTML = `
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Child ${num}
+            `;
+          }
+        });
+      }
+
+      if (addChildBtn && childrenContainer) {
+        addChildBtn.addEventListener('click', () => {
+          childCount++;
+          const newCard = document.createElement('div');
+          newCard.className = 'child-entry-card';
+          newCard.id = `child-entry-${childCount}`;
+          newCard.setAttribute('data-index', childCount);
+          newCard.innerHTML = `
+            <div class="child-entry-header">
+              <span class="child-entry-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Child ${childCount}
+              </span>
+              <button type="button" class="btn-remove-child" onclick="removeChildEntry(${childCount})">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                Remove
+              </button>
+            </div>
+            <div class="form-grid-2">
+              <div class="form-group" style="margin-bottom:0.5rem;">
+                <label class="form-label" for="child-name-${childCount}">Child's Full Name *</label>
+                <input type="text" class="form-input child-name-input" id="child-name-${childCount}" placeholder="Enter child's full name" required />
+                <span class="form-error-text" id="child-name-${childCount}-error"></span>
+              </div>
+              <div class="form-group" style="margin-bottom:0.5rem;">
+                <label class="form-label" for="child-grade-${childCount}">Class / Grade *</label>
+                <input type="text" class="form-input child-grade-input" id="child-grade-${childCount}" placeholder="e.g. Class 2-A" required />
+                <span class="form-error-text" id="child-grade-${childCount}-error"></span>
+              </div>
+            </div>
+          `;
+          childrenContainer.appendChild(newCard);
+          updateChildBadges();
+          
+          const newNameInput = newCard.querySelector('.child-name-input');
+          if (newNameInput) newNameInput.focus();
+        });
+      }
+
+      window.removeChildEntry = function (idx) {
+        const card = document.getElementById(`child-entry-${idx}`);
+        if (card) {
+          card.remove();
+          updateChildBadges();
+        }
+      };
+
+      // Real-time error clearance on input
+      document.addEventListener('input', function (e) {
+        if (e.target.classList.contains('child-name-input') || e.target.classList.contains('child-grade-input')) {
+          if (e.target.value.trim().length > 0) {
+            e.target.classList.remove('is-invalid');
+            const err = document.getElementById(e.target.id + '-error');
+            if (err) { err.style.display = 'none'; err.textContent = ''; }
+          }
+        }
+      });
+
+      const schoolInput = document.getElementById('delivery-school');
+      const schoolError = document.getElementById('delivery-school-error');
+
+      if (schoolInput) {
+        schoolInput.addEventListener('change', () => {
+          if (schoolInput.value) {
+            schoolInput.classList.remove('is-invalid');
+            if (schoolError) { schoolError.style.display = 'none'; schoolError.textContent = ''; }
+          }
+        });
+      }
+
+      // Allergen "None" toggle behavior
+      const allergenBoxes = document.querySelectorAll('input[name="allergen"]');
+      allergenBoxes.forEach(box => {
+        box.addEventListener('change', function () {
+          if (this.value === 'none' && this.checked) {
+            allergenBoxes.forEach(b => { if (b.value !== 'none') b.checked = false; });
+          } else if (this.value !== 'none' && this.checked) {
+            const noneBox = document.querySelector('input[name="allergen"][value="none"]');
+            if (noneBox) noneBox.checked = false;
+          }
+        });
+      });
+
+      // Form validation & submission
+      const form = document.getElementById('setup-form');
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          let isValid = true;
+          let firstErrorEl = null;
+
+          // 1. Validate Children entries
+          const childCards = childrenContainer.querySelectorAll('.child-entry-card');
+          const childrenData = [];
+
+          if (childCards.length === 0) {
+            isValid = false;
+            const globalErr = document.getElementById('child-global-error');
+            if (globalErr) {
+              globalErr.textContent = 'Please add at least one child.';
+              globalErr.style.display = 'block';
+            }
+          }
+
+          childCards.forEach(card => {
+            const nameInput = card.querySelector('.child-name-input');
+            const gradeInput = card.querySelector('.child-grade-input');
+            const nameErr = card.querySelector(`#${nameInput.id}-error`);
+            const gradeErr = card.querySelector(`#${gradeInput.id}-error`);
+
+            const nameVal = nameInput.value.trim();
+            const gradeVal = gradeInput.value.trim();
+
+            if (!nameVal || nameVal.length < 2) {
+              isValid = false;
+              nameInput.classList.add('is-invalid');
+              if (nameErr) {
+                nameErr.textContent = 'Please enter child\'s full name (at least 2 characters).';
+                nameErr.style.display = 'block';
+              }
+              if (!firstErrorEl) firstErrorEl = nameInput;
+            } else {
+              nameInput.classList.remove('is-invalid');
+              if (nameErr) { nameErr.style.display = 'none'; nameErr.textContent = ''; }
+            }
+
+            if (!gradeVal) {
+              isValid = false;
+              gradeInput.classList.add('is-invalid');
+              if (gradeErr) {
+                gradeErr.textContent = 'Please enter class & section (e.g. Class 4-B).';
+                gradeErr.style.display = 'block';
+              }
+              if (!firstErrorEl) firstErrorEl = gradeInput;
+            } else {
+              gradeInput.classList.remove('is-invalid');
+              if (gradeErr) { gradeErr.style.display = 'none'; gradeErr.textContent = ''; }
+            }
+
+            if (nameVal && gradeVal) {
+              childrenData.push({ name: nameVal, grade: gradeVal, label: `${nameVal} (${gradeVal})` });
+            }
+          });
+
+          // 2. Validate School
+          if (!schoolInput.value) {
+            isValid = false;
+            schoolInput.classList.add('is-invalid');
+            if (schoolError) {
+              schoolError.textContent = 'Please select your child\'s school.';
+              schoolError.style.display = 'block';
+            }
+            if (!firstErrorEl) firstErrorEl = schoolInput;
+          } else {
+            schoolInput.classList.remove('is-invalid');
+            if (schoolError) {
+              schoolError.style.display = 'none';
+              schoolError.textContent = '';
+            }
+          }
+
+          // 3. Validate Start Date
+          const startDateSelected = form.querySelector('input[name="start-date"]:checked');
+          const dateError = document.getElementById('start-date-error');
+          if (!startDateSelected) {
+            isValid = false;
+            if (dateError) {
+              dateError.textContent = 'Please select a subscription start date.';
+              dateError.style.display = 'block';
+            }
+            if (!firstErrorEl) firstErrorEl = dateContainer;
+          } else if (dateError) {
+            dateError.style.display = 'none';
+            dateError.textContent = '';
+          }
+
+          if (!isValid) {
+            if (firstErrorEl) {
+              firstErrorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              firstErrorEl.focus();
+            }
+            return;
+          }
+
+          // Save setup data
+          const btn = document.getElementById('btn-proceed');
+          if (btn) {
+            btn.disabled = true;
+            btn.querySelector('span').textContent = 'Saving setup\u2026';
+          }
+
+          const deliveryNotes = document.getElementById('delivery-notes');
+          const setupData = {
+            planId: planId,
+            children: childrenData.map(c => c.label),
+            childrenList: childrenData,
+            dietType: (form.querySelector('[name="diet-type"]:checked') || {}).value || 'pure-veg',
+            allergens: Array.from(form.querySelectorAll('[name="allergen"]:checked')).map(el => el.value),
+            spiceLevel: document.getElementById('spice-level').value,
+            portionSize: document.getElementById('portion-size').value,
+            school: schoolInput.value,
+            deliveryNotes: deliveryNotes ? deliveryNotes.value.trim() : '',
+            startDate: (form.querySelector('[name="start-date"]:checked') || {}).value
+          };
+          localStorage.setItem('schoolbite_subscription_setup', JSON.stringify(setupData));
+
+          setTimeout(() => {
+            window.location.href = 'payment.html?plan=' + encodeURIComponent(planId || '');
+          }, 600);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

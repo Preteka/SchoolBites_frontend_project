@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meal Management | SchoolBite Admin</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <style>
+    .meal-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:20px; }
+    .meal-card-wrap { background:#fff; border:1px solid var(--line); border-radius:var(--r); overflow:hidden; box-shadow:var(--shadow); transition:transform .2s,box-shadow .2s; }
+    .meal-card-wrap:hover { transform:translateY(-3px); box-shadow:var(--shadow-lg); }
+    .meal-img { height:180px; width:100%; overflow:hidden; position:relative; background:#e8f3e8; }
+    .meal-img img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.3s ease; }
+    .meal-card-wrap:hover .meal-img img { transform: scale(1.05); }
+    .meal-img-badge { position:absolute; top:10px; right:10px; z-index:2; }
+    .meal-body { padding:16px; }
+    .meal-meta { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+    .meal-rating { font-weight:700; color:#c88a14; font-size:13px; }
+    .meal-cat { font-size:11px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.5px; }
+    .meal-macros { display:flex; justify-content:space-between; background:var(--page); border-radius:8px; padding:8px 12px; font-size:12px; margin:10px 0; border:1px solid var(--line); }
+    .meal-macros div { display:flex; flex-direction:column; align-items:center; }
+    .meal-macros span { color:var(--muted); font-size:10.5px; }
+    .meal-macros strong { font-weight:700; color:var(--ink); }
+    .meal-footer { display:flex; justify-content:space-between; align-items:center; margin-top:12px; padding-top:10px; border-top:1px solid var(--line); }
+    .meal-prep { font-size:12px; color:var(--muted); font-weight:500; }
+  </style>
+</head>
+<body data-page="meals">
+  <div class="admin-layout">
+    <aside class="sidebar" id="adminSidebar"><div id="sidebarMount"></div></aside>
+    <div class="main-wrapper">
+      <header class="topbar">
+        <button class="hamburger" onclick="toggleSidebar()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        <div class="topbar-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="mealSearchInput" placeholder="Search recipes by name or category..." oninput="filterMealCards()"></div>
+        <div class="topbar-actions">
+          <a href="notifications.html" class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="icon-badge"></span></a>
+          <div class="admin-profile" id="adminProfileBtn"><div class="admin-avatar">A</div><div class="admin-info"><span class="admin-name">Admin</span><span class="admin-role">Administrator</span></div><svg class="admin-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="profile-dropdown" id="profileDropdown"><a href="settings.html" class="dropdown-item">Settings</a><a href="../parent/index.html" class="dropdown-item" style="color:#d9534f">Sign Out</a></div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <div class="page-header-row">
+          <div class="page-title-group">
+            <h1>Meal Catalog &amp; Nutrition</h1>
+            <p>Manage healthy school recipes with calorie counts, dietary types, allergen specifications and portion guides.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn-primary" onclick="document.getElementById('addMealModal').style.display='flex'">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add New Recipe
+            </button>
+          </div>
+        </div>
+
+        <div class="meal-grid" id="mealGrid">
+          
+          <!-- Card 1: Veg Biryani -->
+          <div class="meal-card-wrap" data-cat="rice vegetarian">
+            <div class="meal-img">
+              <img src="../parent/assets/images/meal_wednesday_rice.jpg" alt="Veg Biryani &amp; Raita">
+              <div class="meal-img-badge"><span class="badge-status active">Vegetarian</span></div>
+            </div>
+            <div class="meal-body">
+              <div class="meal-meta"><span class="meal-cat">Rice Dishes</span><span class="meal-rating">★ 4.9</span></div>
+              <h3 style="font-size:15px;font-weight:700;margin-bottom:2px">Veg Biryani &amp; Raita</h3>
+              <div class="meal-macros">
+                <div><span>Protein</span><strong>12g</strong></div>
+                <div><span>Carbs</span><strong>65g</strong></div>
+                <div><span>Fats</span><strong>10g</strong></div>
+                <div><span>Cal</span><strong>420 kcal</strong></div>
+              </div>
+              <div class="meal-footer">
+                <span class="meal-prep">⏱ Prep: 25 min</span>
+                <button class="btn-icon-action danger" onclick="this.closest('.meal-card-wrap').remove();showToast('Recipe deleted.')">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Chapati & Paneer Curry -->
+          <div class="meal-card-wrap" data-cat="breads vegetarian">
+            <div class="meal-img">
+              <img src="../parent/assets/images/meal_thursday_chapati.jpg" alt="Chapati &amp; Paneer Curry">
+              <div class="meal-img-badge"><span class="badge-status active">Vegetarian</span></div>
+            </div>
+            <div class="meal-body">
+              <div class="meal-meta"><span class="meal-cat">Indian Breads</span><span class="meal-rating">★ 4.8</span></div>
+              <h3 style="font-size:15px;font-weight:700;margin-bottom:2px">Chapati &amp; Paneer Curry</h3>
+              <div class="meal-macros">
+                <div><span>Protein</span><strong>16g</strong></div>
+                <div><span>Carbs</span><strong>45g</strong></div>
+                <div><span>Fats</span><strong>14g</strong></div>
+                <div><span>Cal</span><strong>380 kcal</strong></div>
+              </div>
+              <div class="meal-footer">
+                <span class="meal-prep">⏱ Prep: 20 min</span>
+                <button class="btn-icon-action danger" onclick="this.closest('.meal-card-wrap').remove();showToast('Recipe deleted.')">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Lemon Rice & Boiled Egg -->
+          <div class="meal-card-wrap" data-cat="rice nonveg">
+            <div class="meal-img">
+              <img src="../parent/assets/images/meal_lemon_rice.jpg" alt="Lemon Rice &amp; Boiled Egg">
+              <div class="meal-img-badge"><span class="badge-status preparing">Egg / Non-Veg</span></div>
+            </div>
+            <div class="meal-body">
+              <div class="meal-meta"><span class="meal-cat">Rice Dishes</span><span class="meal-rating">★ 4.7</span></div>
+              <h3 style="font-size:15px;font-weight:700;margin-bottom:2px">Lemon Rice &amp; Boiled Egg</h3>
+              <div class="meal-macros">
+                <div><span>Protein</span><strong>14g</strong></div>
+                <div><span>Carbs</span><strong>52g</strong></div>
+                <div><span>Fats</span><strong>8g</strong></div>
+                <div><span>Cal</span><strong>350 kcal</strong></div>
+              </div>
+              <div class="meal-footer">
+                <span class="meal-prep">⏱ Prep: 15 min</span>
+                <button class="btn-icon-action danger" onclick="this.closest('.meal-card-wrap').remove();showToast('Recipe deleted.')">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Rainbow Fruit & Nut Bowl -->
+          <div class="meal-card-wrap" data-cat="snacks vegan">
+            <div class="meal-img">
+              <img src="../parent/assets/images/meal_fruit_bowl.jpg" alt="Rainbow Fruit &amp; Nut Bowl">
+              <div class="meal-img-badge"><span class="badge-status packed">Vegan</span></div>
+            </div>
+            <div class="meal-body">
+              <div class="meal-meta"><span class="meal-cat">Snacks &amp; Salads</span><span class="meal-rating">★ 4.9</span></div>
+              <h3 style="font-size:15px;font-weight:700;margin-bottom:2px">Rainbow Fruit &amp; Nut Bowl</h3>
+              <div class="meal-macros">
+                <div><span>Protein</span><strong>4g</strong></div>
+                <div><span>Carbs</span><strong>32g</strong></div>
+                <div><span>Fats</span><strong>3g</strong></div>
+                <div><span>Cal</span><strong>180 kcal</strong></div>
+              </div>
+              <div class="meal-footer">
+                <span class="meal-prep">⏱ Prep: 10 min</span>
+                <button class="btn-icon-action danger" onclick="this.closest('.meal-card-wrap').remove();showToast('Recipe deleted.')">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5: Idli, Sambar & Chutney -->
+          <div class="meal-card-wrap" data-cat="breakfast vegetarian">
+            <div class="meal-img">
+              <img src="../parent/assets/images/meal_monday_idli.jpg" alt="Idli, Sambar &amp; Chutney">
+              <div class="meal-img-badge"><span class="badge-status active">Vegetarian</span></div>
+            </div>
+            <div class="meal-body">
+              <div class="meal-meta"><span class="meal-cat">Breakfast</span><span class="meal-rating">★ 4.9</span></div>
+              <h3 style="font-size:15px;font-weight:700;margin-bottom:2px">Idli, Sambar &amp; Chutney</h3>
+              <div class="meal-macros">
+                <div><span>Protein</span><strong>9g</strong></div>
+                <div><span>Carbs</span><strong>58g</strong></div>
+                <div><span>Fats</span><strong>2g</strong></div>
+                <div><span>Cal</span><strong>290 kcal</strong></div>
+              </div>
+              <div class="meal-footer">
+                <span class="meal-prep">⏱ Prep: 15 min</span>
+                <button class="btn-icon-action danger" onclick="this.closest('.meal-card-wrap').remove();showToast('Recipe deleted.')">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6: Whole Wheat Veggie Pasta -->
+          <div class="meal-card-wrap" data-cat="continental vegetarian">
+            <div class="meal-img">
+              <img src="../parent/assets/images/meal_friday_noodles.jpg" alt="Whole Wheat Veggie Pasta">
+              <div class="meal-img-badge"><span class="badge-status active">Vegetarian</span></div>
+            </div>
+            <div class="meal-body">
+              <div class="meal-meta"><span class="meal-cat">Continental</span><span class="meal-rating">★ 4.6</span></div>
+              <h3 style="font-size:15px;font-weight:700;margin-bottom:2px">Whole Wheat Veggie Pasta</h3>
+              <div class="meal-macros">
+                <div><span>Protein</span><strong>11g</strong></div>
+                <div><span>Carbs</span><strong>68g</strong></div>
+                <div><span>Fats</span><strong>9g</strong></div>
+                <div><span>Cal</span><strong>410 kcal</strong></div>
+              </div>
+              <div class="meal-footer">
+                <span class="meal-prep">⏱ Prep: 30 min</span>
+                <button class="btn-icon-action danger" onclick="this.closest('.meal-card-wrap').remove();showToast('Recipe deleted.')">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </div>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <!-- ADD MEAL MODAL -->
+  <div class="modal-overlay" id="addMealModal" style="display:none">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Add Recipe to Catalog</h3>
+        <button class="modal-close" onclick="document.getElementById('addMealModal').style.display='none'">&times;</button>
+      </div>
+      <form onsubmit="saveMeal(event)">
+        <div class="modal-body">
+          <div class="form-group"><label>Meal Name *</label><input type="text" class="form-control" id="newMealName" required placeholder="e.g. Palak Paneer with Roti"></div>
+          <div class="form-row-2">
+            <div class="form-group"><label>Category</label><select class="form-control" id="newMealCat"><option>Rice Dishes</option><option>Indian Breads</option><option>Continental</option><option>Snacks &amp; Salads</option><option>Breakfast</option></select></div>
+            <div class="form-group"><label>Dietary Type</label><select class="form-control" id="newMealDiet"><option>Vegetarian</option><option>Non-Veg</option><option>Vegan</option><option>Jain</option><option>Gluten Free</option></select></div>
+          </div>
+          <div class="form-row-2">
+            <div class="form-group"><label>Calories (kcal) *</label><input type="number" class="form-control" id="newMealCal" required placeholder="e.g. 400"></div>
+            <div class="form-group"><label>Prep Time</label><input type="text" class="form-control" id="newMealPrep" placeholder="e.g. 20 min"></div>
+          </div>
+          <div class="form-row-2" style="grid-template-columns:1fr 1fr 1fr">
+            <div class="form-group"><label>Protein</label><input type="text" class="form-control" placeholder="15g"></div>
+            <div class="form-group"><label>Carbs</label><input type="text" class="form-control" placeholder="50g"></div>
+            <div class="form-group"><label>Fats</label><input type="text" class="form-control" placeholder="10g"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="document.getElementById('addMealModal').style.display='none'">Cancel</button>
+          <button type="submit" class="btn-primary">Add Recipe</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="js/admin-sidebar.js"></script>
+  <script src="js/admin-common.js"></script>
+  <script>
+    function filterMealCards() {
+      const q = (document.getElementById('mealSearchInput').value || '').toLowerCase();
+      document.querySelectorAll('.meal-card-wrap').forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (!q || text.includes(q)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function saveMeal(e) {
+      e.preventDefault();
+      const name = document.getElementById('newMealName').value;
+      const cat = document.getElementById('newMealCat').value;
+      const diet = document.getElementById('newMealDiet').value;
+      const cal = document.getElementById('newMealCal').value;
+      const prep = document.getElementById('newMealPrep').value || '20 min';
+
+      const grid = document.getElementById('mealGrid');
+      const card = document.createElement('div');
+      card.className = 'meal-card-wrap';
+      card.innerHTML = `
+        <div class="meal-img">
+          <img src="../parent/assets/images/meal_tuesday_dosa.jpg" alt="${name}">
+          <div class="meal-img-badge"><span class="badge-status active">${diet}</span></div>
+        </div>
+        <div class="meal-body">
+          <div class="meal-meta"><span class="meal-cat">${cat}</span><span class="meal-rating">★ 5.0 (New)</span></div>
+          <h3 style="font-size:15px;font-weight:700;margin-bottom:2px">${name}</h3>
+          <div class="meal-macros">
+            <div><span>Protein</span><strong>14g</strong></div>
+            <div><span>Carbs</span><strong>48g</strong></div>
+            <div><span>Fats</span><strong>8g</strong></div>
+            <div><span>Cal</span><strong>${cal} kcal</strong></div>
+          </div>
+          <div class="meal-footer">
+            <span class="meal-prep">⏱ Prep: ${prep}</span>
+            <button class="btn-icon-action danger" onclick="this.closest('.meal-card-wrap').remove();showToast('Recipe deleted.')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            </button>
+          </div>
+        </div>
+      `;
+      grid.insertBefore(card, grid.firstChild);
+      document.getElementById('addMealModal').style.display = 'none';
+      e.target.reset();
+      showToast('New recipe added to catalog successfully!');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orders | SchoolBite Admin</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body data-page="orders">
+  <div class="admin-layout">
+    <aside class="sidebar" id="adminSidebar"><div id="sidebarMount"></div></aside>
+    <div class="main-wrapper">
+      <header class="topbar">
+        <button class="hamburger" onclick="toggleSidebar()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        <div class="topbar-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Search orders..."></div>
+        <div class="topbar-actions">
+          <a href="notifications.html" class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="icon-badge"></span></a>
+          <div class="admin-profile" id="adminProfileBtn"><div class="admin-avatar">A</div><div class="admin-info"><span class="admin-name">Admin</span><span class="admin-role">Administrator</span></div><svg class="admin-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="profile-dropdown" id="profileDropdown"><a href="settings.html" class="dropdown-item">Settings</a><a href="../parent/index.html" class="dropdown-item" style="color:#d9534f">Sign Out</a></div>
+          </div>
+        </div>
+      </header>
+      <main class="content-body">
+        <div class="page-header-row">
+          <div class="page-title-group"><h1>Orders &amp; Transactions</h1><p>Complete ledger of parent subscription purchases and payment statuses.</p></div>
+          <div class="page-actions">
+            <button class="btn-secondary" onclick="showToast('Exporting CSV report...')">📥 Export CSV</button>
+          </div>
+        </div>
+        <div class="table-panel">
+          <div class="table-toolbar">
+            <div class="table-search-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Search by order ID or parent..." oninput="filterOrders(this.value)"></div>
+            <div class="table-filters">
+              <select class="filter-select" onchange="filterByStatus(this.value)"><option value="">All Status</option><option>Success</option><option>Refunded</option></select>
+            </div>
+          </div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Order ID</th><th>Date &amp; Time</th><th>Parent</th><th>Student</th><th>Plan</th><th>Payment Method</th><th>Amount</th><th>Status</th></tr></thead>
+              <tbody id="ordersTbody">
+                <tr><td style="color:var(--muted);font-size:11px">ORD-8492</td><td style="color:var(--muted);font-size:12px">09 Sep 2026, 10:24 AM</td><td><strong>Priya Sharma</strong></td><td>Aarav Sharma</td><td>Monthly Subscription</td><td style="font-size:12px">UPI (Google Pay)</td><td><strong style="color:var(--green)">₹2,999</strong></td><td><span class="badge-status success">Success</span></td></tr>
+                <tr><td style="color:var(--muted);font-size:11px">ORD-8491</td><td style="color:var(--muted);font-size:12px">08 Sep 2026, 4:12 PM</td><td><strong>Rajesh Raman</strong></td><td>Diya R.</td><td>Weekly Subscription</td><td style="font-size:12px">Credit Card</td><td><strong style="color:var(--green)">₹799</strong></td><td><span class="badge-status success">Success</span></td></tr>
+                <tr><td style="color:var(--muted);font-size:11px">ORD-8490</td><td style="color:var(--muted);font-size:12px">08 Sep 2026, 11:30 AM</td><td><strong>Sanjay Kumar</strong></td><td>Ananya S.</td><td>Monthly Subscription</td><td style="font-size:12px">Net Banking</td><td><strong style="color:var(--green)">₹2,999</strong></td><td><span class="badge-status success">Success</span></td></tr>
+                <tr><td style="color:var(--muted);font-size:11px">ORD-8489</td><td style="color:var(--muted);font-size:12px">07 Sep 2026, 9:15 AM</td><td><strong>Anita Gupta</strong></td><td>Rohan Gupta</td><td>Term Subscription</td><td style="font-size:12px">Debit Card</td><td><strong style="color:var(--green)">₹7,999</strong></td><td><span class="badge-status success">Success</span></td></tr>
+                <tr><td style="color:var(--muted);font-size:11px">ORD-8488</td><td style="color:var(--muted);font-size:12px">06 Sep 2026, 8:55 PM</td><td><strong>Karthik Raja</strong></td><td>Tara K.</td><td>Weekly Subscription</td><td style="font-size:12px">UPI (PhonePe)</td><td><strong style="color:var(--green)">₹799</strong></td><td><span class="badge-status refunded">Refunded</span></td></tr>
+                <tr><td style="color:var(--muted);font-size:11px">ORD-8487</td><td style="color:var(--muted);font-size:12px">05 Sep 2026, 2:40 PM</td><td><strong>Meera Kavin</strong></td><td>Kavin M.</td><td>Term Subscription</td><td style="font-size:12px">UPI (Paytm)</td><td><strong style="color:var(--green)">₹7,999</strong></td><td><span class="badge-status success">Success</span></td></tr>
+                <tr><td style="color:var(--muted);font-size:11px">ORD-8486</td><td style="color:var(--muted);font-size:12px">04 Sep 2026, 11:20 AM</td><td><strong>Farhan Khan</strong></td><td>Sara Khan</td><td>Monthly Subscription</td><td style="font-size:12px">Credit Card</td><td><strong style="color:var(--green)">₹2,999</strong></td><td><span class="badge-status success">Success</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="js/admin-sidebar.js"></script>
+  <script src="js/admin-common.js"></script>
+  <script>
+    function filterOrders(q) {
+      q = q.toLowerCase();
+      document.querySelectorAll('#ordersTbody tr').forEach(function(r) {
+        r.style.display = !q || r.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+    }
+    function filterByStatus(s) {
+      document.querySelectorAll('#ordersTbody tr').forEach(function(r) {
+        r.style.display = !s || r.textContent.includes(s) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

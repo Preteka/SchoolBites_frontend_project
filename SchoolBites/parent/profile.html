@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parent Profile &amp; Children — SchoolBite</title>
+  <meta name="description" content="Manage your parent account, view enrolled children, track today's live classroom lunch delivery, and swap upcoming meal schedules." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Site Header Mount -->
+  <div id="site-header-mount"></div>
+
+  <main id="main-content">
+    <section class="section section-bg-subtle" style="padding-top: 3.5rem;">
+      <div class="container">
+        <!-- Profile Header -->
+        <div class="profile-avatar-wrap reveal" style="background-color: var(--bg-card); padding: 2rem; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); justify-content: space-between; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;">
+            <img 
+              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" 
+              alt="Radhika Sharma" 
+              class="profile-avatar" 
+            />
+            <div>
+              <div style="display: flex; align-items: center; gap: 0.65rem;">
+                <h1 style="font-size: 1.85rem;">Radhika Sharma</h1>
+                <span class="badge" style="background-color: var(--bg-surface-sage); color: var(--color-primary);">Active Subscriber</span>
+              </div>
+              <p style="font-size: 0.95rem; margin-top: 0.2rem;">
+                radhika.sharma@example.com &bull; +91 98450 12345
+              </p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; align-items: center;">
+            <a href="settings.html" class="btn btn-secondary btn-sm">
+              <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              <span>Account Settings</span>
+            </a>
+            <button type="button" class="btn btn-primary btn-sm" data-modal-target="add-child-modal">
+              <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+              <span>Add Child</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="profile-grid" style="margin-top: 2rem;">
+          <!-- Left Column: My Children -->
+          <div class="reveal">
+            <div class="profile-card">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+                <h3 style="font-size: 1.4rem;">My Children</h3>
+                <span style="font-size: 0.85rem; font-weight: 700; color: var(--color-primary);">2 Enrolled</span>
+              </div>
+
+              <!-- Child 1 -->
+              <div class="child-card">
+                <div class="child-info-group">
+                  <img 
+                    src="https://images.unsplash.com/photo-1595454223600-91fbdd77e58a?auto=format&fit=crop&w=200&q=80" 
+                    alt="Aarav Sharma" 
+                    class="child-avatar-sm" 
+                  />
+                  <div>
+                    <h4 style="font-size: 1.1rem; margin-bottom: 0.15rem;">Aarav Sharma</h4>
+                    <p style="font-size: 0.85rem; color: var(--color-text-muted);">Class 4-B &bull; Oakridge International</p>
+                    <div style="display: flex; gap: 0.4rem; margin-top: 0.4rem;">
+                      <span class="badge badge-veg" style="font-size: 0.72rem;">Standard Veg</span>
+                      <span class="badge" style="background-color: var(--bg-surface-cream); color: var(--color-accent); font-size: 0.72rem;">Peanut Alert</span>
+                    </div>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <span style="font-size: 0.75rem; color: var(--color-text-subtle); display: block;">Plan Active</span>
+                  <strong style="color: var(--color-primary); font-size: 0.9rem;">₹2,200/mo</strong>
+                </div>
+              </div>
+
+              <!-- Child 2 -->
+              <div class="child-card">
+                <div class="child-info-group">
+                  <img 
+                    src="https://images.unsplash.com/photo-1543332164-6e82f355badc?auto=format&fit=crop&w=200&q=80" 
+                    alt="Ananya Sharma" 
+                    class="child-avatar-sm" 
+                  />
+                  <div>
+                    <h4 style="font-size: 1.1rem; margin-bottom: 0.15rem;">Ananya Sharma</h4>
+                    <p style="font-size: 0.85rem; color: var(--color-text-muted);">Class 1-A &bull; Oakridge International</p>
+                    <div style="display: flex; gap: 0.4rem; margin-top: 0.4rem;">
+                      <span class="badge badge-veg" style="font-size: 0.72rem;">Standard Veg + Fruit</span>
+                      <span class="badge" style="background-color: var(--bg-surface-sage); color: var(--color-primary); font-size: 0.72rem;">Mild Spice</span>
+                    </div>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <span style="font-size: 0.75rem; color: var(--color-text-subtle); display: block;">Plan Active</span>
+                  <strong style="color: var(--color-primary); font-size: 0.9rem;">₹2,200/mo</strong>
+                </div>
+              </div>
+
+              <button type="button" class="btn btn-secondary btn-block btn-sm" data-modal-target="add-child-modal" style="margin-top: 1rem;">
+                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+                <span>Add Another Child Profile</span>
+              </button>
+            </div>
+
+            <!-- Subscription Summary Card -->
+            <div class="profile-card" style="margin-top: 1.5rem;">
+              <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">Current Subscription</h3>
+              <div style="padding: 1rem; border-radius: var(--radius-md); background-color: var(--bg-surface-secondary); margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                  <span style="font-size: 0.9rem; color: var(--color-text-muted);">Current Billing Cycle:</span>
+                  <strong style="font-size: 0.9rem;">Sep 1 – Sep 30, 2026</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                  <span style="font-size: 0.9rem; color: var(--color-text-muted);">Total Monthly Subscriptions:</span>
+                  <strong style="color: var(--color-primary);">₹4,400 (2 Children)</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-size: 0.9rem; color: var(--color-text-muted);">Payment Method:</span>
+                  <span style="font-size: 0.9rem;">HDFC Auto-Debit (**** 4092)</span>
+                </div>
+              </div>
+              <div style="display: flex; gap: 0.5rem;">
+                <button type="button" class="btn btn-ghost btn-sm" style="flex: 1;" onclick="window.showToast('Your subscription is paused for next Monday. Credit saved.', 'info')">
+                  <span>Pause Delivery</span>
+                </button>
+                <a href="pricing.html" class="btn btn-secondary btn-sm" style="flex: 1;">
+                  <span>Change Plan</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Today's Live Delivery Tracker & Weekly Schedule -->
+          <div class="reveal reveal-delay-1">
+            <!-- Today's Live Delivery Tracker -->
+            <div class="profile-card">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                <h3 style="font-size: 1.4rem;">Today’s Live Delivery Tracker</h3>
+                <span class="badge" style="background-color: var(--bg-surface-cream); color: var(--color-accent);">
+                  <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  Lunch Bell: 12:45 PM
+                </span>
+              </div>
+              <p style="font-size: 0.92rem; color: var(--color-text-muted);">
+                Tracking hot tiffins for <strong>Aarav</strong> &amp; <strong>Ananya</strong> &bull; Oakridge International
+              </p>
+
+              <!-- Delivery Tracker Pipeline Steps -->
+              <div class="delivery-tracker-pipeline">
+                <div class="tracker-step completed">
+                  <svg class="icon-sm" style="color: var(--color-secondary); margin: 0 auto 0.4rem auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+                  <strong style="font-size: 0.8rem; display: block;">1. Kitchen Cooked</strong>
+                  <span style="font-size: 0.72rem; color: var(--color-text-subtle);">6:15 AM</span>
+                </div>
+                <div class="tracker-step completed">
+                  <svg class="icon-sm" style="color: var(--color-secondary); margin: 0 auto 0.4rem auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+                  <strong style="font-size: 0.8rem; display: block;">2. Thermal Sealed</strong>
+                  <span style="font-size: 0.72rem; color: var(--color-text-subtle);">8:30 AM (68&deg;C)</span>
+                </div>
+                <div class="tracker-step active">
+                  <svg class="icon-sm" style="color: var(--color-accent); margin: 0 auto 0.4rem auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+                  <strong style="font-size: 0.8rem; display: block;">3. On Delivery Van</strong>
+                  <span style="font-size: 0.72rem; color: var(--color-accent);">ETA: 12:15 PM</span>
+                </div>
+                <div class="tracker-step">
+                  <svg class="icon-sm" style="color: var(--color-text-subtle); margin: 0 auto 0.4rem auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                  <strong style="font-size: 0.8rem; display: block;">4. Floor Handover</strong>
+                  <span style="font-size: 0.72rem; color: var(--color-text-subtle);">Classroom 4-B / 1-A</span>
+                </div>
+              </div>
+
+              <div style="margin-top: 1.5rem; padding: 0.75rem 1rem; border-radius: var(--radius-md); background-color: var(--bg-surface-secondary); display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 0.65rem;">
+                  <svg class="icon" style="color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  <div>
+                    <span style="font-size: 0.85rem; font-weight: 700; color: var(--color-dark-text); display: block;">Route Dispatcher: Suresh Gowda</span>
+                    <span style="font-size: 0.75rem; color: var(--color-text-subtle);">Van KA-04-MB-2291 &bull; Direct Floor Delivery</span>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-ghost btn-sm" onclick="window.showToast('Connecting to dispatch floor...', 'info')">
+                  <span>Call Driver</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Upcoming 5-Day Meal Schedule -->
+            <div class="profile-card" id="schedule" style="margin-top: 1.5rem;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+                <h3 style="font-size: 1.4rem;">Upcoming 5-Day Menu Schedule</h3>
+                <span style="font-size: 0.85rem; color: var(--color-text-subtle);">Swap cutoff: Sunday 6 PM</span>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+                <!-- Mon -->
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1rem; border-radius: var(--radius-md); background-color: var(--bg-surface-secondary);">
+                  <div>
+                    <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase;">Monday</span>
+                    <h5 style="font-size: 0.98rem; margin-top: 0.1rem;">Paneer Tikka Brown Rice Bowl + Mint Raita</h5>
+                  </div>
+                  <button type="button" class="btn btn-ghost btn-sm" onclick="window.showToast('Meal swapped to Whole Wheat Pasta!', 'success')">
+                    <span>Swap Dish</span>
+                  </button>
+                </div>
+
+                <!-- Tue -->
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1rem; border-radius: var(--radius-md); background-color: var(--bg-surface-secondary);">
+                  <div>
+                    <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase;">Tuesday</span>
+                    <h5 style="font-size: 0.98rem; margin-top: 0.1rem;">Rainbow Veggie Rotini Pasta + Parmesan</h5>
+                  </div>
+                  <button type="button" class="btn btn-ghost btn-sm" onclick="window.showToast('Meal swapped to Lentil Patty Thali!', 'success')">
+                    <span>Swap Dish</span>
+                  </button>
+                </div>
+
+                <!-- Wed -->
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1rem; border-radius: var(--radius-md); background-color: var(--bg-surface-secondary);">
+                  <div>
+                    <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase;">Wednesday</span>
+                    <h5 style="font-size: 0.98rem; margin-top: 0.1rem;">Whole Wheat Veggie &amp; Lentil Wrap + Fruit Skewers</h5>
+                  </div>
+                  <button type="button" class="btn btn-ghost btn-sm" onclick="window.showToast('Meal swapped to Brown Rice Pulao!', 'success')">
+                    <span>Swap Dish</span>
+                  </button>
+                </div>
+
+                <!-- Thu -->
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1rem; border-radius: var(--radius-md); background-color: var(--bg-surface-secondary);">
+                  <div>
+                    <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase;">Thursday</span>
+                    <h5 style="font-size: 0.98rem; margin-top: 0.1rem;">Mild Dal Makhani &amp; Cumin Rice Thali + French Beans</h5>
+                  </div>
+                  <button type="button" class="btn btn-ghost btn-sm" onclick="window.showToast('Meal swapped to Sourdough Mini Calzone!', 'success')">
+                    <span>Swap Dish</span>
+                  </button>
+                </div>
+
+                <!-- Fri -->
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1rem; border-radius: var(--radius-md); background-color: var(--bg-surface-secondary);">
+                  <div>
+                    <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase;">Friday (Fun Day)</span>
+                    <h5 style="font-size: 0.98rem; margin-top: 0.1rem;">Sourdough Veggie Mini Pizza &amp; Coconut Chia Pudding</h5>
+                  </div>
+                  <button type="button" class="btn btn-ghost btn-sm" onclick="window.showToast('Meal swapped to Grilled Cottage Cheese Box!', 'success')">
+                    <span>Swap Dish</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal: Add Child Profile -->
+    <div class="modal-backdrop" id="add-child-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="add-child-title">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+            <h3 class="modal-title" id="add-child-title">Add Child Profile</h3>
+          </div>
+          <button type="button" class="btn-modal-close" data-close-modal aria-label="Close modal">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <form id="add-child-form" novalidate>
+          <div class="form-group">
+            <label for="child-fullname" class="form-label">Child’s Full Name *</label>
+            <input type="text" id="child-fullname" class="form-control" placeholder="e.g. Siddharth Sharma" required />
+            <span class="form-error-text" id="child-fullname-error"></span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label for="child-school-select" class="form-label">School Name *</label>
+              <select id="child-school-select" class="form-control" required>
+                <option value="">Select Partner School</option>
+                <option value="oakridge">Oakridge International School</option>
+                <option value="valley">The Valley School</option>
+                <option value="stpauls">St. Paul’s International</option>
+                <option value="greenwood">Greenwood High International</option>
+                <option value="inventure">Inventure Academy</option>
+              </select>
+              <span class="form-error-text" id="child-school-select-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="child-grade" class="form-label">Grade / Class *</label>
+              <input type="text" id="child-grade" class="form-control" placeholder="e.g. Class 3-A" required />
+              <span class="form-error-text" id="child-grade-error"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="child-plan-select" class="form-label">Select Meal Subscription</label>
+            <select id="child-plan-select" class="form-control">
+              <option value="standard">Standard Plan — ₹2,200/month (5 meals/wk)</option>
+              <option value="basic">Basic Plan — ₹1,500/month (3 meals/wk)</option>
+              <option value="premium">Premium Plan — ₹3,000/month (Lunches + Breakfasts)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Allergies / Special Dietary Needs</label>
+            <input type="text" id="child-allergies" class="form-control" placeholder="e.g. Nut allergy, Dairy intolerant, Pure Jain" />
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg">
+            <span>Save &amp; Enroll Child</span>
+            <svg class="btn-icon icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Site Footer Mount -->
+  <div id="site-footer-mount"></div>
+
+  <!-- Site Modals Mount -->
+  <div id="site-modals-mount"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

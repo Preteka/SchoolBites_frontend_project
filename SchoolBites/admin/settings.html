@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Settings | SchoolBite Admin</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <style>
+    .settings-layout { display: grid; grid-template-columns: 240px 1fr; gap: 24px; align-items: flex-start; }
+    .settings-nav { background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 12px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 4px; }
+    .settings-tab-btn { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 10px; border: none; background: transparent; font-size: 14px; font-weight: 500; color: var(--ink-sec); cursor: pointer; text-align: left; width: 100%; transition: all 0.2s; }
+    .settings-tab-btn svg { width: 18px; height: 18px; stroke-width: 2; flex-shrink: 0; }
+    .settings-tab-btn:hover { background: var(--sage-light); color: var(--green); }
+    .settings-tab-btn.active { background: #e5f4eb; color: var(--green); font-weight: 700; }
+
+    .settings-panel { background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 28px; box-shadow: var(--shadow); display: none; }
+    .settings-panel.active { display: block; }
+    .settings-panel-head { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+    .settings-panel-head h2 { font-size: 20px; font-weight: 800; font-family: var(--font-head); color: var(--ink); }
+    .settings-panel-head p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+    .settings-section { margin-bottom: 24px; }
+    .settings-section-title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+
+    .switch-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .switch-info h4 { font-size: 14px; font-weight: 600; color: var(--ink); }
+    .switch-info p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* Custom Toggle Switch */
+    .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .3s; border-radius: 24px; }
+    .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
+    input:checked + .slider { background-color: var(--green); }
+    input:checked + .slider:before { transform: translateX(20px); }
+
+    .team-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    .team-table th { text-align: left; padding: 10px; font-size: 12px; color: var(--muted); border-bottom: 1px solid var(--line); text-transform: uppercase; }
+    .team-table td { padding: 12px 10px; border-bottom: 1px solid var(--line); font-size: 13.5px; }
+
+    @media (max-width: 900px) {
+      .settings-layout { grid-template-columns: 1fr; }
+      .settings-nav { flex-direction: row; overflow-x: auto; white-space: nowrap; }
+      .settings-tab-btn { width: auto; }
+    }
+  </style>
+</head>
+<body data-page="settings">
+  <div class="admin-layout">
+    <aside class="sidebar" id="adminSidebar"><div id="sidebarMount"></div></aside>
+    <div class="main-wrapper">
+      <header class="topbar">
+        <button class="hamburger" onclick="toggleSidebar()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        <div class="topbar-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Search system configuration..."></div>
+        <div class="topbar-actions">
+          <a href="notifications.html" class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="icon-badge"></span></a>
+          <div class="admin-profile" id="adminProfileBtn"><div class="admin-avatar">A</div><div class="admin-info"><span class="admin-name">Admin</span><span class="admin-role">Administrator</span></div><svg class="admin-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="profile-dropdown" id="profileDropdown"><a href="settings.html" class="dropdown-item">Settings</a><a href="../parent/index.html" class="dropdown-item" style="color:#d9534f">Sign Out</a></div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <div class="page-header-row">
+          <div class="page-title-group">
+            <h1>Admin &amp; Portal Settings</h1>
+            <p>Configure kitchen cutoff thresholds, payment gateways, delivery schedules, team access roles and notifications.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn-primary" onclick="saveAllSettings()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="16" height="16"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save All Changes
+            </button>
+          </div>
+        </div>
+
+        <div class="settings-layout">
+          <!-- Settings Navigation -->
+          <div class="settings-nav">
+            <button class="settings-tab-btn active" onclick="switchTab(this, 'general')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              <span>General Info</span>
+            </button>
+            <button class="settings-tab-btn" onclick="switchTab(this, 'cutoffs')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Kitchen &amp; Cutoffs</span>
+            </button>
+            <button class="settings-tab-btn" onclick="switchTab(this, 'delivery')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              <span>Delivery Fleet</span>
+            </button>
+            <button class="settings-tab-btn" onclick="switchTab(this, 'payments')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+              <span>Payments &amp; Taxes</span>
+            </button>
+            <button class="settings-tab-btn" onclick="switchTab(this, 'team')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span>Staff &amp; Access Roles</span>
+            </button>
+            <button class="settings-tab-btn" onclick="switchTab(this, 'security')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span>Security &amp; Backups</span>
+            </button>
+          </div>
+
+          <!-- Settings Panels Container -->
+          <div class="settings-panels">
+            
+            <!-- PANEL 1: GENERAL -->
+            <div class="settings-panel active" id="panel-general">
+              <div class="settings-panel-head">
+                <h2>General School &amp; Portal Information</h2>
+                <p>Basic organization profile, contact channels, and academic operational parameters.</p>
+              </div>
+              <div class="form-row-2">
+                <div class="form-group"><label>Platform / Brand Name</label><input type="text" class="form-control" value="SchoolBite Healthy School Lunches"></div>
+                <div class="form-group"><label>Support Helpline</label><input type="text" class="form-control" value="+91 98765 43210"></div>
+              </div>
+              <div class="form-row-2">
+                <div class="form-group"><label>Admin Support Email</label><input type="email" class="form-control" value="support@schoolbite.in"></div>
+                <div class="form-group"><label>Academic Calendar Year</label><input type="text" class="form-control" value="2026 - 2027"></div>
+              </div>
+              <div class="form-row-2">
+                <div class="form-group"><label>Default Currency</label><input type="text" class="form-control" value="INR (₹)" disabled></div>
+                <div class="form-group"><label>Timezone</label><input type="text" class="form-control" value="Asia/Kolkata (IST +5:30)"></div>
+              </div>
+            </div>
+
+            <!-- PANEL 2: KITCHEN & CUTOFFS -->
+            <div class="settings-panel" id="panel-cutoffs">
+              <div class="settings-panel-head">
+                <h2>Kitchen Prep &amp; Parent Ordering Cutoffs</h2>
+                <p>Enforce strict daily deadlines for menu substitutions, sick-day cancellations, and allergy updates.</p>
+              </div>
+              <div class="form-row-2">
+                <div class="form-group"><label>Daily Meal Customization Cutoff</label><input type="time" class="form-control" value="08:00"></div>
+                <div class="form-group"><label>Sick Day / Cancellation Deadline</label><input type="time" class="form-control" value="07:30"></div>
+              </div>
+              <div class="switch-row">
+                <div class="switch-info">
+                  <h4>Auto-Credit Meal Wallet on Timely Cancellation</h4>
+                  <p>Instantly credit ₹120 meal fee back to parent wallet if cancelled before 07:30 AM.</p>
+                </div>
+                <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+              </div>
+              <div class="switch-row">
+                <div class="switch-info">
+                  <h4>High-Risk Allergy Pop-up Confirmation</h4>
+                  <p>Require kitchen supervisor sign-off for boxes with peanut or dairy exclusions.</p>
+                </div>
+                <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+              </div>
+            </div>
+
+            <!-- PANEL 3: DELIVERY FLEET -->
+            <div class="settings-panel" id="panel-delivery">
+              <div class="settings-panel-head">
+                <h2>Fleet &amp; Dispatch Logistics</h2>
+                <p>Set delivery van departure windows and school cafeteria delivery SLAs.</p>
+              </div>
+              <div class="form-row-2">
+                <div class="form-group"><label>Central Kitchen Van Departure Window</label><input type="text" class="form-control" value="10:30 AM - 10:45 AM"></div>
+                <div class="form-group"><label>Target School Handover Window</label><input type="text" class="form-control" value="11:15 AM - 11:45 AM"></div>
+              </div>
+              <div class="switch-row">
+                <div class="switch-info">
+                  <h4>Automated Parent SMS on Arrival</h4>
+                  <p>Send an SMS &amp; App Push alert to parents as soon as the driver marks delivery completed.</p>
+                </div>
+                <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+              </div>
+              <div class="switch-row">
+                <div class="switch-info">
+                  <h4>GPS Live Van Tracking for Admins</h4>
+                  <p>Enable live telemetry and speed alerts on active delivery routes.</p>
+                </div>
+                <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+              </div>
+            </div>
+
+            <!-- PANEL 4: PAYMENTS -->
+            <div class="settings-panel" id="panel-payments">
+              <div class="settings-panel-head">
+                <h2>Payment Gateways &amp; Tax Invoicing</h2>
+                <p>Manage Razorpay / UPI credentials, GST rates, and automated receipt dispatches.</p>
+              </div>
+              <div class="form-row-2">
+                <div class="form-group"><label>Active Gateway</label><select class="form-control"><option>Razorpay UPI &amp; Cards (Live)</option><option>PayU India</option><option>Cashfree Payments</option></select></div>
+                <div class="form-group"><label>Applicable GST / Food Tax Rate (%)</label><input type="number" class="form-control" value="5"></div>
+              </div>
+              <div class="form-group"><label>Razorpay Key ID</label><input type="text" class="form-control" value="rzp_live_88910472199201" readonly></div>
+              <div class="switch-row">
+                <div class="switch-info">
+                  <h4>Automated GST Tax Invoices</h4>
+                  <p>Send signed PDF invoice with GSTIN breakdown immediately upon subscription checkout.</p>
+                </div>
+                <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+              </div>
+            </div>
+
+            <!-- PANEL 5: TEAM & ROLES -->
+            <div class="settings-panel" id="panel-team">
+              <div class="settings-panel-head">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <div>
+                    <h2>Admin Staff &amp; Role Permissions</h2>
+                    <p>Manage kitchen staff, dispatch coordinators and administrator accounts.</p>
+                  </div>
+                  <button class="btn-primary" onclick="document.getElementById('addStaffModal').style.display='flex'">+ Add Staff Member</button>
+                </div>
+              </div>
+              <table class="team-table">
+                <thead>
+                  <tr>
+                    <th>Staff Name</th>
+                    <th>Email Address</th>
+                    <th>Assigned Role</th>
+                    <th>Last Active</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Super Admin</strong></td>
+                    <td>admin@schoolbite.in</td>
+                    <td><span class="badge-status active">Super Administrator</span></td>
+                    <td>Online Now</td>
+                    <td><span style="color:var(--muted);font-size:12px">Primary Owner</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Chef Rajesh Kumar</strong></td>
+                    <td>kitchen.rajesh@schoolbite.in</td>
+                    <td><span class="badge-status preparing">Kitchen Lead</span></td>
+                    <td>Today, 10:15 AM</td>
+                    <td><button class="btn-icon-action danger" onclick="this.closest('tr').remove();showToast('Staff access revoked.')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Vikram Singh</strong></td>
+                    <td>logistics.vikram@schoolbite.in</td>
+                    <td><span class="badge-status out-for-delivery">Fleet Coordinator</span></td>
+                    <td>Today, 11:40 AM</td>
+                    <td><button class="btn-icon-action danger" onclick="this.closest('tr').remove();showToast('Staff access revoked.')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Ananya Sen</strong></td>
+                    <td>support.ananya@schoolbite.in</td>
+                    <td><span class="badge-status packed">Customer Care</span></td>
+                    <td>Yesterday</td>
+                    <td><button class="btn-icon-action danger" onclick="this.closest('tr').remove();showToast('Staff access revoked.')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- PANEL 6: SECURITY & BACKUP -->
+            <div class="settings-panel" id="panel-security">
+              <div class="settings-panel-head">
+                <h2>Security, Auditing &amp; System Backups</h2>
+                <p>Control multi-factor authentication, session expiration, and database snapshots.</p>
+              </div>
+              <div class="switch-row">
+                <div class="switch-info">
+                  <h4>Two-Factor Authentication (2FA) for All Admins</h4>
+                  <p>Enforce OTP verification via Authenticator app during admin sign-in.</p>
+                </div>
+                <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+              </div>
+              <div class="switch-row">
+                <div class="switch-info">
+                  <h4>Automatic Daily Database Snapshot</h4>
+                  <p>Encrypted cloud backup created everyday at 02:00 AM IST.</p>
+                </div>
+                <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+              </div>
+              <div style="margin-top:20px; display:flex; gap:12px;">
+                <button class="btn-secondary" onclick="showToast('Downloading encrypted JSON backup snapshot...')">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Download DB Snapshot Now
+                </button>
+                <button class="btn-secondary" onclick="showToast('Exporting 90-day admin audit log...')">
+                  Download Audit Log (CSV)
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <!-- ADD STAFF MODAL -->
+  <div class="modal-overlay" id="addStaffModal" style="display:none">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Add Staff Account</h3>
+        <button class="modal-close" onclick="document.getElementById('addStaffModal').style.display='none'">&times;</button>
+      </div>
+      <form onsubmit="addStaff(event)">
+        <div class="modal-body">
+          <div class="form-group"><label>Full Name *</label><input type="text" class="form-control" required placeholder="e.g. Meera Joshi"></div>
+          <div class="form-group"><label>Work Email Address *</label><input type="email" class="form-control" required placeholder="meera@schoolbite.in"></div>
+          <div class="form-group"><label>Role / Permissions</label>
+            <select class="form-control">
+              <option>Kitchen Lead (Meals &amp; Nutrition)</option>
+              <option>Fleet Coordinator (Delivery Management)</option>
+              <option>Customer Support (Parents &amp; Inquiries)</option>
+              <option>Full Administrator</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="document.getElementById('addStaffModal').style.display='none'">Cancel</button>
+          <button type="submit" class="btn-primary">Send Invite</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="js/admin-sidebar.js"></script>
+  <script src="js/admin-common.js"></script>
+  <script>
+    function switchTab(btn, tabId) {
+      document.querySelectorAll('.settings-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.settings-panel').forEach(p => p.classList.remove('active'));
+      
+      btn.classList.add('active');
+      const target = document.getElementById('panel-' + tabId);
+      if (target) target.classList.add('active');
+    }
+
+    function saveAllSettings() {
+      showToast('All system configurations updated successfully!');
+    }
+
+    function addStaff(e) {
+      e.preventDefault();
+      document.getElementById('addStaffModal').style.display = 'none';
+      showToast('Invitation link sent to new staff member.');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,2608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SchoolBite — Healthy Meals. Brighter Futures.</title>
+  <meta name="description"
+    content="SchoolBite makes school meals easier to plan, personalize and manage — with nutritious menus, flexible subscriptions and convenient meal choices for every school day." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <style>
+    /* ===================================================
+       HOME 2 (SCHOOLBITE) — PIXEL-PERFECT SPECIFIC STYLES
+       =================================================== */
+
+    :root {
+      background: var(--bg-page);
+      color: var(--color-dark-text);
+      --h2-green-light: var(--bg-surface-sage);
+      --h2-green-soft: var(--bg-surface-secondary);
+      font-family: var(--font-body);
+      font-weight: 600;
+      --h2-bg-cream: var(--bg-page);
+      --h2-text-dark: var(--color-dark-text);
+      --h2-text-muted: var(--color-text-muted);
+      --h2-green-deep: var(--color-primary);
+      --h2-green-primary: var(--color-secondary);
+      --h2-orange: var(--color-accent);
+      --h2-orange-deep: var(--color-accent-hover);
+      --font-doodle: var(--font-script);
+    }
+
+    [data-theme="dark"] {
+      --h2-bg-cream: #0D1F1A;
+      --h2-green-soft: #1B352D;
+      background: var(--color-primary-hover);
+      --h2-text-dark: #F3F8F5;
+      box-shadow: 0 6px 20px rgba(7, 91, 70, 0.28);
+    }
+
+    /* Common Eyebrow Pill */
+    .h2-pill-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      min-height: 34px;
+      padding: 0.45rem 0.95rem;
+      font-family: var(--font-body);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      background: var(--h2-green-light);
+      border: 1px solid var(--border-color);
+      border-radius: 9999px;
+      line-height: 1;
+      margin-bottom: 1.1rem;
+      box-shadow: 0 2px 8px rgba(7, 91, 70, 0.04);
+    }
+
+    .h2-pill-eyebrow svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    [data-theme="dark"] .h2-pill-eyebrow {
+      border-color: rgba(99, 201, 141, 0.28);
+      background: rgba(99, 201, 141, 0.08);
+      color: #63c98d;
+    }
+
+    /* Hand-drawn Doodles */
+    .h2-doodle {
+      font-family: var(--font-doodle);
+      color: var(--color-primary);
+      font-size: 1.3rem;
+      line-height: 1.2;
+      pointer-events: none;
+      user-select: none;
+      position: absolute;
+    }
+
+    [data-theme="dark"] .h2-doodle {
+      color: var(--color-secondary);
+    }
+
+    /* Leaf Decoration Floating */
+    .h2-leaf-decor {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.85;
+    }
+
+    /* ===================================================
+       1. HERO SECTION
+       =================================================== */
+    .h2-hero-section {
+      background: var(--h2-bg-cream);
+      padding: clamp(3rem, 6vw, 4.8rem) 0 clamp(3.5rem, 7vw, 5.5rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .h2-hero-section::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      right: 15%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(76, 175, 80, 0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .h2-hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .h2-hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.12;
+      color: var(--h2-text-dark);
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .h2-hero-title .text-orange {
+      color: var(--h2-orange);
+    }
+
+    .h2-hero-sub {
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+      color: var(--h2-text-muted);
+      line-height: 1.75;
+      max-width: 500px;
+      margin-bottom: 2rem;
+    }
+
+    .h2-hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 2.2rem;
+    }
+
+    .btn-h2-primary {
+      background: #075B46;
+      color: #FFFFFF;
+      border-radius: 9999px;
+      padding: 0.95rem 1.95rem;
+      font-family: var(--font-body);
+      font-size: 0.98rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      transition: all var(--transition-normal);
+      border: 1px solid #075B46;
+      box-shadow: 0 6px 18px rgba(7, 91, 70, 0.22);
+      cursor: pointer;
+    }
+
+    .btn-h2-primary:hover {
+      background: #054535;
+      border-color: #054535;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(7, 91, 70, 0.3);
+    }
+
+    .btn-h2-outline {
+      background: #FFFFFF;
+      color: #17352D;
+      border-radius: 9999px;
+      padding: 0.95rem 1.95rem;
+      font-family: var(--font-body);
+      font-size: 0.98rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      border: 1.5px solid #D2DDD7;
+      transition: all var(--transition-normal);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      cursor: pointer;
+    }
+
+    .btn-h2-outline:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      background: var(--h2-green-light);
+      transform: translateY(-2px);
+    }
+
+    [data-theme="dark"] .btn-h2-outline {
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--h2-text-dark);
+      border-color: rgba(99, 201, 141, 0.35);
+    }
+
+    [data-theme="dark"] .btn-h2-outline:hover {
+      border-color: var(--color-secondary);
+      color: var(--color-secondary);
+      background: rgba(99, 201, 141, 0.08);
+    }
+
+    .h2-hero-benefits {
+      display: flex;
+      gap: 1.75rem;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--border-color);
+      padding-top: 1.5rem;
+    }
+
+    .h2-benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--h2-text-muted);
+      line-height: 1.4;
+    }
+
+    .h2-benefit-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--color-primary);
+      flex-shrink: 0;
+    }
+
+    /* Hero Visual Right Side */
+    .h2-hero-visual-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 440px;
+    }
+
+    .h2-hero-circle-main {
+      width: clamp(280px, 32vw, 400px);
+      height: clamp(280px, 32vw, 400px);
+      border-radius: 50%;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(7, 91, 70, 0.15);
+      border: 8px solid rgba(255, 255, 255, 0.9);
+      overflow: hidden;
+      background: var(--h2-green-light);
+    }
+
+    [data-theme="dark"] .h2-hero-circle-main {
+      border-color: rgba(255, 255, 255, 0.1);
+      background: #102d20;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .h2-hero-circle-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .h2-hero-circle-main:hover img {
+      transform: scale(1.04);
+    }
+
+    /* Floating UI Cards in Hero */
+    .h2-card-float {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 18px;
+      padding: 0.85rem 1.1rem;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+      z-index: 4;
+      animation: h2Float 4s ease-in-out infinite alternate;
+    }
+
+    [data-theme="dark"] .h2-card-float {
+      background: rgba(14, 36, 27, 0.95);
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+    }
+
+    @keyframes h2Float {
+      0% {
+        transform: translateY(0px);
+      }
+
+      100% {
+        transform: translateY(-8px);
+      }
+    }
+
+    /* Top-Right "This Week" Card */
+    .h2-float-this-week {
+      top: -0.5rem;
+      right: -1rem;
+      min-width: 190px;
+      animation-delay: 0.2s;
+    }
+
+    .h2-tw-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .h2-tw-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--h2-text-muted);
+    }
+
+    .h2-tw-indicator {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--h2-green-deep);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+    }
+
+    .h2-tw-days {
+      display: flex;
+      gap: 0.35rem;
+      justify-content: space-between;
+    }
+
+    .h2-tw-day {
+      text-align: center;
+    }
+
+    .h2-tw-day-label {
+      font-size: 0.62rem;
+      font-weight: 600;
+      color: var(--h2-text-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .h2-tw-day-thumb {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      display: block;
+    }
+
+    /* Middle-Right "Nutrition" Card */
+    .h2-float-nutrition {
+      top: 42%;
+      right: -2.5rem;
+      min-width: 155px;
+      animation-delay: 0.6s;
+    }
+
+    .h2-nutri-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .h2-nutri-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      background: var(--h2-green-deep);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+    }
+
+    .h2-nutri-title {
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--h2-text-dark);
+    }
+
+    .h2-nutri-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      font-size: 0.75rem;
+      color: var(--h2-text-muted);
+      font-weight: 500;
+    }
+
+    /* Bottom-Left "Monthly Plan" Card */
+    .h2-float-plan {
+      bottom: 0.5rem;
+      left: -2rem;
+      min-width: 170px;
+      animation-delay: 1s;
+    }
+
+    .h2-plan-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.35rem;
+    }
+
+    .h2-plan-name {
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--h2-text-dark);
+    }
+
+    .h2-plan-status-row {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .h2-plan-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: var(--h2-green-light);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .h2-plan-active-text {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .h2-plan-date {
+      font-size: 0.68rem;
+      color: var(--h2-text-muted);
+    }
+
+    /* Badge Circle "Good Food Brighter Futures" */
+    .h2-badge-green-circle {
+      position: absolute;
+      top: 15%;
+      left: -1.5rem;
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      background: var(--h2-green-deep);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: var(--font-heading);
+      font-size: 0.65rem;
+      font-weight: 700;
+      line-height: 1.25;
+      padding: 0.5rem;
+      box-shadow: 0 10px 25px rgba(7, 91, 70, 0.3);
+      z-index: 5;
+      border: 3px solid rgba(255, 255, 255, 0.9);
+    }
+
+    /* ===================================================
+       2. PROBLEM SECTION ("THE EVERYDAY CHALLENGE")
+       =================================================== */
+    .h2-problem-section {
+      background: var(--bg-page);
+      padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+      position: relative;
+    }
+
+    .h2-sec-head {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 3rem;
+      position: relative;
+    }
+
+    .h2-sec-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 3.8vw, 2.6rem);
+      font-weight: 800;
+      color: var(--h2-text-dark);
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .h2-sec-sub {
+      font-size: 0.98rem;
+      color: var(--h2-text-muted);
+      line-height: 1.7;
+    }
+
+    /* Handwritten note top right of problem section */
+    .h2-problem-doodle-wrap {
+      position: absolute;
+      right: 1.25rem;
+      top: 0.75rem;
+      text-align: center;
+      color: var(--h2-orange);
+      z-index: 2;
+      max-width: 220px;
+    }
+
+    .h2-problem-doodle-wrap .h2-doodle {
+      position: static;
+      display: block;
+      font-size: 1.1rem;
+      line-height: 1.2;
+    }
+
+    .h2-problem-doodle-wrap svg {
+      color: var(--h2-orange);
+    }
+
+    .h2-problem-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+
+    .h2-prob-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 1.75rem 1.4rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .h2-prob-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      border-color: rgba(7, 91, 70, 0.2);
+    }
+
+    .h2-prob-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--h2-green-light);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .h2-prob-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .h2-prob-card-title {
+      font-family: var(--font-heading);
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: var(--h2-orange-deep);
+      margin-bottom: 0.6rem;
+    }
+
+    .h2-prob-card-desc {
+      font-size: 0.85rem;
+      color: var(--h2-text-muted);
+      line-height: 1.65;
+    }
+
+    /* ===================================================
+       3. HOW IT WORKS ("ONE SIMPLE PROCESS")
+       =================================================== */
+    .h2-process-section {
+      background: var(--h2-green-soft);
+      padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+      position: relative;
+    }
+
+    .h2-process-steps-wrap {
+      position: relative;
+      margin-top: 3.5rem;
+    }
+
+    /* Connecting Dotted Line */
+    .h2-process-line {
+      position: absolute;
+      top: 28px;
+      left: 12%;
+      right: 12%;
+      height: 2px;
+      background-image: linear-gradient(to right, var(--color-primary) 40%, rgba(255, 255, 255, 0) 0%);
+      background-position: top;
+      background-size: 10px 2px;
+      background-repeat: repeat-x;
+      z-index: 1;
+      opacity: 0.6;
+    }
+
+    .h2-process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .h2-proc-step {
+      text-align: center;
+      padding: 0 0.5rem;
+    }
+
+    .h2-proc-badge {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 2px solid var(--h2-green-primary);
+      color: var(--h2-green-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.25rem;
+      box-shadow: 0 4px 14px rgba(7, 91, 70, 0.12);
+      transition: transform 0.3s ease;
+    }
+
+    .h2-proc-step:hover .h2-proc-badge {
+      transform: scale(1.1);
+      background: var(--h2-green-primary);
+      color: #fff;
+    }
+
+    .h2-proc-num-pill {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #fff;
+      background: var(--h2-green-deep);
+      padding: 0.15rem 0.6rem;
+      border-radius: 100px;
+      margin-bottom: 0.5rem;
+    }
+
+    .h2-proc-title {
+      font-family: var(--font-heading);
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--h2-text-dark);
+      margin-bottom: 0.45rem;
+    }
+
+    .h2-proc-desc {
+      font-size: 0.84rem;
+      color: var(--h2-text-muted);
+      line-height: 1.6;
+    }
+
+    /* ===================================================
+       4. FEATURES + DASHBOARD ("BUILT FOR BUSY PARENTS")
+       =================================================== */
+    .h2-features-section {
+      background: var(--bg-page);
+      padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+      position: relative;
+    }
+
+    .h2-features-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: center;
+    }
+
+    .h2-feat-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      margin: 2rem 0;
+    }
+
+    .h2-feat-item {
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+    }
+
+    .h2-feat-chk {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--h2-green-deep);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    .h2-feat-chk svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .h2-feat-info strong {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--h2-text-dark);
+      margin-bottom: 0.15rem;
+    }
+
+    .h2-feat-info span {
+      font-size: 0.84rem;
+      color: var(--h2-text-muted);
+      line-height: 1.5;
+    }
+
+    /* Realistic Modern Dashboard Preview Window */
+    .h2-dashboard-mockup {
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      position: relative;
+    }
+
+    [data-theme="dark"] .h2-dashboard-mockup {
+      background: #0d2118;
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    .h2-dash-layout {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      min-height: 380px;
+    }
+
+    .h2-dash-sidebar {
+      background: #092015;
+      padding: 1rem 0.8rem;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .h2-dash-brand {
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .h2-dash-nav-item {
+      font-size: 0.68rem;
+      color: rgba(255, 255, 255, 0.7);
+      padding: 0.4rem 0.6rem;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-weight: 500;
+    }
+
+    .h2-dash-nav-item.active {
+      background: var(--h2-green-deep);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .h2-dash-main {
+      padding: 1.25rem 1.4rem;
+      background: var(--bg-surface-secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    [data-theme="dark"] .h2-dash-main {
+      background: #0b1a13;
+    }
+
+    .h2-dash-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .h2-dash-greeting h4 {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--h2-text-dark);
+      margin: 0;
+    }
+
+    .h2-dash-greeting span {
+      font-size: 0.7rem;
+      color: var(--h2-text-muted);
+    }
+
+    .h2-dash-date {
+      font-size: 0.7rem;
+      color: var(--h2-text-muted);
+      font-weight: 600;
+    }
+
+    /* Dashboard meals row */
+    .h2-dash-meals-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--h2-text-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .h2-dash-meals-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.45rem;
+    }
+
+    .h2-dash-meal-mini {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 10px;
+      padding: 0.4rem;
+      text-align: center;
+    }
+
+    [data-theme="dark"] .h2-dash-meal-mini {
+      background: #12281e;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .h2-dash-meal-day {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: var(--h2-text-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .h2-dash-meal-img {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 0.25rem;
+      display: block;
+    }
+
+    .h2-dash-meal-name {
+      font-size: 0.58rem;
+      font-weight: 700;
+      color: var(--h2-text-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Dashboard 3 bottom widgets */
+    .h2-dash-widgets {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+    }
+
+    .h2-dash-widget {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 12px;
+      padding: 0.75rem;
+    }
+
+    [data-theme="dark"] .h2-dash-widget {
+      background: #12281e;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .h2-dash-w-title {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--h2-text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .h2-dash-w-val {
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--h2-text-dark);
+    }
+
+    .h2-dash-w-sub {
+      font-size: 0.62rem;
+      color: var(--h2-text-muted);
+      margin-top: 0.15rem;
+    }
+
+    .h2-dash-btn-row {
+      display: flex;
+      gap: 0.35rem;
+      margin-top: 0.45rem;
+    }
+
+    .h2-dash-btn-mini {
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .h2-dash-btn-primary {
+      background: var(--h2-green-deep);
+      color: #fff;
+    }
+
+    .h2-dash-btn-ghost {
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--h2-text-muted);
+    }
+
+    [data-theme="dark"] .h2-dash-btn-ghost {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    /* Dashboard Handwritten Doodle */
+    .h2-dash-doodle-wrap {
+      position: absolute;
+      bottom: -2.2rem;
+      right: 2rem;
+      color: var(--h2-green-primary);
+      text-align: right;
+    }
+
+    /* ===================================================
+       5. USE CASES ("DESIGNED FOR EVERYONE")
+       =================================================== */
+    .h2-usecases-section {
+      background: var(--h2-green-soft);
+      padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+      position: relative;
+    }
+
+    .h2-usecase-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .h2-usecase-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .h2-usecase-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.1);
+    }
+
+    .h2-usecase-img-wrap {
+      height: 160px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .h2-usecase-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .h2-usecase-card:hover .h2-usecase-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    .h2-usecase-body {
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .h2-usecase-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .h2-usecase-icon-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--h2-green-light);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .h2-usecase-title {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--h2-text-dark);
+      margin: 0;
+    }
+
+    .h2-usecase-desc {
+      font-size: 0.85rem;
+      color: var(--h2-text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .h2-usecase-cta {
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: gap 0.2s ease;
+    }
+
+    .h2-usecase-cta:hover {
+      gap: 0.55rem;
+      color: var(--h2-green-deep);
+    }
+
+    /* ===================================================
+       6. WEEKLY MENU ("THIS WEEK AT SCHOOLBITE")
+       =================================================== */
+    .h2-menu-section {
+      background: var(--bg-page);
+      padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+      position: relative;
+    }
+
+    .h2-menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .h2-menu-tabs {
+      display: flex;
+      gap: 0.45rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .h2-day-tab {
+      padding: 0.5rem 1.1rem;
+      border-radius: 100px;
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 700;
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-color);
+      color: var(--h2-text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .h2-day-tab:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .h2-day-tab.active {
+      background: var(--h2-green-deep);
+      border-color: var(--h2-green-deep);
+      color: #fff;
+    }
+
+    .h2-menu-meal-circle {
+      width: clamp(220px, 24vw, 300px);
+      height: clamp(220px, 24vw, 300px);
+      border-radius: 50%;
+      margin: 0 auto;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+      border: 6px solid #fff;
+      overflow: hidden;
+      position: relative;
+    }
+
+    [data-theme="dark"] .h2-menu-meal-circle {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .h2-menu-meal-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .h2-menu-info-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 1.75rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    }
+
+    .h2-menu-meal-title {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--h2-text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .h2-menu-meal-desc {
+      font-size: 0.88rem;
+      color: var(--h2-text-muted);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+    }
+
+    .h2-menu-tags-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .h2-menu-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      background: var(--h2-green-light);
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    /* Side Trust Card in Menu */
+    .h2-menu-side-card {
+      background: var(--h2-green-light);
+      border-radius: 16px;
+      padding: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .h2-msc-title {
+      font-family: var(--font-heading);
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--h2-green-deep);
+      margin-bottom: 0.6rem;
+    }
+
+    .h2-msc-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--h2-green-deep);
+    }
+
+    /* ===================================================
+       7. TESTIMONIALS ("PARENT STORIES")
+       =================================================== */
+    .h2-testi-section {
+      background: var(--h2-green-soft);
+      padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+      position: relative;
+    }
+
+    .h2-testi-head-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .h2-testi-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .h2-testi-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 1.85rem 1.6rem;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+
+    .h2-testi-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+    }
+
+    .h2-testi-quote {
+      font-size: 0.92rem;
+      color: var(--h2-text-dark);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .h2-testi-author-row {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .h2-testi-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .h2-testi-author-name {
+      font-family: var(--font-heading);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--h2-text-dark);
+    }
+
+    .h2-testi-author-sub {
+      font-size: 0.75rem;
+      color: var(--h2-text-muted);
+    }
+
+    .h2-testi-stars {
+      display: flex;
+      gap: 0.2rem;
+      color: var(--h2-orange);
+      margin-top: 0.4rem;
+    }
+
+    .h2-testi-stars svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--h2-orange);
+    }
+
+    .h2-testi-dots {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 2.5rem;
+    }
+
+    .h2-testi-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border-color);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .h2-testi-dot.active {
+      width: 24px;
+      border-radius: 100px;
+      background: var(--h2-green-deep);
+    }
+
+    /* ===================================================
+       8. FINAL CTA SECTION ("READY TO MAKE MEALTIMES EASIER?")
+       =================================================== */
+    .h2-final-cta-section {
+      padding: clamp(3rem, 6vw, 5rem) 0;
+      background: var(--bg-page);
+    }
+
+    .h2-final-cta-box {
+      background: var(--color-dark-bg);
+      border-radius: 32px;
+      padding: clamp(2.5rem, 5vw, 4.5rem);
+      color: var(--color-dark-text-primary);
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2.5rem;
+      align-items: center;
+      box-shadow: 0 24px 64px rgba(9, 38, 23, 0.3);
+    }
+
+    .h2-final-cta-box::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(76, 175, 80, 0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .h2-cta-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-dark-bright-green);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .h2-cta-main-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 1.1rem;
+    }
+
+    .h2-cta-main-sub {
+      font-size: 0.98rem;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.7;
+      max-width: 460px;
+      margin-bottom: 2rem;
+    }
+
+    .h2-cta-btns-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-cta-orange {
+      background: var(--color-primary);
+      color: #FFFFFF;
+      padding: 0.85rem 1.8rem;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .btn-cta-orange:hover {
+      background: var(--color-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(7, 91, 70, 0.28);
+    }
+
+    .btn-cta-outline-white {
+      background: var(--color-dark-surface);
+      color: var(--color-dark-text-secondary);
+      padding: 0.85rem 1.8rem;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      border: 1.5px solid var(--color-dark-border);
+      transition: all 0.25s ease;
+    }
+
+    .btn-cta-outline-white:hover {
+      border-color: var(--color-dark-bright-green);
+      background: var(--color-dark-surface-alt);
+      color: var(--color-dark-text-primary);
+      transform: translateY(-2px);
+    }
+
+    /* CTA Visual */
+    .h2-cta-visual-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .h2-cta-child-circle {
+      width: clamp(220px, 25vw, 320px);
+      height: clamp(220px, 25vw, 320px);
+      border-radius: 50%;
+      border: 6px solid rgba(255, 255, 255, 0.2);
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .h2-cta-child-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .h2-cta-doodle-text {
+      position: absolute;
+      top: 5%;
+      left: -2.5rem;
+      font-family: var(--font-doodle);
+      color: var(--color-dark-bright-green);
+      font-size: 1.4rem;
+      line-height: 1.2;
+      text-align: center;
+      transform: rotate(-10deg);
+    }
+
+    /* ===================================================
+       RESPONSIVE BREAKPOINTS
+       =================================================== */
+    @media (max-width: 1100px) {
+      .h2-problem-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .h2-usecase-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .h2-menu-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .h2-menu-grid> :nth-child(3) {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .h2-hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .h2-hero-sub {
+        margin: 0 auto 2rem;
+      }
+
+      .h2-hero-btns {
+        justify-content: center;
+      }
+
+      .h2-hero-benefits {
+        justify-content: center;
+      }
+
+      .h2-hero-visual-wrap {
+        margin-top: 1.5rem;
+      }
+
+      .h2-features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .h2-process-line {
+        display: none;
+      }
+
+      .h2-process-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+
+      .h2-testi-cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .h2-final-cta-box {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .h2-cta-btns-row {
+        justify-content: center;
+      }
+
+      .h2-cta-doodle-text {
+        position: static;
+        transform: none;
+        margin-bottom: 1rem;
+      }
+
+      .h2-problem-doodle-wrap {
+        position: static;
+        margin: 0 auto 1rem;
+        max-width: 260px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .h2-problem-cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .h2-process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .h2-usecase-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .h2-menu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .h2-menu-grid> :nth-child(3) {
+        grid-column: auto;
+      }
+
+      .h2-card-float {
+        position: static;
+        margin: 0.5rem auto;
+        width: 100%;
+        max-width: 260px;
+        animation: none;
+      }
+
+      .h2-problem-doodle-wrap {
+        position: static;
+        margin: 0.75rem auto 0;
+        max-width: 230px;
+      }
+
+      .h2-problem-doodle-wrap .h2-doodle {
+        font-size: 1rem;
+      }
+
+      .h2-badge-green-circle {
+        position: static;
+        margin: 0.5rem auto;
+      }
+
+      .h2-dash-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .h2-dash-sidebar {
+        display: none;
+      }
+
+      .h2-dash-widgets {
+        grid-template-columns: 1fr;
+      }
+
+      .h2-dash-meals-row {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Site Header Mount -->
+  <div id="site-header-mount"></div>
+
+  <main id="main-content">
+
+    <!-- ===================================================
+         1. HERO SECTION
+         =================================================== -->
+    <section class="h2-hero-section" aria-label="Hero">
+      <!-- Decorative Leaves -->
+      <svg class="h2-leaf-decor" style="top: 5%; left: 3%; width: 42px; transform: rotate(-25deg);" viewBox="0 0 40 60"
+        fill="none">
+        <path d="M20 55 C10 40, 2 25, 5 10 C8 0, 20 0, 30 8 C38 15, 35 35, 20 55Z" fill="var(--color-primary)" opacity="0.6" />
+      </svg>
+      <svg class="h2-leaf-decor" style="top: 12%; right: 4%; width: 36px; transform: rotate(45deg);" viewBox="0 0 40 60"
+        fill="none">
+        <path d="M20 55 C10 40, 2 25, 5 10 C8 0, 20 0, 30 8 C38 15, 35 35, 20 55Z" fill="var(--color-secondary)" opacity="0.7" />
+      </svg>
+
+      <div class="container">
+        <div class="h2-hero-grid">
+
+          <!-- Left Column -->
+          <div class="h2-hero-content reveal">
+            <span class="h2-pill-eyebrow">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+              SCHOOL MEALS, MADE SIMPLE
+            </span>
+            <h1 class="h2-hero-title">
+              Better Meals.<br />
+              Smarter Choices.<br />
+              <span class="text-orange">Happier Parents.</span>
+            </h1>
+            <p class="h2-hero-sub">
+              SchoolBite makes school meals easier to plan, personalize and manage — with nutritious menus, flexible
+              subscriptions and convenient meal choices for every school day.
+            </p>
+            <div class="h2-hero-btns">
+              <a href="#how-it-works" class="btn-h2-primary" id="h2-hero-explore">
+                <span>Explore How It Works</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a href="#weekly-menu" class="btn-h2-outline" id="h2-hero-plans">
+                <span>View Meal Plans</span>
+              </a>
+            </div>
+            <div class="h2-hero-benefits">
+              <div class="h2-benefit-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                </svg>
+                <span>Nutritious Meals</span>
+              </div>
+              <div class="h2-benefit-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <rect width="18" height="18" x="3" y="4" rx="2" />
+                  <line x1="3" x2="21" y1="10" y2="10" />
+                </svg>
+                <span>Flexible Plans</span>
+              </div>
+              <div class="h2-benefit-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+                <span>Easy Management</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column (Hero Visual) -->
+          <div class="h2-hero-visual-wrap reveal reveal-delay-1">
+
+            <!-- Circular Child Portrait -->
+            <div class="h2-hero-circle-main">
+              <img src="assets/images/hero_girl_lunchbox.jpg"
+                alt="Happy school child with a healthy fresh SchoolBite tiffin" loading="eager" />
+            </div>
+
+            <!-- "Good Food Brighter Futures" Badge -->
+            <div class="h2-badge-green-circle" aria-hidden="true">
+              <span>Good Food<br /><strong>Brighter<br />Futures</strong></span>
+            </div>
+
+            <!-- Floating Card: This Week -->
+            <div class="h2-card-float h2-float-this-week">
+              <div class="h2-tw-head">
+                <span class="h2-tw-title">This Week</span>
+                <div class="h2-tw-indicator">✓</div>
+              </div>
+              <div class="h2-tw-days">
+                <div class="h2-tw-day">
+                  <div class="h2-tw-day-label">Mon</div>
+                  <img src="assets/images/meal_monday_idli.jpg" alt="Monday meal" class="h2-tw-day-thumb" />
+                </div>
+                <div class="h2-tw-day">
+                  <div class="h2-tw-day-label">Tue</div>
+                  <img src="assets/images/meal_tuesday_dosa.jpg" alt="Tuesday meal" class="h2-tw-day-thumb" />
+                </div>
+                <div class="h2-tw-day">
+                  <div class="h2-tw-day-label">Wed</div>
+                  <img src="assets/images/meal_wednesday_rice.jpg" alt="Wednesday meal" class="h2-tw-day-thumb" />
+                </div>
+                <div class="h2-tw-day">
+                  <div class="h2-tw-day-label">Thu</div>
+                  <img src="assets/images/meal_thursday_chapati.jpg" alt="Thursday meal" class="h2-tw-day-thumb" />
+                </div>
+                <div class="h2-tw-day">
+                  <div class="h2-tw-day-label">Fri</div>
+                  <img src="assets/images/meal_friday_noodles.jpg" alt="Friday meal" class="h2-tw-day-thumb" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating Card: Nutrition -->
+            <div class="h2-card-float h2-float-nutrition">
+              <div class="h2-nutri-header">
+                <div class="h2-nutri-icon">🌿</div>
+                <div class="h2-nutri-title">Nutrition</div>
+              </div>
+              <div class="h2-nutri-list">
+                <div>• <strong>420 kcal</strong></div>
+                <div>• <strong>12g</strong> Protein</div>
+                <div>• <strong>8g</strong> Fiber</div>
+                <div>• <strong>100%</strong> Veg</div>
+              </div>
+            </div>
+
+            <!-- Floating Card: Monthly Plan -->
+            <div class="h2-card-float h2-float-plan">
+              <div class="h2-plan-header">
+                <span class="h2-plan-name">Monthly Plan</span>
+                <span style="font-size:0.65rem; color:#888;">▼</span>
+              </div>
+              <div class="h2-plan-status-row">
+                <div class="h2-plan-icon">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <rect width="18" height="18" x="3" y="4" rx="2" />
+                    <line x1="16" x2="16" y1="2" y2="6" />
+                    <line x1="8" x2="8" y1="2" y2="6" />
+                    <line x1="3" x2="21" y1="10" y2="10" />
+                  </svg>
+                </div>
+                <span class="h2-plan-active-text">Active</span>
+              </div>
+              <div class="h2-plan-date">Next billing: Oct 05, 2025</div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         2. PROBLEM SECTION ("THE EVERYDAY CHALLENGE")
+         =================================================== -->
+    <section class="h2-problem-section" id="problem" aria-label="The Everyday Challenge">
+      <div class="container" style="position: relative;">
+
+        <!-- Header -->
+        <div class="h2-sec-head reveal">
+          <span class="h2-pill-eyebrow">The Everyday Challenge</span>
+          <h2 class="h2-sec-title">School Meals Shouldn't Be a Daily Guess.</h2>
+          <p class="h2-sec-sub">
+            Managing your child's meals can be challenging. SchoolBite brings meal planning, nutrition, subscriptions and delivery together in one simple place.
+          </p>
+
+          <!-- Hand-drawn Doodle Note -->
+          <div class="h2-problem-doodle-wrap" aria-hidden="true">
+            <span class="h2-doodle" style="position:static; display:block;">From Challenges<br />to a Simple Solution
+              ☺</span>
+          </div>
+        </div>
+
+        <!-- 4 Cards Grid -->
+        <div class="h2-problem-cards-grid">
+          <!-- Card 1 -->
+          <div class="h2-prob-card reveal">
+            <div class="h2-prob-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect width="18" height="18" x="3" y="4" rx="2" />
+                <line x1="16" x2="16" y1="2" y2="6" />
+                <line x1="8" x2="8" y1="2" y2="6" />
+                <line x1="3" x2="21" y1="10" y2="10" />
+              </svg>
+            </div>
+            <h3 class="h2-prob-card-title">Daily Meal Decisions</h3>
+            <p class="h2-prob-card-desc">Planning what your child will eat every day takes time and effort.</p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="h2-prob-card reveal reveal-delay-1">
+            <div class="h2-prob-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </div>
+            <h3 class="h2-prob-card-title">Limited Menu Visibility</h3>
+            <p class="h2-prob-card-desc">Parents need a clear view of what's being served before the week begins.</p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="h2-prob-card reveal reveal-delay-2">
+            <div class="h2-prob-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="4" x2="20" y1="21" y2="21" />
+                <line x1="4" x2="20" y1="14" y2="14" />
+                <line x1="4" x2="20" y1="7" y2="7" />
+                <circle cx="8" cy="7" r="2" />
+                <circle cx="16" cy="14" r="2" />
+                <circle cx="10" cy="21" r="2" />
+              </svg>
+            </div>
+            <h3 class="h2-prob-card-title">Changing Preferences</h3>
+            <p class="h2-prob-card-desc">Children's tastes and dietary needs can change frequently.</p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="h2-prob-card reveal reveal-delay-3">
+            <div class="h2-prob-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <h3 class="h2-prob-card-title">Subscription Hassle</h3>
+            <p class="h2-prob-card-desc">Managing recurring meals and payments shouldn't become a constant task.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================
+         3. HOW IT WORKS / SOLUTION
+         =================================================== -->
+    <section class="h2-process-section" id="how-it-works" aria-label="How It Works">
+      <div class="container">
+
+        <div class="h2-sec-head reveal">
+          <span class="h2-pill-eyebrow">How It Works</span>
+          <h2 class="h2-sec-title">Everything Parents Need for Better School Meals.</h2>
+          <p class="h2-sec-sub">
+            Add your child's details, choose meals and manage every school-day detail from one simple place.
+          </p>
+        </div>
+
+        <div class="h2-process-steps-wrap">
+          <div class="h2-process-line"></div>
+
+          <div class="h2-process-grid">
+            <!-- Step 1 -->
+            <div class="h2-proc-step reveal">
+              <div class="h2-proc-badge">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect width="18" height="18" x="3" y="4" rx="2" />
+                  <line x1="16" x2="16" y1="2" y2="6" />
+                  <line x1="8" x2="8" y1="2" y2="6" />
+                  <line x1="3" x2="21" y1="10" y2="10" />
+                </svg>
+              </div>
+              <span class="h2-proc-num-pill">01</span>
+              <h3 class="h2-proc-title">Add Your Child</h3>
+              <p class="h2-proc-desc">Create your child's profile with school, class, dietary preferences and allergy information.</p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="h2-proc-step reveal reveal-delay-1">
+              <div class="h2-proc-badge">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 20h9" />
+                  <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z" />
+                </svg>
+              </div>
+              <span class="h2-proc-num-pill">02</span>
+              <h3 class="h2-proc-title">Explore Weekly Menus</h3>
+              <p class="h2-proc-desc">View upcoming meals and choose meals that suit your child's preferences.</p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="h2-proc-step reveal reveal-delay-2">
+              <div class="h2-proc-badge">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M8 2v4" />
+                  <path d="M16 2v4" />
+                  <rect width="18" height="18" x="3" y="4" rx="2" />
+                  <path d="M3 10h18" />
+                  <path d="m9 16 2 2 4-4" />
+                </svg>
+              </div>
+              <span class="h2-proc-num-pill">03</span>
+              <h3 class="h2-proc-title">Choose a Meal Plan</h3>
+              <p class="h2-proc-desc">Select a suitable meal subscription based on your family's needs.</p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="h2-proc-step reveal reveal-delay-3">
+              <div class="h2-proc-badge">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+              </div>
+              <span class="h2-proc-num-pill">04</span>
+              <h3 class="h2-proc-title">Manage Everything Easily</h3>
+              <p class="h2-proc-desc">Manage meals, subscriptions, payments and delivery from your Parent Dashboard.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================
+         4. FEATURES + DASHBOARD ("BUILT FOR BUSY PARENTS")
+         =================================================== -->
+    <section class="h2-features-section" id="features" aria-label="Built for Busy Parents">
+      <div class="container">
+        <div class="h2-features-grid">
+
+          <!-- Left Column (Features List) -->
+          <div class="reveal">
+            <span class="h2-pill-eyebrow">Parent Benefits</span>
+            <h2 class="h2-sec-title">Less Planning. Better Meals. Happier Kids.</h2>
+            <p class="h2-sec-sub">
+              Everything you need to make nutritious school-day meals simple to plan and manage.
+            </p>
+
+            <div class="h2-feat-list">
+              <div class="h2-feat-item">
+                <div class="h2-feat-chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg></div>
+                <div class="h2-feat-info">
+                  <strong>Nutritious school-day meals</strong>
+                  <span>Balanced meals planned for every school day.</span>
+                </div>
+              </div>
+
+              <div class="h2-feat-item">
+                <div class="h2-feat-chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg></div>
+                <div class="h2-feat-info">
+                  <strong>Easy weekly menu planning</strong>
+                  <span>See and organize your child's meals for the entire week.</span>
+                </div>
+              </div>
+
+              <div class="h2-feat-item">
+                <div class="h2-feat-chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg></div>
+                <div class="h2-feat-info">
+                  <strong>Personalized child preferences</strong>
+                  <span>Choose meals around preferences and dietary needs.</span>
+                </div>
+              </div>
+
+              <div class="h2-feat-item">
+                <div class="h2-feat-chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg></div>
+                <div class="h2-feat-info">
+                  <strong>Flexible subscriptions</strong>
+                  <span>Select a plan that fits your family's schedule.</span>
+                </div>
+              </div>
+
+              <div class="h2-feat-item">
+                <div class="h2-feat-chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg></div>
+                <div class="h2-feat-info">
+                  <strong>Simple online payments</strong>
+                  <span>Manage safe, straightforward billing in one place.</span>
+                </div>
+              </div>
+
+              <div class="h2-feat-item">
+                <div class="h2-feat-chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg></div>
+                <div class="h2-feat-info">
+                  <strong>Delivery tracking</strong>
+                  <span>Stay informed about every school-day delivery.</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="#" class="btn-h2-primary" id="h2-dashboard-cta" data-modal-target="login-modal" data-dashboard-cta>
+              <span>Go to Dashboard</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+
+          <!-- Right Column (Dashboard Window Preview) -->
+          <div class="reveal reveal-delay-1" style="position: relative;">
+            <div style="margin-bottom: 1.5rem;">
+              <span class="h2-pill-eyebrow">Parent Dashboard</span>
+              <h2 class="h2-sec-title">Your Child's Meals, All in One Place.</h2>
+              <p class="h2-sec-sub">
+                Manage your children's profiles, weekly menus, subscriptions, payments and deliveries from one convenient Parent Dashboard.
+              </p>
+            </div>
+            <div class="h2-dashboard-mockup">
+              <div class="h2-dash-layout">
+
+                <!-- Sidebar -->
+                <div class="h2-dash-sidebar">
+                  <div class="h2-dash-brand">
+                    <span>🌿</span> SchoolBite
+                  </div>
+                  <div class="h2-dash-nav-item active">📊 Dashboard</div>
+                  <div class="h2-dash-nav-item">👶 My Children</div>
+                  <div class="h2-dash-nav-item">📅 Weekly Menu</div>
+                  <div class="h2-dash-nav-item">🥗 Preferences</div>
+                  <div class="h2-dash-nav-item">💳 Payments</div>
+                  <div class="h2-dash-nav-item">⚙️ Settings</div>
+                </div>
+
+                <!-- Main View -->
+                <div class="h2-dash-main">
+                  <!-- Greeting Row -->
+                  <div class="h2-dash-top">
+                    <div class="h2-dash-greeting">
+                      <h4>Good Morning, Priya!</h4>
+                      <span>Healthy meals create brighter futures.</span>
+                    </div>
+                    <div class="h2-dash-date">Mon, Sep 22, 2025</div>
+                  </div>
+
+                  <!-- This Week's Meals Row -->
+                  <div>
+                    <div class="h2-dash-meals-title">This Week's Meals</div>
+                    <div class="h2-dash-meals-row">
+                      <div class="h2-dash-meal-mini">
+                        <div class="h2-dash-meal-day">Mon</div>
+                        <img src="assets/images/meal_monday_idli.jpg" alt="Idli" class="h2-dash-meal-img" />
+                        <div class="h2-dash-meal-name">Idli Bowl</div>
+                      </div>
+                      <div class="h2-dash-meal-mini">
+                        <div class="h2-dash-meal-day">Tue</div>
+                        <img src="assets/images/meal_tuesday_dosa.jpg" alt="Dosa" class="h2-dash-meal-img" />
+                        <div class="h2-dash-meal-name">Dosa Roll</div>
+                      </div>
+                      <div class="h2-dash-meal-mini">
+                        <div class="h2-dash-meal-day">Wed</div>
+                        <img src="assets/images/meal_wednesday_rice.jpg" alt="Rice" class="h2-dash-meal-img" />
+                        <div class="h2-dash-meal-name">Veg Rice</div>
+                      </div>
+                      <div class="h2-dash-meal-mini">
+                        <div class="h2-dash-meal-day">Thu</div>
+                        <img src="assets/images/meal_thursday_chapati.jpg" alt="Chapati" class="h2-dash-meal-img" />
+                        <div class="h2-dash-meal-name">Chapati</div>
+                      </div>
+                      <div class="h2-dash-meal-mini">
+                        <div class="h2-dash-meal-day">Fri</div>
+                        <img src="assets/images/meal_friday_noodles.jpg" alt="Noodles" class="h2-dash-meal-img" />
+                        <div class="h2-dash-meal-name">Noodles</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Widgets Row -->
+                  <div class="h2-dash-widgets">
+                    <!-- Widget 1: Subscription -->
+                    <div class="h2-dash-widget">
+                      <div class="h2-dash-w-title">Active Plan</div>
+                      <div class="h2-dash-w-val">Monthly Plan</div>
+                      <div class="h2-dash-w-sub">Next: Oct 05, 2025</div>
+                      <div class="h2-dash-btn-row">
+                        <button class="h2-dash-btn-mini h2-dash-btn-primary">Manage</button>
+                      </div>
+                    </div>
+
+                    <!-- Widget 2: Child Profile -->
+                    <div class="h2-dash-widget">
+                      <div class="h2-dash-w-title">Child Profile</div>
+                      <div class="h2-dash-w-val">Aarav (Class 5)</div>
+                      <div class="h2-dash-w-sub">100% Vegetarian</div>
+                      <div class="h2-dash-btn-row">
+                        <button class="h2-dash-btn-mini h2-dash-btn-ghost">Edit</button>
+                      </div>
+                    </div>
+
+                    <!-- Widget 3: Payment -->
+                    <div class="h2-dash-widget">
+                      <div class="h2-dash-w-title">Recent Payment</div>
+                      <div class="h2-dash-w-val">₹1,799</div>
+                      <div class="h2-dash-w-sub">Paid on Sep 05</div>
+                      <div class="h2-dash-btn-row">
+                        <button class="h2-dash-btn-mini h2-dash-btn-ghost">Receipt</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Handwritten Note -->
+            <div class="h2-dash-doodle-wrap" aria-hidden="true">
+              <span class="h2-doodle">Your Meal Control Center ⤵</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         5. PARENT BENEFITS
+         =================================================== -->
+    <section class="h2-usecases-section" id="parent-benefits" aria-label="Parent Benefits">
+      <div class="container">
+
+        <div class="h2-sec-head reveal">
+          <span class="h2-pill-eyebrow">Parent Benefits</span>
+          <h2 class="h2-sec-title">School Meals That Fit Your Family.</h2>
+          <p class="h2-sec-sub">
+            SchoolBite keeps your child's meals, preferences and plan easy to manage from one place.
+          </p>
+        </div>
+
+        <div class="h2-usecase-grid">
+          <!-- Parent-focused benefits -->
+          <div class="h2-usecase-card reveal">
+            <div class="h2-usecase-img-wrap">
+              <img src="assets/images/usecase_parents.jpg" alt="Mother and daughter enjoying healthy meal"
+                loading="lazy" />
+            </div>
+            <div class="h2-usecase-body">
+              <div class="h2-usecase-header">
+                <div class="h2-usecase-icon-badge">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                </div>
+                <h3 class="h2-usecase-title">Nutritious Meals</h3>
+              </div>
+              <p class="h2-usecase-desc">Nutritious school-day meals planned with your family in mind.</p>
+              <a href="pricing.html" class="h2-usecase-cta">View Meal Plans →</a>
+            </div>
+          </div>
+
+          <!-- 2. Menu planning -->
+          <div class="h2-usecase-card reveal reveal-delay-1">
+            <div class="h2-usecase-img-wrap">
+              <img src="assets/images/usecase_children.jpg" alt="Happy school children enjoying tiffins"
+                loading="lazy" />
+            </div>
+            <div class="h2-usecase-body">
+              <div class="h2-usecase-header">
+                <div class="h2-usecase-icon-badge">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                </div>
+                <h3 class="h2-usecase-title">Weekly Planning</h3>
+              </div>
+              <p class="h2-usecase-desc">See upcoming meals and make choices before the school week begins.</p>
+              <a href="#weekly-menu" class="h2-usecase-cta">See Weekly Menus →</a>
+            </div>
+          </div>
+
+          <!-- 3. Personalization -->
+          <div class="h2-usecase-card reveal reveal-delay-2">
+            <div class="h2-usecase-img-wrap">
+              <img src="assets/images/usecase_schools.jpg" alt="Modern school campus building" loading="lazy" />
+            </div>
+            <div class="h2-usecase-body">
+              <div class="h2-usecase-header">
+                <div class="h2-usecase-icon-badge">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 21h18" />
+                    <path d="M5 21V7l8-4 8 4v14" />
+                    <path d="M9 10h1" />
+                    <path d="M9 14h1" />
+                    <path d="M9 18h1" />
+                    <path d="M14 10h1" />
+                    <path d="M14 14h1" />
+                    <path d="M14 18h1" />
+                  </svg>
+                </div>
+                <h3 class="h2-usecase-title">Personal Preferences</h3>
+              </div>
+              <p class="h2-usecase-desc">Keep dietary preferences and allergy information close at hand.</p>
+              <a href="dashboard/children.html" class="h2-usecase-cta">Add Your Child →</a>
+            </div>
+          </div>
+
+          <!-- 4. Flexible plans -->
+          <div class="h2-usecase-card reveal reveal-delay-3">
+            <div class="h2-usecase-img-wrap">
+              <img src="assets/images/usecase_chef.jpg" alt="Professional chef preparing healthy meals"
+                loading="lazy" />
+            </div>
+            <div class="h2-usecase-body">
+              <div class="h2-usecase-header">
+                <div class="h2-usecase-icon-badge">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z" />
+                  </svg>
+                </div>
+                <h3 class="h2-usecase-title">Flexible Subscriptions</h3>
+              </div>
+              <p class="h2-usecase-desc">Choose a subscription that works for your family's needs.</p>
+              <a href="pricing.html" class="h2-usecase-cta">Compare Plans →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================
+         6. WEEKLY MENU SECTION ("THIS WEEK AT SCHOOLBITE")
+         =================================================== -->
+    <section class="h2-menu-section" id="weekly-menu" aria-label="This Week at SchoolBite">
+      <div class="container">
+
+        <div class="h2-menu-grid">
+
+          <!-- Left Column (Heading & Tabs) -->
+          <div class="reveal">
+            <span class="h2-pill-eyebrow">This Week at SchoolBite</span>
+            <h2 class="h2-sec-title">See What's Coming<br />to the Lunchbox.</h2>
+            <p class="h2-sec-sub">
+              Nutritious, delicious and thoughtfully planned meals for the week.
+            </p>
+
+            <div class="h2-menu-tabs" id="h2-menu-tabs">
+              <button class="h2-day-tab active" data-day="Mon">Mon</button>
+              <button class="h2-day-tab" data-day="Tue">Tue</button>
+              <button class="h2-day-tab" data-day="Wed">Wed</button>
+              <button class="h2-day-tab" data-day="Thu">Thu</button>
+              <button class="h2-day-tab" data-day="Fri">Fri</button>
+            </div>
+          </div>
+
+          <!-- Center Column (Meal Circular Photo) -->
+          <div class="reveal reveal-delay-1" style="text-align: center;">
+            <div class="h2-menu-meal-circle">
+              <img id="h2-meal-img" src="assets/images/meal_monday_idli.jpg" alt="Selected daily meal" />
+            </div>
+          </div>
+
+          <!-- Right Column (Meal Details & Side Info Card) -->
+          <div class="reveal reveal-delay-2">
+            <div class="h2-menu-info-card">
+              <h3 class="h2-menu-meal-title" id="h2-meal-name">Steamed Idli &amp; Sambar Bowl</h3>
+              <p class="h2-menu-meal-desc" id="h2-meal-desc">
+                Soft steamed rice cakes served with protein-rich lentil vegetable sambar and fresh coconut chutney.
+              </p>
+              <div class="h2-menu-tags-row" id="h2-meal-tags">
+                <span class="h2-menu-tag">🔥 380 kcal</span>
+                <span class="h2-menu-tag">🌱 Vegetarian</span>
+                <span class="h2-menu-tag">🌾 High Fiber</span>
+              </div>
+              <a href="pricing.html" class="btn-h2-primary" style="width: 100%; justify-content: center;">
+                <span>Select This Meal</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+
+            <!-- Side Trust Card -->
+            <div class="h2-menu-side-card">
+              <div class="h2-msc-title">Fresh Ingredients • Brighter Days</div>
+              <div class="h2-msc-list">
+                <div>✓ No Artificial Preservatives</div>
+                <div>✓ Balanced Nutrition &amp; Whole Grains</div>
+                <div>✓ 100% Kid-Approved Taste</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================
+         7. TESTIMONIAL SECTION ("PARENT STORIES")
+         =================================================== -->
+    <section class="h2-testi-section" id="testimonials" aria-label="Parent Stories">
+      <div class="container">
+
+        <div class="h2-testi-head-row reveal">
+          <div>
+            <span class="h2-pill-eyebrow">Parent Stories</span>
+            <h2 class="h2-sec-title">What Parents Say About SchoolBite.</h2>
+          </div>
+          <p class="h2-sec-sub" style="max-width: 380px;">
+            Real feedback from families who choose healthier school meals every day.
+          </p>
+        </div>
+
+        <div class="h2-testi-cards-grid">
+          <!-- Card 1 -->
+          <div class="h2-testi-card reveal">
+            <p class="h2-testi-quote">
+              “SchoolBite has made planning my daughter's meals so much easier. I can see the menu in advance and make
+              choices without worrying every morning.”
+            </p>
+            <div class="h2-testi-author-row">
+              <img src="assets/images/team_priya_sharma.jpg" alt="Parent review" class="h2-testi-avatar" />
+              <div>
+                <div class="h2-testi-author-name">Deepa R.</div>
+                <div class="h2-testi-author-sub">Parent of a Grade 5 Student</div>
+                <div class="h2-testi-stars">
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="h2-testi-card reveal reveal-delay-1">
+            <p class="h2-testi-quote">
+              “The subscription system is simple and hassle-free. My son looks forward to his lunch every day, and I
+              love the thermal stainless containers.”
+            </p>
+            <div class="h2-testi-author-row">
+              <img src="assets/images/team_rahul_mehta.jpg" alt="Parent review" class="h2-testi-avatar" />
+              <div>
+                <div class="h2-testi-author-name">Karthik S.</div>
+                <div class="h2-testi-author-sub">Parent of a Grade 3 Student</div>
+                <div class="h2-testi-stars">
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="h2-testi-card reveal reveal-delay-2">
+            <p class="h2-testi-quote">
+              “Healthy, tasty and convenient. It's everything I was looking for in a school meal service. Aarav cleans
+              his lunchbox completely!”
+            </p>
+            <div class="h2-testi-author-row">
+              <img src="assets/images/team_sneha_iyer.jpg" alt="Parent review" class="h2-testi-avatar" />
+              <div>
+                <div class="h2-testi-author-name">Ananya V.</div>
+                <div class="h2-testi-author-sub">Parent of a Grade 6 Student</div>
+                <div class="h2-testi-stars">
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carousel Dots -->
+
+
+      </div>
+    </section>
+
+    <!-- ===================================================
+         8. FINAL CTA SECTION ("READY TO MAKE MEALTIMES EASIER?")
+         =================================================== -->
+    <section class="h2-final-cta-section" aria-label="Final Call to Action">
+      <div class="container">
+        <div class="h2-final-cta-box reveal">
+
+          <!-- Left Copy -->
+          <div>
+            <span class="h2-cta-eyebrow">Ready to Make Mealtimes Easier?</span>
+            <h2 class="h2-cta-main-title">Ready to Make School<br />Mealtimes Easier?</h2>
+            <p class="h2-cta-main-sub">
+              Give your child nutritious meals while keeping everything simple to manage.
+            </p>
+            <div class="h2-cta-btns-row">
+              <a href="pricing.html" class="btn-cta-orange" id="h2-cta-start-btn">
+                <span>Get Started</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a href="pricing.html" class="btn-cta-outline-white" id="h2-cta-plans-btn">
+                <span>View Meal Plans</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Visual -->
+          <div class="h2-cta-visual-wrap">
+            <div class="h2-cta-doodle-text" aria-hidden="true">
+              Healthy Kids<br /><strong>Brighter Futures ⤵</strong>
+            </div>
+
+            <div class="h2-cta-child-circle">
+              <img src="assets/images/cta_child_thumbsup.jpg" alt="Happy school child thumbs up with SchoolBite meal" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Site Footer Mount -->
+  <div id="site-footer-mount"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/script.js"></script>
+
+  <!-- Interactive Day Tabs Script for Home 2 Menu Section -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Meal data mapping for interactive day tabs
+      const dailyMeals = {
+        Mon: {
+          name: "Steamed Idli & Sambar Bowl",
+          desc: "Soft steamed rice cakes served with protein-rich lentil vegetable sambar and fresh coconut chutney.",
+          calories: "380 kcal",
+          dietary: "Vegetarian",
+          tag: "High Fiber",
+          img: "assets/images/meal_monday_idli.jpg"
+        },
+        Tue: {
+          name: "Crispy Masala Dosa & Chutney",
+          desc: "Golden whole-grain dosa filled with spiced potato masala, paired with mint chutney and warm sambar.",
+          calories: "420 kcal",
+          dietary: "Vegetarian",
+          tag: "Low GI",
+          img: "assets/images/meal_tuesday_dosa.jpg"
+        },
+        Wed: {
+          name: "Wholesome Rice & Tadka Dal Bowl",
+          desc: "Fragrant steamed basmati rice paired with yellow lentils, tempered with cumin, and farm-fresh spinach.",
+          calories: "450 kcal",
+          dietary: "Vegetarian",
+          tag: "Protein Rich",
+          img: "assets/images/meal_wednesday_rice.jpg"
+        },
+        Thu: {
+          name: "Whole Wheat Chapati & Veg Curry",
+          desc: "Two soft warm chapatis with rich seasonal mixed vegetable curry and crisp cucumber carrot salad.",
+          calories: "410 kcal",
+          dietary: "Vegetarian",
+          tag: "Iron & Zinc",
+          img: "assets/images/meal_thursday_chapati.jpg"
+        },
+        Fri: {
+          name: "Rainbow Veg Hakka Noodles Bowl",
+          desc: "Whole-wheat noodles tossed with crunchy bell peppers, cabbage, carrots, and baked veggie spring rolls.",
+          calories: "430 kcal",
+          dietary: "Vegetarian",
+          tag: "Kid Approved",
+          img: "assets/images/meal_friday_noodles.jpg"
+        }
+      };
+
+      const tabs = document.querySelectorAll('.h2-day-tab');
+      const mealImg = document.getElementById('h2-meal-img');
+      const mealName = document.getElementById('h2-meal-name');
+      const mealDesc = document.getElementById('h2-meal-desc');
+      const mealTags = document.getElementById('h2-meal-tags');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+
+          const day = tab.getAttribute('data-day');
+          const data = dailyMeals[day];
+          if (!data) return;
+
+          // Smooth transition
+          if (mealImg) {
+            mealImg.style.opacity = '0.3';
+            mealImg.style.transform = 'scale(0.96)';
+            setTimeout(() => {
+              mealImg.src = data.img;
+              mealImg.style.opacity = '1';
+              mealImg.style.transform = 'scale(1)';
+            }, 180);
+          }
+
+          if (mealName) mealName.textContent = data.name;
+          if (mealDesc) mealDesc.textContent = data.desc;
+          if (mealTags) {
+            mealTags.innerHTML = `
+              <span class="h2-menu-tag">🔥 ${data.calories}</span>
+              <span class="h2-menu-tag">🌱 ${data.dietary}</span>
+              <span class="h2-menu-tag">🌾 ${data.tag}</span>
+            `;
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

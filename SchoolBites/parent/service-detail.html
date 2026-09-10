@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Service Details — SchoolBite</title>
+  <meta name="description" content="Explore SchoolBite school meal services: nutritious, fresh and timely tiffin deliveries designed for students." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/service-detail.css" />
+</head>
+<body>
+
+  <!-- ===== Site Header Mount ===== -->
+  <div id="site-header-mount"></div>
+
+  <main id="sd-main">
+
+    <!-- ===== BREADCRUMB ===== -->
+    <div class="container">
+      <nav class="sd-breadcrumb" aria-label="Breadcrumb">
+        <ol class="sd-breadcrumb-list">
+          <li><a href="index.html">Home</a></li>
+          <li><span class="sd-breadcrumb-sep">&#8250;</span></li>
+          <li><a href="services.html">Services</a></li>
+          <li><span class="sd-breadcrumb-sep">&#8250;</span></li>
+          <li><span class="sd-breadcrumb-current" id="sd-breadcrumb-service">Service</span></li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- ============================================================
+         SECTION 1 — HERO
+         ============================================================ -->
+    <section class="sd-hero" aria-label="Service Hero">
+      <div class="container">
+        <div class="sd-hero-inner">
+
+          <!-- Left: Content -->
+          <div class="sd-hero-content reveal">
+            <span class="sd-hero-eyebrow">
+              <svg class="sd-eyebrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+              </svg>
+              <span id="sd-hero-eyebrow-text">Our Service</span>
+            </span>
+
+            <h1 class="sd-hero-title" id="sd-hero-title">
+              Loading...
+            </h1>
+
+            <p class="sd-hero-desc" id="sd-hero-desc"></p>
+
+            <div class="sd-hero-actions">
+              <a href="pricing.html" class="sd-btn-primary" id="sd-hero-start-btn">
+                <span>Get Started</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="contact.html" class="sd-btn-ghost" id="sd-hero-contact-btn">
+                <span>Contact Us</span>
+              </a>
+            </div>
+
+            <div class="sd-hero-highlights" id="sd-hero-highlights">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- Right: Visual -->
+          <div class="sd-hero-visual reveal" style="transition-delay:0.15s">
+            <div class="sd-hero-img-wrap">
+              <!-- Spinning decorative ring -->
+              <div class="sd-hero-img-ring" aria-hidden="true"></div>
+
+              <!-- Leaf decorations -->
+              <span class="sd-leaf sd-leaf-tl" aria-hidden="true">
+                <svg viewBox="0 0 48 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M24 68 C12 50, 2 30, 6 12 C10 0, 24 0, 36 10 C46 18, 42 44, 24 68Z" fill="#4CAF50" opacity="0.78"/>
+                  <path d="M24 68 C24 42, 21 24, 18 10" stroke="#a8d9b8" stroke-width="1.5" fill="none" opacity="0.5"/>
+                </svg>
+              </span>
+              <span class="sd-leaf sd-leaf-br" aria-hidden="true">
+                <svg viewBox="0 0 40 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 55 C10 40, 2 25, 5 10 C8 0, 20 0, 30 8 C38 15, 35 35, 20 55Z" fill="#2e7d32" opacity="0.60"/>
+                </svg>
+              </span>
+
+              <!-- Main circular image -->
+              <div class="sd-hero-img-circle">
+                <img id="sd-hero-img" src="" alt="Service image" />
+              </div>
+            </div>
+
+            <!-- Floating cards (right side) -->
+            <div class="sd-float-cards" id="sd-float-cards" aria-hidden="true">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2 — KEY BENEFITS
+         ============================================================ -->
+    <section class="sd-section sd-section-alt" id="sd-benefits-section" aria-labelledby="sd-benefits-title">
+      <div class="container">
+        <div class="sd-benefits-header">
+          <div class="sd-eyebrow-label reveal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span id="sd-benefits-label">KEY BENEFITS</span>
+          </div>
+          <h2 class="sd-section-title reveal" id="sd-benefits-title">Why Choose Our Service?</h2>
+          <p class="sd-section-subtitle reveal" id="sd-benefits-desc"></p>
+        </div>
+
+        <div class="sd-benefits-grid" id="sd-benefits-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3 — SERVICE OVERVIEW (split layout)
+         ============================================================ -->
+    <section class="sd-section" id="sd-overview-section" aria-labelledby="sd-overview-title">
+      <div class="container">
+        <div class="sd-overview-grid">
+
+          <!-- Left: Image -->
+          <div class="sd-overview-img-wrap reveal">
+            <img id="sd-overview-img" src="" alt="Service overview" />
+            <!-- Decorative handwriting -->
+            <div class="sd-overview-handwriting" id="sd-overview-handwriting" aria-hidden="true"></div>
+            <!-- Leaf decor -->
+            <span class="sd-overview-img-leaf" aria-hidden="true">
+              <svg viewBox="0 0 48 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 68 C12 50, 2 30, 6 12 C10 0, 24 0, 36 10 C46 18, 42 44, 24 68Z" fill="#4CAF50" opacity="0.7"/>
+              </svg>
+            </span>
+          </div>
+
+          <!-- Right: Content -->
+          <div class="reveal" style="transition-delay:0.15s">
+            <div class="sd-eyebrow-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/></svg>
+              <span id="sd-overview-label">OUR SERVICE</span>
+            </div>
+            <h2 class="sd-section-title" id="sd-overview-title">Service Title</h2>
+            <p style="color:#4a6660;line-height:1.78;font-size:0.95rem;margin-bottom:1.2rem;" id="sd-overview-text"></p>
+            <ul class="sd-checklist" id="sd-checklist">
+              <!-- Populated by JS -->
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4 — HOW IT WORKS
+         ============================================================ -->
+    <section class="sd-section sd-section-alt" id="sd-steps-section" aria-labelledby="sd-steps-title">
+      <div class="container">
+        <div class="sd-steps-header">
+          <div class="sd-eyebrow-label reveal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            HOW IT WORKS
+          </div>
+          <h2 class="sd-section-title reveal" id="sd-steps-title">How It Works</h2>
+        </div>
+
+        <div class="sd-steps-grid" id="sd-steps-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5 — HIGHLIGHT / DARK CTA BANNER
+         ============================================================ -->
+    <section class="sd-section" id="sd-highlight-section" aria-label="Service Highlight">
+      <div class="container">
+        <div class="sd-highlight-section reveal">
+
+          <!-- Left: Content -->
+          <div>
+            <div class="sd-highlight-eyebrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span id="sd-hl-label">HIGHLIGHT</span>
+            </div>
+            <h2 class="sd-highlight-title" id="sd-hl-title">Highlight Title</h2>
+            <p class="sd-highlight-desc" id="sd-hl-desc"></p>
+            <div class="sd-highlight-items" id="sd-hl-items">
+              <!-- Populated by JS -->
+            </div>
+            <div class="sd-highlight-actions">
+              <a href="pricing.html" class="sd-btn-white" id="sd-hl-start-btn">
+                <span>Get Started</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="contact.html" class="sd-btn-outline-white" id="sd-hl-contact-btn">
+                <span>Contact Our Team</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: Visual -->
+          <div class="sd-highlight-visual" aria-hidden="true">
+            <!-- Leaf decor -->
+            <span class="sd-highlight-leaf">
+              <svg viewBox="0 0 48 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 68 C12 50, 2 30, 6 12 C10 0, 24 0, 36 10 C46 18, 42 44, 24 68Z" fill="#4CAF50" opacity="0.50"/>
+              </svg>
+            </span>
+            <div class="sd-highlight-img-circle">
+              <img id="sd-hl-img" src="" alt="Service highlight" />
+            </div>
+            <div class="sd-highlight-handwriting" id="sd-hl-handwriting" aria-hidden="true"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6 — TESTIMONIALS
+         ============================================================ -->
+    <section class="sd-section" id="sd-testimonials-section" aria-labelledby="sd-testimonials-title">
+      <div class="container">
+        <div class="sd-testimonials-header">
+          <div class="sd-eyebrow-label reveal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            WHAT PARENTS SAY
+          </div>
+          <h2 class="sd-section-title reveal" id="sd-testimonials-title">What Parents Say About SchoolBite.</h2>
+          <p class="sd-section-subtitle reveal">Real stories from families who rely on SchoolBite every single school day.</p>
+        </div>
+
+        <div class="sd-testimonials-grid" id="sd-testimonials-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FINAL CTA
+         ============================================================ -->
+    <section class="sd-section" id="sd-cta-section" aria-label="Call to Action">
+      <div class="container">
+        <div class="sd-cta-wrap reveal">
+          <h2 class="sd-cta-title" id="sd-cta-title">Ready to Get Started?</h2>
+          <p class="sd-cta-desc" id="sd-cta-desc">Join thousands of happy students who enjoy fresh, delicious food every day.</p>
+          <div class="sd-cta-actions">
+            <a href="pricing.html" class="sd-btn-white" id="sd-cta-start-btn">
+              <span>Get Started</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="contact.html" class="sd-btn-outline-white" id="sd-cta-contact-btn">
+              <span>Contact Us</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PREV / NEXT SERVICE NAVIGATION
+         ============================================================ -->
+    <section class="sd-section" style="padding-top:1rem;padding-bottom:3rem;" aria-label="Service Navigation">
+      <div class="container">
+        <div class="sd-service-nav" id="sd-service-nav">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Site Footer Mount ===== -->
+  <div id="site-footer-mount"></div>
+
+  <!-- ===== Site Modals Mount ===== -->
+  <div id="site-modals-mount"></div>
+
+  <!-- ===== Scripts ===== -->
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/services-data.js"></script>
+  <script src="js/service-detail.js"></script>
+  <script src="js/script.js"></script>
+
+</body>
+</html>
